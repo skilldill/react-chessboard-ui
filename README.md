@@ -1,6 +1,6 @@
 # rechess
 
-[![NPM](https://img.shields.io/npm/v/rechess.svg)](https://www.npmjs.com/package/rechess) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/rechess.svg)](https://www.npmjs.com/package/react-chessboard-ui) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## ❗️ ATTENTION ❗️
 This is a package that is currently in active development.
