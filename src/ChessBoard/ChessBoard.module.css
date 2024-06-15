@@ -1,0 +1,130 @@
+.chessBoard {
+    position: relative;
+    width: fit-content;
+}
+
+.figuresLayout {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.controlLayout {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    cursor: pointer;
+}
+
+.controlLayoutGrabbing {
+    cursor: grabbing;
+}
+
+.interactiveLayout {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 5;
+}
+
+.selectedCell {
+    box-sizing: border-box;
+}
+
+.controlCell {}
+
+.interactiveCell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.possibleMoveMark {
+    border-radius: 100%;
+    opacity: 0.8;
+}
+
+.row {
+    display: flex;
+}
+
+.cell {}
+
+.cellLight {}
+
+.figure {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all .15s ease-out;
+}
+
+.holdedFigure {
+    transition: none;
+}
+
+.bluredFigure {
+    opacity: .4;
+}
+
+.hiddenFigure {
+    opacity: 0;
+    transform: rotate(-90deg);
+}
+
+.markedCell {}
+
+.checkedCell {}
+
+.arrow {
+    position: absolute;
+    width: 20px;
+    height: 100px;
+    opacity: 0.5;
+    z-index: 1;
+}
+
+.arrowEnd {
+    position: absolute;
+    bottom: -45px;
+    left: -5px;
+    width: 0;
+    height: 0;
+    border-top: 30px solid transparent;
+    border-bottom: 30px solid transparent;
+    border-left: 30px solid;
+    transform: rotate(90deg);
+}
+
+.figurePicker {
+    display: flex;
+    justify-content: center;
+}
+
+.figurePickerItem {
+    background-position: center;
+    background-size: cover;
+    cursor: pointer;
+}
+
+.chessBoardFigurePicker {
+    z-index: 101;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
