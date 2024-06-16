@@ -1,6 +1,6 @@
 {
-  "short_name": "rechess",
-  "name": "rechess",
+  "short_name": "react-chessboard-ui",
+  "name": "react-chessboard-ui",
   "icons": [
     {
       "src": "favicon.ico",

@@ -1,6 +1,6 @@
-# rechess
+# react-chessboard-ui
 
-[![NPM](https://img.shields.io/npm/v/rechess.svg)](https://www.npmjs.com/package/react-chessboard-ui) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/react-chessboard-ui.svg)](https://www.npmjs.com/package/react-chessboard-ui) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## ❗️ ATTENTION ❗️
 This is a package that is currently in active development.
@@ -10,21 +10,21 @@ This is a package that is currently in active development.
 ## Install
 
 ```bash
-npm install rechess
+npm install react-chessboard-ui
 ```
 
 or
 
 ```bash
-yarn add rechess
+yarn add react-chessboard-ui
 ```
 
 ## Usage
 ```tsx
 import React from 'react';
-import { ChessBoard } from 'rechess'; // ChessBoard is a base component of rechess
+import { ChessBoard } from 'rechreact-chessboard-ui'; // ChessBoard is a base component of react-chessboard-ui
 
-import 'rechess/dist/index.css'; // required import css for ChessBoard
+import 'react-chessboard-ui/dist/index.css'; // required import css for ChessBoard
 
 export const App = () => {
 
