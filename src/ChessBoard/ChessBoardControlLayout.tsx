@@ -64,7 +64,7 @@ export const ChessBoardControlLayout: FC<ChessBoardControlLayoutProps> = (props)
     const handleGrabing = (event: MouseEvent) => {
         if (pressed) {
             const { pageX, pageY} = event;
-            onGrabbing(pageX, pageY - window.scrollY);
+            onGrabbing(pageX, pageY);
         }
     }
 

@@ -9,6 +9,7 @@ import { ChessBoardInteractiveLayout } from "./ChessBoardInteractiveLayout";
 import { ChangeMove, ChessBoardConfig } from "./models";
 import { ArrowLayout } from "./ArrowLayout";
 import { FigurePicker } from "./FigurePicker";
+import { correctGrabbingPosByScroll } from "./utils";
 
 type ChessBoardProps = {
     FEN: string;
@@ -88,7 +89,7 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
                 selectedPos={fromPos}
                 possibleMoves={possibleMoves}
                 holdedFigure={holdedFigure}
-                grabbingPos={grabbingPos}
+                grabbingPos={correctGrabbingPosByScroll(grabbingPos)}
                 markedCells={markedCells}
                 boardConfig={boardConfig}
                 onHasCheck={getHasCheckByCellPos}

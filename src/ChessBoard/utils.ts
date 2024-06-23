@@ -183,3 +183,12 @@ export const getFiguresByColor = (
         touched: true,
     }));
 };
+
+/**
+ * Корректирует позицию захвата курсором
+ * коррекция происходит по сроллу
+ */
+export const correctGrabbingPosByScroll = (pos: CellPos) => [
+    pos[0] - window.scrollX,
+    pos[1] - window.scrollY,
+] as CellPos;
