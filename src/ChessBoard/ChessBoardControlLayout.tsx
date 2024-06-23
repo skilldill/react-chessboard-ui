@@ -21,10 +21,10 @@ type ChessBoardControlLayoutProps = {
 }
 
 export const ChessBoardControlLayout: FC<ChessBoardControlLayoutProps> = (props) => {
-    const { 
-        size = BASE_BOARD_SIZE, 
+    const {
+        size = BASE_BOARD_SIZE,
         boardConfig,
-        onClick, 
+        onClick,
         onGrabEnd,
         onGrabbing,
         onGrabStart,
@@ -64,7 +64,7 @@ export const ChessBoardControlLayout: FC<ChessBoardControlLayoutProps> = (props)
     const handleGrabing = (event: MouseEvent) => {
         if (pressed) {
             const { pageX, pageY} = event;
-            onGrabbing(pageX, pageY);
+            onGrabbing(pageX, pageY - window.scrollY);
         }
     }
 
@@ -74,19 +74,19 @@ export const ChessBoardControlLayout: FC<ChessBoardControlLayoutProps> = (props)
     }
 
     return (
-        <div 
+        <div
             className={cn(styles.controlLayout, {[styles.controlLayoutGrabbing]: pressed})}
             onMouseMove={handleGrabing}
         >
-            {getFilledArrayBySize(size).map((_, j) => 
+            {getFilledArrayBySize(size).map((_, j) =>
                 <div className={styles.row} key={`control-layout-${j}`}>
                     {getFilledArrayBySize(size).map((_, i) => (
-                        <div 
+                        <div
                             key={`control-layout-${i}`}
                             className={styles.controlCell}
-                            style={{ 
-                                width: boardConfig.cellSize, 
-                                height: boardConfig.cellSize 
+                            style={{
+                                width: boardConfig.cellSize,
+                                height: boardConfig.cellSize
                             }}
                             onClick={() => handleClick([i, j])}
                             onMouseDown={handleGrabStart([i, j])}
