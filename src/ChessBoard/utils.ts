@@ -188,7 +188,12 @@ export const getFiguresByColor = (
  * Корректирует позицию захвата курсором
  * коррекция происходит по сроллу
  */
-export const correctGrabbingPosByScroll = (pos: CellPos) => [
-    pos[0] - window.scrollX,
-    pos[1] - window.scrollY,
-] as CellPos;
+export const correctGrabbingPosByScroll = (pos: CellPos) => {
+    if (typeof window === 'undefined')
+        return pos;
+
+    return [
+        pos[0] - window.scrollX,
+        pos[1] - window.scrollY,
+    ] as CellPos;
+}
