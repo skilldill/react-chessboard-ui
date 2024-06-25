@@ -1,6 +1,6 @@
 import { Cell, CellPos, Figure, FigureColor, GameResult, JSChessEngine, MoveData, stateToFEN } from "../JSChessEngine";
 import { useEffect, useState } from "react"
-import { checkIsPossibleMove, checkPositionsHas, getChessBoardConfig, hasCheck } from "./utils";
+import { checkIsPossibleMove, checkPositionsHas, correctGrabbingPosForArrow, getChessBoardConfig, hasCheck } from "./utils";
 import { ArrowCoords, ChangeMove, ChessBoardConfig } from "./models";
 import { DEFAULT_CHESSBORD_CONFIG } from "./constants";
 
@@ -26,6 +26,7 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
   const [newMove, setNewMove] = useState<ChangeMove>();
   const [linesWithCheck, setLinesWithCheck] = useState<CellPos[][]>([]);
   const [markedCells, setMarkedCells] = useState<CellPos[]>([]);
+  const [grabbingCell, setGrabbingCell] = useState<CellPos>([-1, -1]);
 
   const [clickedPos, setClickedPos] = useState<CellPos>([-1, -1]);
   const [clickedFigure, setClickedFigure] = useState<Figure>();
@@ -370,10 +371,7 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
         ...copiedArrows, 
         { 
           start: [...startArrowCoord], 
-          end: [
-            (x * boardConfig.cellSize) + (boardConfig.cellSize / 2 - 10), 
-            (y * boardConfig.cellSize) + (boardConfig.cellSize / 2),
-          ],
+          end: correctGrabbingPosForArrow([x, y], boardConfig),
         }
       ];
     });
@@ -431,6 +429,10 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
     clearArrows();
   }
 
+  const handleGrabbingCell = (cellPos: CellPos) => {
+    setGrabbingCell(cellPos);
+  }
+
   return {
     fromPos,
     newMove,
@@ -442,6 +444,7 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
     arrowsCoords,
     initialState,
     holdedFigure,
+    grabbingCell,
     possibleMoves,
     linesWithCheck,
     startArrowCoord,
@@ -461,6 +464,7 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
     setInitialState,
     startRenderArrow,
     reverseChessBoard,
+    handleGrabbingCell,
     getHasCheckByCellPos,
     handleSelectFigurePicker,
   }

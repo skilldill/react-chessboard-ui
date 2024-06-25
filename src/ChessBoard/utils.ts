@@ -197,3 +197,11 @@ export const correctGrabbingPosByScroll = (pos: CellPos) => {
         pos[1] - window.scrollY,
     ] as CellPos;
 }
+
+/**
+ * Корректирует указатели стрелки
+ */
+export const correctGrabbingPosForArrow = (pos: CellPos, boardConfig: ChessBoardConfig) => [
+    (pos[0] * boardConfig.cellSize) + (boardConfig.cellSize / 2 - 10), 
+    (pos[1] * boardConfig.cellSize) + (boardConfig.cellSize / 2)
+] as CellPos;

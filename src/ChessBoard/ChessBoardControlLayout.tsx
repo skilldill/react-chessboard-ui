@@ -18,17 +18,19 @@ type ChessBoardControlLayoutProps = {
     onGrabEndRight: (position: CellPos) => void;
     onGrabbing: (x: number, y: number) => void;
     onRightClick: (position: CellPos) => void;
+    onGrabbingCell: (position: CellPos) => void;
 }
 
 export const ChessBoardControlLayout: FC<ChessBoardControlLayoutProps> = (props) => {
-    const {
-        size = BASE_BOARD_SIZE,
+    const { 
+        size = BASE_BOARD_SIZE, 
         boardConfig,
-        onClick,
+        onClick, 
         onGrabEnd,
         onGrabbing,
         onGrabStart,
         onRightClick,
+        onGrabbingCell,
         onGrabEndRight,
         onGrabStartRight,
     } = props;
@@ -73,25 +75,30 @@ export const ChessBoardControlLayout: FC<ChessBoardControlLayoutProps> = (props)
         onRightClick(cellPos);
     }
 
+    const handleGrabbingCell = (cellPos: CellPos) => {
+        onGrabbingCell(cellPos);
+    }
+
     return (
-        <div
+        <div 
             className={cn(styles.controlLayout, {[styles.controlLayoutGrabbing]: pressed})}
             onMouseMove={handleGrabing}
         >
-            {getFilledArrayBySize(size).map((_, j) =>
+            {getFilledArrayBySize(size).map((_, j) => 
                 <div className={styles.row} key={`control-layout-${j}`}>
                     {getFilledArrayBySize(size).map((_, i) => (
-                        <div
+                        <div 
                             key={`control-layout-${i}`}
                             className={styles.controlCell}
-                            style={{
-                                width: boardConfig.cellSize,
-                                height: boardConfig.cellSize
+                            style={{ 
+                                width: boardConfig.cellSize, 
+                                height: boardConfig.cellSize 
                             }}
                             onClick={() => handleClick([i, j])}
                             onMouseDown={handleGrabStart([i, j])}
                             onMouseUp={handleGrabEnd([i, j])}
                             onContextMenu={handleContextMenu([i, j])}
+                            onMouseMove={() => handleGrabbingCell([i, j])}
                         ></div>
                     ))}
                 </div>
