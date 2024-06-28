@@ -3,12 +3,12 @@ import { Cell } from "../JSChessEngine";
 export const INITIAL_CELLS: Cell[][] = [
     [
       { figure: { type: 'rook', color: 'black', touched: false } },
-      { figure: { type: 'knigts', color: 'black', touched: false } },
+      { figure: { type: 'knight', color: 'black', touched: false } },
       { figure: { type: 'bishop', color: 'black', touched: false } },
       { figure: { type: 'queen', color: 'black', touched: false } },
       { figure: { type: 'king', color: 'black', touched: false } },
       { figure: { type: 'bishop', color: 'black', touched: false } },
-      { figure: { type: 'knigts', color: 'black', touched: false } },
+      { figure: { type: 'knight', color: 'black', touched: false } },
       { figure: { type: 'rook', color: 'black', touched: false } },
     ],
     [
@@ -73,12 +73,12 @@ export const INITIAL_CELLS: Cell[][] = [
     ],
     [
       { figure: { type: 'rook', color: 'white', touched: false } },
-      { figure: { type: 'knigts', color: 'white', touched: false } },
+      { figure: { type: 'knight', color: 'white', touched: false } },
       { figure: { type: 'bishop', color: 'white', touched: false } },
       { figure: { type: 'queen', color: 'white', touched: false } },
       { figure: { type: 'king', color: 'white', touched: false } },
       { figure: { type: 'bishop', color: 'white', touched: false } },
-      { figure: { type: 'knigts', color: 'white', touched: false } },
+      { figure: { type: 'knight', color: 'white', touched: false } },
       { figure: { type: 'rook', color: 'white', touched: false } },
     ],
   ];
@@ -107,10 +107,10 @@ export const STATE_CELLS_WITHOUT_LONG_CASTLINGS: Cell[][] = [
     [
       { figure: undefined },
       { figure: undefined },
-      { figure: { type: 'knigts', color: 'black', touched: false } },
+      { figure: { type: 'knight', color: 'black', touched: false } },
       { figure: undefined },
       { figure: undefined },
-      { figure: { type: 'knigts', color: 'black', touched: true } },
+      { figure: { type: 'knight', color: 'black', touched: true } },
       { figure: { type: 'pawn', color: 'black', touched: true } },
       { figure: undefined },
     ],
@@ -137,7 +137,7 @@ export const STATE_CELLS_WITHOUT_LONG_CASTLINGS: Cell[][] = [
     [
       { figure: undefined },
       { figure: undefined },
-      { figure: { type: 'knigts', color: 'white', touched: true } },
+      { figure: { type: 'knight', color: 'white', touched: true } },
       { figure: undefined },
       { figure: undefined },
       { figure: { type: 'pawn', color: 'white', touched: true } },
@@ -161,7 +161,7 @@ export const STATE_CELLS_WITHOUT_LONG_CASTLINGS: Cell[][] = [
       { figure: { type: 'queen', color: 'white', touched: false } },
       { figure: { type: 'king', color: 'white', touched: false } },
       { figure: { type: 'bishop', color: 'white', touched: false } },
-      { figure: { type: 'knigts', color: 'white', touched: false } },
+      { figure: { type: 'knight', color: 'white', touched: false } },
       { figure: { type: 'rook', color: 'white', touched: false } },
     ],
   ];

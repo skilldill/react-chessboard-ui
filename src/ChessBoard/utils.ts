@@ -160,7 +160,7 @@ export const getFiguresByColor = (
             'queen',
             'rook',
             'bishop',
-            'knigts',
+            'knight',
         ];
         return figureNamesForPawn.map((figureName) => ({
             type: figureName,
@@ -171,7 +171,7 @@ export const getFiguresByColor = (
 
     const figureNames: FigureType[] = [
         'pawn',
-        'knigts',
+        'knight',
         'bishop',
         'rook',
         'queen',

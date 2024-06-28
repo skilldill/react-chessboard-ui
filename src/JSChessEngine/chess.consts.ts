@@ -6,7 +6,7 @@ export const LETTERS = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
 export const FIGURES_LATTERS_NOTATIONS = {
   white: {
     pawn: 'P',
-    knigts: 'N',
+    knight: 'N',
     bishop: 'B',
     rook: 'R',
     queen: 'Q',
@@ -15,7 +15,7 @@ export const FIGURES_LATTERS_NOTATIONS = {
 
   black: {
     pawn: 'p',
-    knigts: 'n',
+    knight: 'n',
     bishop: 'b',
     rook: 'r',
     queen: 'q',
@@ -25,14 +25,14 @@ export const FIGURES_LATTERS_NOTATIONS = {
 
 export const LETTER_TO_FIGURE_MAP: { [key: string]: Figure } = {
   P: { type: 'pawn', color: 'white' },
-  N: { type: 'knigts', color: 'white' },
+  N: { type: 'knight', color: 'white' },
   B: { type: 'bishop', color: 'white' },
   R: { type: 'rook', color: 'white' },
   Q: { type: 'queen', color: 'white' },
   K: { type: 'king', color: 'white' },
 
   p: { type: 'pawn', color: 'black' },
-  n: { type: 'knigts', color: 'black' },
+  n: { type: 'knight', color: 'black' },
   b: { type: 'bishop', color: 'black' },
   r: { type: 'rook', color: 'black' },
   q: { type: 'queen', color: 'black' },
@@ -41,14 +41,14 @@ export const LETTER_TO_FIGURE_MAP: { [key: string]: Figure } = {
 
 export const ALL_FIGURES: Figure[] = [
   { type: 'pawn', color: 'white' },
-  { type: 'knigts', color: 'white' },
+  { type: 'knight', color: 'white' },
   { type: 'bishop', color: 'white' },
   { type: 'rook', color: 'white' },
   { type: 'queen', color: 'white' },
   { type: 'king', color: 'white' },
 
   { type: 'pawn', color: 'black' },
-  { type: 'knigts', color: 'black' },
+  { type: 'knight', color: 'black' },
   { type: 'bishop', color: 'black' },
   { type: 'rook', color: 'black' },
   { type: 'queen', color: 'black' },
@@ -66,7 +66,7 @@ export const CHESS_BOARD_CONFIG = {
     white: {
       pawn: '',
       bishop: '',
-      knigts: '',
+      knight: '',
       rook: '',
       queen: '',
       king: '',
@@ -75,7 +75,7 @@ export const CHESS_BOARD_CONFIG = {
     black: {
       pawn: '',
       bishop: '',
-      knigts: '',
+      knight: '',
       rook: '',
       queen: '',
       king: '',
@@ -86,12 +86,12 @@ export const CHESS_BOARD_CONFIG = {
 export const INITIAL_CELLS: Cell[][] = [
   [
     { figure: { type: 'rook', color: 'black', touched: false } },
-    { figure: { type: 'knigts', color: 'black', touched: false } },
+    { figure: { type: 'knight', color: 'black', touched: false } },
     { figure: { type: 'bishop', color: 'black', touched: false } },
     { figure: { type: 'queen', color: 'black', touched: false } },
     { figure: { type: 'king', color: 'black', touched: false } },
     { figure: { type: 'bishop', color: 'black', touched: false } },
-    { figure: { type: 'knigts', color: 'black', touched: false } },
+    { figure: { type: 'knight', color: 'black', touched: false } },
     { figure: { type: 'rook', color: 'black', touched: false } },
   ],
   [
@@ -156,12 +156,12 @@ export const INITIAL_CELLS: Cell[][] = [
   ],
   [
     { figure: { type: 'rook', color: 'white', touched: false } },
-    { figure: { type: 'knigts', color: 'white', touched: false } },
+    { figure: { type: 'knight', color: 'white', touched: false } },
     { figure: { type: 'bishop', color: 'white', touched: false } },
     { figure: { type: 'queen', color: 'white', touched: false } },
     { figure: { type: 'king', color: 'white', touched: false } },
     { figure: { type: 'bishop', color: 'white', touched: false } },
-    { figure: { type: 'knigts', color: 'white', touched: false } },
+    { figure: { type: 'knight', color: 'white', touched: false } },
     { figure: { type: 'rook', color: 'white', touched: false } },
   ],
 ];

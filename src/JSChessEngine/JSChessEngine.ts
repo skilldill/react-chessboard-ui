@@ -1,7 +1,7 @@
 export type FigureType =
   | 'pawn'
   | 'bishop'
-  | 'knigts'
+  | 'knight'
   | 'rook'
   | 'queen'
   | 'king';
@@ -92,7 +92,7 @@ export interface MoveData {
 
 export interface BeatedCountsData {
   pawn: number;
-  knigts: number;
+  knight: number;
   bishop: number;
   rook: number;
   queen: number;
@@ -170,8 +170,8 @@ export class JSChessEngine {
         );
         break;
 
-      case 'knigts':
-        const knigtPossibleMoves = JSChessEngine.getNextMovesKnigts(state, [
+      case 'knight':
+        const knigtPossibleMoves = JSChessEngine.getNextMovesKnight(state, [
           i,
           j,
         ]);
@@ -1014,8 +1014,8 @@ export class JSChessEngine {
           attackedPositions = [...attackedPositions, ...bishopAttackedPos];
           break;
 
-        case 'knigts':
-          const knigtAttackedPos = JSChessEngine.calcKnigtsMoves(
+        case 'knight':
+          const knigtAttackedPos = JSChessEngine.calcKnightMoves(
             state,
             [i, j],
             JSChessEngine.checkAttackedCell
@@ -1225,7 +1225,7 @@ export class JSChessEngine {
    * @param figurePos текущая позиция фигуры
    * @returns
    */
-  static calcKnigtsMoves = (
+  static calcKnightMoves = (
     state: Cell[][],
     figurePos: CellPos,
     onCheckPossible: OnCheckPossible = JSChessEngine.checkPossibleMoveTo
@@ -1571,8 +1571,8 @@ export class JSChessEngine {
     return JSChessEngine.calcDiagonalMoves(state, figurePos);
   };
 
-  static getNextMovesKnigts = (state: Cell[][], figurePos: CellPos) => {
-    return JSChessEngine.calcKnigtsMoves(state, figurePos);
+  static getNextMovesKnight = (state: Cell[][], figurePos: CellPos) => {
+    return JSChessEngine.calcKnightMoves(state, figurePos);
   };
 
   static getNextMovesRook = (state: Cell[][], figurePos: CellPos) => {
@@ -1772,7 +1772,7 @@ export class JSChessEngine {
 
           break;
 
-        case 'knigts':
+        case 'knight':
           const knigtAttackedPositions: CellPos[] = [
             [pos[0] + 1, pos[1] - 2],
             [pos[0] - 1, pos[1] - 2],
@@ -2156,7 +2156,7 @@ export class JSChessEngine {
       // Фигура для ничьей - конь или слон
       const figureForCommon = cellsWithFigures.find(
         (cell) =>
-          cell.figure?.type === 'knigts' || cell.figure?.type === 'bishop'
+          cell.figure?.type === 'knight' || cell.figure?.type === 'bishop'
       );
 
       if (!!figureForCommon) return { resultType: 'draw' };
@@ -2241,9 +2241,9 @@ export class JSChessEngine {
       pawn:
         countsConfig.PAWNS_COUNT -
         JSChessEngine.getFiguresCountByType(cellsWithFigures, 'pawn'),
-      knigts:
+      knight:
         countsConfig.KNIGHTS_COUNT -
-        JSChessEngine.getFiguresCountByType(cellsWithFigures, 'knigts'),
+        JSChessEngine.getFiguresCountByType(cellsWithFigures, 'knight'),
       bishop:
         countsConfig.BISHOPS_COUNT -
         JSChessEngine.getFiguresCountByType(cellsWithFigures, 'bishop'),
