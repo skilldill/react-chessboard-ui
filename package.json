@@ -1,6 +1,6 @@
 {
   "name": "react-chessboard-ui",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "for chess apps",
   "author": "skilldill",
   "license": "MIT",
@@ -8,6 +8,7 @@
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.tsx",
+  "keywords": ["react", "chess", "chess.js", "chessboard", "chess board", "react-chessboard", "react chessboard", "react chess board", "react-dnd", "chessboard component", "drag and drop", "typescript", "lichess", "chesscom"],
   "engines": {
     "node": ">=10"
   },
