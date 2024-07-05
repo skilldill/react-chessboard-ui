@@ -96,7 +96,13 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
 
     const { figure } = cell;
 
-    if (figure.color !== currentColor) {
+    
+    if (figure.color !== currentColor && !playerColor) {
+      cleanAllForFigure();
+      return { figure: undefined, nextMoves: [] };
+    }
+
+    if (!!playerColor && figure.color !== playerColor) {
       cleanAllForFigure();
       return { figure: undefined, nextMoves: [] };
     }
@@ -131,6 +137,11 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
   }
 
   const moveFigure = (from: CellPos, to: CellPos, figure: Figure) => {
+    if (!!playerColor && currentColor !== playerColor) {
+      cleanAllForFigure();
+      return { moveData: undefined, attackedPos: undefined } ;
+    }
+
     const inNextMoves = checkPositionsHas(possibleMoves, to);
 
     // Проверка, что начальная позиция не равняется следующей
@@ -156,10 +167,7 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
 
     setLinesWithCheck(linesCheck);
     
-    // Если playetColor не задан, то
-    // Доска работает в режиме анализа
-    // Можно менять состояние внутри доски
-    if (playerColor === undefined) setActualState(updatedCells);
+    setActualState(updatedCells);
 
     // Пешка дошла до конца доски
     // Показываем FigurePicker
@@ -194,6 +202,11 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
   }
 
   const moveFigureByClick = (from: CellPos, to: CellPos, figure: Figure) => {
+    if (!!playerColor && currentColor !== playerColor) {
+      cleanAllForFigure();
+      return { moveData: undefined, attackedPos: undefined } ;
+    }
+
     const inNextMoves = checkPositionsHas(clickPossibleMoves, to);
 
     // Проверка, что начальная позиция не равняется следующей
@@ -219,10 +232,7 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
 
     setLinesWithCheck(linesCheck);
 
-    // Если playetColor не задан, то
-    // Доска работает в режиме анализа
-    // Можно менять состояние внутри доски
-    if (playerColor === undefined) setActualState(updatedCells);
+    setActualState(updatedCells);
 
     // Пешка дошла до конца доски
     // Показываем FigurePicker
@@ -458,6 +468,7 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
     handleGrabbing,
     endRenderArrow,
     setActualState,
+    setPlayerColor,
     setCurrentColor,
     selectClickFrom,
     selectHoverFrom,

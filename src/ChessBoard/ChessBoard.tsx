@@ -18,6 +18,7 @@ type ChessBoardProps = {
     change?: ChangeMove;
     reversed?: boolean;
     config?: Partial<ChessBoardConfig>;
+    playerColor?: FigureColor;
 }
 
 export const ChessBoard: FC<ChessBoardProps> = (props) => {
@@ -28,40 +29,46 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
         change, 
         reversed,
         config,
+        playerColor,
     } = props;
 
     const {
-        initialState,
         fromPos,
-        holdedFigure,
-        grabbingPos,
-        possibleMoves,
         newMove,
-        markedCells,
-        arrowsCoords,
-        startArrowCoord,
         boardConfig,
+        markedCells,
+        grabbingPos,
         currentColor,
-        showFigurePicker,
+        arrowsCoords,
+        initialState,
+        holdedFigure,
         grabbingCell,
+        possibleMoves,
+        startArrowCoord,
+        showFigurePicker,
 
-        setActualState,
-        selectClickFrom,
-        startRenderArrow,
-        selectHoverFrom,
-        handleGrabbing,
-        handleGrabEnd,
-        handleClick,
-        setInitialState,
-        setCurrentColor,
-        reverseChessBoard,
-        setNewMove,
         markCell,
-        getHasCheckByCellPos,
+        setNewMove,
+        handleClick,
+        handleGrabEnd,
+        handleGrabbing,
         endRenderArrow,
-        handleSelectFigurePicker,
+        setActualState,
+        setPlayerColor,
+        setCurrentColor,
+        selectClickFrom,
+        selectHoverFrom,
+        setInitialState,
+        startRenderArrow,
+        reverseChessBoard,
         handleGrabbingCell,
+        getHasCheckByCellPos,
+        handleSelectFigurePicker,
     } = useChessBoardInteractive({ onChange, onEndGame, config });
+
+    useEffect(() => {
+        setPlayerColor(playerColor);
+    }, [playerColor]);
 
     useEffect(() => {
         const { boardState, currentColor } = FENtoGameState(FEN);
