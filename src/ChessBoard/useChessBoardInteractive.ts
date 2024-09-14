@@ -307,6 +307,7 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
   }
 
   const handleClickForTargetCell = (cellPos: CellPos, withTransition = false) => {
+    if (clickedPos[0] === cellPos[0] && clickedPos[1] === cellPos[1]) return;
     if (clickedPos[0] === -1) return;
     if (!clickedFigure) return;
     if (clickPossibleMoves.length === 0) return;

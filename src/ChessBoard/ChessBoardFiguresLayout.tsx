@@ -100,7 +100,7 @@ export const ChessBoardFiguresLayout: FC<ChessBoardFiguresLayoutProps> = (props)
                         && figure.position![1] === to[1];
                 });
 
-                if (foundAttactedFigure) {
+                if (foundAttactedFigure && foundAttactedFigure.color !== move.figure.color) {
                     foundAttactedFigure.color === 'white'
                     ? foundAttactedFigure.position = [8, foundAttactedFigure.position![1]]
                     : foundAttactedFigure.position = [-1, foundAttactedFigure.position![1]]
@@ -110,7 +110,10 @@ export const ChessBoardFiguresLayout: FC<ChessBoardFiguresLayoutProps> = (props)
                     figure.position![0] === from[0]
                     && figure.position![1] === from[1]
                 );
-                foundFigureByPositionFrom!.position! = move.to;
+
+                if (!foundFigureByPositionFrom) return updatedState;
+
+                foundFigureByPositionFrom.position! = move.to;
 
                 if (!!transformTo) {
                     foundFigureByPositionFrom!.type = transformTo.type;
