@@ -387,14 +387,14 @@ export class JSChessEngine {
   ) => {
     let count = 0;
 
-    positions.forEach((pos) => {
+    for (let pos of positions) {
+      if (JSChessEngine.checkEnemyKing(state, figurePos, pos)) break;
+
       if (
-        JSChessEngine.checkEnemy(state, figurePos, pos) &&
-        !JSChessEngine.checkEnemyKing(state, figurePos, pos)
-      ) {
-        count += 1;
-      }
-    });
+          JSChessEngine.checkEnemy(state, figurePos, pos)
+          && !JSChessEngine.checkEnemyKing(state, figurePos, pos)
+      ) count += 1;
+    }
 
     return count;
   };
