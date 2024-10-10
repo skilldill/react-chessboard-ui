@@ -34,60 +34,68 @@ export const prepareCastlingByFEN = (
   const preparedState = [...state];
 
   if (castlingNotation.includes('K')) {
-    // Ладья
-    preparedState[preparedState.length - 1][preparedState.length - 1].figure = {
-      ...preparedState[preparedState.length - 1][preparedState.length - 1]
-        .figure!,
-      touched: false,
-    };
-
-    // Король
-    preparedState[preparedState.length - 1][4].figure = {
-      ...preparedState[preparedState.length - 1][4].figure!,
-      touched: false,
-    };
+    if (!!preparedState[preparedState.length - 1][preparedState.length - 1].figure) {
+      // Ладья
+      preparedState[preparedState.length - 1][preparedState.length - 1].figure = {
+        ...preparedState[preparedState.length - 1][preparedState.length - 1]
+          .figure!,
+        touched: false,
+      };
+  
+      // Король
+      preparedState[preparedState.length - 1][4].figure = {
+        ...preparedState[preparedState.length - 1][4].figure!,
+        touched: false,
+      };
+    }
   }
 
   if (castlingNotation.includes('Q')) {
-    // Ладья
-    preparedState[preparedState.length - 1][0].figure = {
-      ...preparedState[preparedState.length - 1][0].figure!,
-      touched: false,
-    };
-
-    // Король
-    preparedState[preparedState.length - 1][4].figure = {
-      ...preparedState[preparedState.length - 1][4].figure!,
-      touched: false,
-    };
+    if (!!preparedState[preparedState.length - 1][0].figure) {
+      // Ладья
+      preparedState[preparedState.length - 1][0].figure = {
+        ...preparedState[preparedState.length - 1][0].figure!,
+        touched: false,
+      };
+  
+      // Король
+      preparedState[preparedState.length - 1][4].figure = {
+        ...preparedState[preparedState.length - 1][4].figure!,
+        touched: false,
+      };
+    }
   }
 
   if (castlingNotation.includes('k')) {
-    // Ладья
-    preparedState[0][preparedState.length - 1].figure = {
-      ...preparedState[0][preparedState.length - 1].figure!,
-      touched: false,
-    };
-
-    // Король
-    preparedState[0][4].figure = {
-      ...preparedState[0][4].figure!,
-      touched: false,
-    };
+    if (!!preparedState[0][preparedState.length - 1].figure) {
+      // Ладья
+      preparedState[0][preparedState.length - 1].figure = {
+        ...preparedState[0][preparedState.length - 1].figure!,
+        touched: false,
+      };
+  
+      // Король
+      preparedState[0][4].figure = {
+        ...preparedState[0][4].figure!,
+        touched: false,
+      };
+    }
   }
 
   if (castlingNotation.includes('q')) {
-    // Ладья
-    preparedState[0][0].figure = {
-      ...preparedState[0][preparedState.length - 1].figure!,
-      touched: false,
-    };
-
-    // Король
-    preparedState[0][4].figure = {
-      ...preparedState[0][4].figure!,
-      touched: false,
-    };
+    if (!!preparedState[0][0].figure) {
+      // Ладья
+      preparedState[0][0].figure = {
+        ...preparedState[0][preparedState.length - 1].figure!,
+        touched: false,
+      };
+  
+      // Король
+      preparedState[0][4].figure = {
+        ...preparedState[0][4].figure!,
+        touched: false,
+      };
+    }
   }
 
   return preparedState;
