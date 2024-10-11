@@ -22,7 +22,7 @@ yarn add react-chessboard-ui
 ## Usage example
 ```tsx
 import React from 'react';
-import { ChessBoard } from 'rechreact-chessboard-ui'; // ChessBoard is a base component of react-chessboard-ui
+import { ChessBoard } from 'react-chessboard-ui'; // ChessBoard is a base component of react-chessboard-ui
 
 import 'react-chessboard-ui/dist/index.css'; // required import css for ChessBoard
 
