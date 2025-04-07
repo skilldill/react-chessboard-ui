@@ -1,6 +1,6 @@
 {
   "name": "react-chessboard-ui",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A customizable and interactive chessboard component for React applications. Easily integrate a fully functional and responsive chessboard into your React project with features like drag-and-drop pieces, move validation, and customizable board styles.",
   "author": "skilldill",
   "license": "MIT",
@@ -26,7 +26,7 @@
     "deploy": "gh-pages -d example/build"
   },
   "peerDependencies": {
-    "react": "^18.3.0"
+    "react": "^19.1.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -34,8 +34,8 @@
     "@testing-library/user-event": "^7.2.1",
     "@types/jest": "^25.1.4",
     "@types/node": "^12.12.38",
-    "@types/react": "^18.3.0",
-    "@types/react-dom": "^18.3.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
     "@typescript-eslint/eslint-plugin": "^2.26.0",
     "@typescript-eslint/parser": "^2.26.0",
     "babel-eslint": "^10.0.3",
@@ -54,8 +54,8 @@
     "microbundle-crl": "^0.13.10",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.0.4",
-    "react": "^18.3.0",
-    "react-dom": "^18.3.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "react-scripts": "^3.4.1",
     "typescript": "^3.7.5"
   },
