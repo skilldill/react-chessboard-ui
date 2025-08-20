@@ -1,23 +1,23 @@
 # react-chessboard-ui ♟️
 
-[![NPM](https://img.shields.io/npm/v/react-chessboard-ui.svg)](https://www.npmjs.com/package/react-chessboard-ui)  
+[![NPM](https://img.shields.io/npm/v/react-chessboard-ui.svg)](https://www.npmjs.com/package/react-chessboard-ui)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 A lightweight and customizable React chessboard component built with modern UI in mind. Easily integrate chess functionality into your React apps with FEN support, game-end detection, and position handling.
 
 <img src="./blob/ChessBoard.png?raw=true" width="400px" alt="react-chessboard-ui preview" />
 
-## 📘 **Full documentation**: [https://chessboardui.space/](https://chessboardui.space/)
+## 📘 **Full documentation**: [https://react-chessboard-ui.dev/](https://react-chessboard-ui.dev/)
 
 ---
 
 ## 🚀 Features
 
-- 🎯 Fully controlled via FEN strings  
-- ♻️ React functional component with hooks support  
-- 🎨 Customizable styles (via CSS or override)  
-- ♟️ Game-end and move-change callbacks  
-- 🧩 Easy integration into any React project  
+- 🎯 Fully controlled via FEN strings
+- ♻️ React functional component with hooks support
+- 🎨 Customizable styles (via CSS or override)
+- ♟️ Game-end and move-change callbacks
+- 🧩 Easy integration into any React project
 
 ---
 
@@ -47,7 +47,7 @@ import 'react-chessboard-ui/dist/index.css'; // Required CSS
 export const App = () => {
   return (
     <div>
-      <ChessBoard 
+      <ChessBoard
         FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
         onChange={handleChangePosition}
         onEndGame={handleEndGame}
@@ -60,7 +60,7 @@ export const App = () => {
 ## Full customizable
 <img src="./blob/customization.png?raw=true" width="400px" alt="react-chessboard-ui preview" />
 
-### 📘 **Documentation for customization**: [https://chessboardui.space/properties/config/](https://chessboardui.space/properties/config/)
+### 📘 **Documentation for customization**: [https://react-chessboard-ui.dev/properties/config/](https://react-chessboard-ui.dev/properties/config/)
 
 
 ---
