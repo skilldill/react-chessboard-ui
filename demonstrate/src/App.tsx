@@ -136,12 +136,12 @@ function App() {
         </button>
       ))}
       
-      <ChessBoard 
+      <ChessBoard
         FEN={"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"}
         onChange={() => {}}
         onEndGame={() => {}}
         change={currentMove}
-        reversed={false} // <~~~ flag for reversing board
+        reversed={true} // <~~~ flag for reversing board
       />
     </div>
   )

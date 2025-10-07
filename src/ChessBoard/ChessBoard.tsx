@@ -1,5 +1,5 @@
 import { FENtoGameState, FigureColor, GameResult, MoveData } from "../JSChessEngine";
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect, useState } from "react";
 import styles from './ChessBoard.module.css';
 import { ChessBoardCellsLayout } from "./ChessBoardCellsLayout";
 import { ChessBoardFiguresLayout } from "./ChessBoardFiguresLayout";
@@ -31,6 +31,8 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
         config,
         playerColor,
     } = props;
+
+    const [animated, setAnimated] = useState(false);
 
     const {
         fromPos,
@@ -66,15 +68,19 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
         handleSelectFigurePicker,
     } = useChessBoardInteractive({ onChange, onEndGame, config });
 
+    const handleUpdateFEN = (FEN: string) => {
+        const { boardState, currentColor } = FENtoGameState(FEN);
+        setInitialState(boardState);
+        setActualState(boardState);
+        setCurrentColor(currentColor);
+    };
+
     useEffect(() => {
         setPlayerColor(playerColor);
     }, [playerColor]);
 
     useEffect(() => {
-        const { boardState, currentColor } = FENtoGameState(FEN);
-        setInitialState(boardState);
-        setActualState(boardState);
-        setCurrentColor(currentColor);
+        handleUpdateFEN(FEN);
     }, [FEN]);
 
     useEffect(() => {
@@ -82,7 +88,23 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
     }, [reversed]);
 
     useEffect(() => {
-        setNewMove(change);
+        if (!change) return;
+
+        if (change.withTransition) {
+            setAnimated(true);
+            setTimeout(() => {
+                setNewMove(change);
+            }, 10);
+            setTimeout(() => {
+                setAnimated(false);
+            }, 160); // animation duration 150ms + for 10ms delay
+            setTimeout(() => {
+                handleUpdateFEN(change.move.FEN);
+            }, 170);
+        } else {
+            setNewMove(change);
+            handleUpdateFEN(change.move.FEN);
+        }
     }, [change]);
 
     return (
@@ -93,6 +115,7 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
                 change={newMove}
                 reversed={reversed}
                 boardConfig={boardConfig}
+                animated={animated}
             />
             <ChessBoardInteractiveLayout
                 selectedPos={fromPos}

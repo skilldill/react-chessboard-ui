@@ -21,7 +21,8 @@
     "test:build": "run-s build",
     "test:lint": "eslint .",
     "test:unit": "cross-env CI=1 react-scripts test --env=jsdom",
-    "test:watch": "react-scripts test --env=jsdom"
+    "test:watch": "react-scripts test --env=jsdom",
+    "dev": "cd demonstrate && npm run dev"
   },
   "peerDependencies": {
     "react": "^19.1.0"

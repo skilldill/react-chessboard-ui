@@ -9,11 +9,12 @@ type ChessBoardFiguresLayoutProps = {
     initialState: Cell[][];
     change?: ChangeMove;
     reversed?: boolean;
+    animated?: boolean;
     boardConfig: ChessBoardConfig;
 }
 
 export const ChessBoardFiguresLayout: FC<ChessBoardFiguresLayoutProps> = (props) => {
-    const { initialState, change, reversed, boardConfig } = props;
+    const { initialState, change, reversed, boardConfig, animated } = props;
     const [actualState, setActualState] = useState<Figure[]>([]);
 
     useEffect(() => {
@@ -153,7 +154,7 @@ export const ChessBoardFiguresLayout: FC<ChessBoardFiguresLayoutProps> = (props)
                     style={{ 
                         top: `${boardConfig.cellSize * figure.position![1]}px`, 
                         left: `${boardConfig.cellSize * figure.position![0]}px`,
-                        transition: !!change && change.withTransition ? 'all .15s ease-out' : 'none',
+                        transition: !!change && animated ? 'all .15s ease-out' : 'none',
                         width: boardConfig.cellSize,
                         height: boardConfig.cellSize,
                     }}
