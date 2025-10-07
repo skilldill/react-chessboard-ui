@@ -141,7 +141,7 @@ function App() {
         onChange={() => {}}
         onEndGame={() => {}}
         change={currentMove}
-        reversed={true} // <~~~ flag for reversing board
+        reversed={false} // <~~~ flag for reversing board
       />
     </div>
   )

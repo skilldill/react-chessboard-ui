@@ -110,8 +110,7 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
             setNewMove(updatedChange);
             handleUpdateFEN(updatedChange.move.FEN);
         }
-        
-    }, [change, reversed]);
+    }, [change]);
 
     return (
         <div className={styles.chessBoard}>
