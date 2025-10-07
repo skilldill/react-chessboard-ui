@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './App.css'
 import { ChessBoard, type MoveData } from "../../src";
+import { PAUL_MORPHY_OPERA_GAME } from './moves';
 
 const MOVES: MoveData[] = [
     {
@@ -104,27 +105,38 @@ const MOVES: MoveData[] = [
 function App() {
   const [moveIndex, setMoveIndex] = useState<number>();
   const [currentMove, setCurrentMove] = useState<any>();
+    const [history, setHistory] = useState<MoveData[]>([]);
+
+    const onChange = (move: MoveData) => {
+        setHistory(() => {
+            console.log([...history, move]);
+            return [...history, move];
+        });
+    }
 
   const nextMove = () => {
     if (moveIndex === undefined) {
       setCurrentMove({
-        move: MOVES[0],
-        withTransition: true
+            move: PAUL_MORPHY_OPERA_GAME[0],
+            withTransition: true
       });
       setMoveIndex(0);
       return;
     }
     setCurrentMove({
-      move: MOVES[moveIndex + 1],
+      move: PAUL_MORPHY_OPERA_GAME[moveIndex + 1],
       withTransition: true
     });
+    if (moveIndex + 1 === PAUL_MORPHY_OPERA_GAME.length) {
+      return;
+    }
     setMoveIndex(moveIndex + 1);
   }
 
   return (
     <div>
-      {/* <button onClick={nextMove}>Next move</button> */}
-      {MOVES.map((move, index) => (
+      <button onClick={nextMove}>Next move</button>
+      {/* {MOVES.map((move, index) => (
         <button key={index} onClick={() => {
             setCurrentMove({
                 move: move,
@@ -134,10 +146,11 @@ function App() {
         }}>
           Move {index + 1}
         </button>
-      ))}
+      ))} */}
       
       <ChessBoard
         FEN={"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"}
+        // onChange={onChange}
         onChange={() => {}}
         onEndGame={() => {}}
         change={currentMove}
