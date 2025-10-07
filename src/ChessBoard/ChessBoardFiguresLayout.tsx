@@ -159,7 +159,7 @@ export const ChessBoardFiguresLayout: FC<ChessBoardFiguresLayoutProps> = (props)
                         height: boardConfig.cellSize,
                     }}
                 >
-                    {boardConfig.piecesMap[getFigureCSS(figure)]('80%')}
+                    {boardConfig.piecesMap[getFigureCSS(figure)] && boardConfig.piecesMap[getFigureCSS(figure)]('80%')}
                 </div>
             )}
         </div>

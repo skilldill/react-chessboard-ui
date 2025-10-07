@@ -32,11 +32,10 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
         playerColor,
     } = props;
 
-    const [animated, setAnimated] = useState(false);
-
     const {
         fromPos,
         newMove,
+        animated,
         boardConfig,
         markedCells,
         grabbingPos,
@@ -48,9 +47,9 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
         possibleMoves,
         startArrowCoord,
         showFigurePicker,
-
         markCell,
         setNewMove,
+        setAnimated,
         handleClick,
         handleGrabEnd,
         handleGrabbing,

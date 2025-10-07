@@ -39,6 +39,9 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
   const [showFigurePicker, setShowFigurePicker] = useState(false);
   const [targetPos, setTargetPos] = useState<CellPos>([-1, -1]);
 
+  // Для анимирования хода фигуры
+  const [animated, setAnimated] = useState(false);
+
   const clearFromPos = () => setFromPos([-1, -1]);
   const clearGrabbingPos = () => setGrabbingPos([-1, -1]);
   const clearPossibleMoves = () => setPossibleMoves([]);
@@ -300,6 +303,7 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
 
     onChange(moveData);
 
+    setAnimated(withTransition);
     setNewMove({ move: moveData, withTransition, attackedPos });
 
     clearGrabbingPos();
@@ -320,6 +324,7 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
 
     onChange(moveData);
 
+    setAnimated(withTransition);
     setNewMove({ move: moveData, withTransition, attackedPos });
 
     clearClickedPos();
@@ -447,6 +452,7 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
   return {
     fromPos,
     newMove,
+    animated,
     boardConfig,
     markedCells,
     grabbingPos,
@@ -463,6 +469,7 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
 
     markCell,
     setNewMove,
+    setAnimated,
     handleClick,
     clearFromPos,
     handleGrabEnd,

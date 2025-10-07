@@ -3,108 +3,10 @@ import './App.css'
 import { ChessBoard, type MoveData } from "../../src";
 import { PAUL_MORPHY_OPERA_GAME } from './moves';
 
-const MOVES: MoveData[] = [
-    {
-        "figure": {
-            "type": "pawn",
-            "color": "white",
-            "touched": true
-        },
-        "from": [
-            4,
-            6
-        ],
-        "to": [
-            4,
-            4
-        ],
-        "FEN": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1"
-    },
-    {
-        "figure": {
-            "type": "pawn",
-            "color": "black",
-            "touched": true
-        },
-        "from": [
-            4,
-            1
-        ],
-        "to": [
-            4,
-            3
-        ],
-        "FEN": "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 1"
-    },
-    {
-        "figure": {
-            "type": "knight",
-            "color": "white",
-            "touched": true
-        },
-        "from": [
-            6,
-            7
-        ],
-        "to": [
-            5,
-            5
-        ],
-        "FEN": "rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 0 1"
-    },
-    {
-        "figure": {
-            "type": "knight",
-            "color": "black",
-            "touched": true
-        },
-        "from": [
-            1,
-            0
-        ],
-        "to": [
-            2,
-            2
-        ],
-        "FEN": "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 0 1"
-    },
-    {
-        "figure": {
-            "type": "pawn",
-            "color": "white",
-            "touched": true
-        },
-        "from": [
-            3,
-            6
-        ],
-        "to": [
-            3,
-            4
-        ],
-        "FEN": "r1bqkbnr/pppp1ppp/2n5/4p3/3PP3/5N2/PPP2PPP/RNBQKB1R b KQkq d3 0 1"
-    },
-    {
-        "figure": {
-            "type": "pawn",
-            "color": "black",
-            "touched": true
-        },
-        "from": [
-            4,
-            3
-        ],
-        "to": [
-            3,
-            4
-        ],
-        "FEN": "r1bqkbnr/pppp1ppp/2n5/8/3pP3/5N2/PPP2PPP/RNBQKB1R w KQkq - 0 1"
-    }
-];
 
 function App() {
-  const [moveIndex, setMoveIndex] = useState<number>();
-  const [currentMove, setCurrentMove] = useState<any>();
+    const [moveIndex, setMoveIndex] = useState<number>();
+    const [currentMove, setCurrentMove] = useState<any>();
     const [history, setHistory] = useState<MoveData[]>([]);
 
     const onChange = (move: MoveData) => {
@@ -114,29 +16,32 @@ function App() {
         });
     }
 
-  const nextMove = () => {
-    if (moveIndex === undefined) {
-      setCurrentMove({
-            move: PAUL_MORPHY_OPERA_GAME[0],
-            withTransition: true
-      });
-      setMoveIndex(0);
-      return;
-    }
-    setCurrentMove({
-      move: PAUL_MORPHY_OPERA_GAME[moveIndex + 1],
-      withTransition: true
-    });
-    if (moveIndex + 1 === PAUL_MORPHY_OPERA_GAME.length) {
-      return;
-    }
-    setMoveIndex(moveIndex + 1);
-  }
+    const nextMove = () => {
+        if (moveIndex === undefined) {
+            setCurrentMove({
+                move: PAUL_MORPHY_OPERA_GAME[0],
+                withTransition: true
+            });
+            setMoveIndex(0);
+            return;
+        }
 
-  return (
-    <div>
-      <button onClick={nextMove}>Next move</button>
-      {/* {MOVES.map((move, index) => (
+        if (moveIndex + 1 === PAUL_MORPHY_OPERA_GAME.length) {
+            return;
+        }
+
+        setCurrentMove({
+            move: PAUL_MORPHY_OPERA_GAME[moveIndex + 1],
+            withTransition: true
+        });
+
+        setMoveIndex(moveIndex + 1);
+    }
+
+    return (
+        <div>
+            <button onClick={nextMove}>Next move</button>
+            {/* {MOVES.map((move, index) => (
         <button key={index} onClick={() => {
             setCurrentMove({
                 move: move,
@@ -147,17 +52,17 @@ function App() {
           Move {index + 1}
         </button>
       ))} */}
-      
-      <ChessBoard
-        FEN={"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"}
-        // onChange={onChange}
-        onChange={() => {}}
-        onEndGame={() => {}}
-        change={currentMove}
-        reversed={false} // <~~~ flag for reversing board
-      />
-    </div>
-  )
+
+            <ChessBoard
+                FEN={"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"}
+                // onChange={onChange}
+                onChange={() => {}}
+                onEndGame={() => {}}
+                change={currentMove}
+                reversed={false} // <~~~ flag for reversing board
+            />
+        </div>
+    )
 }
 
 export default App
