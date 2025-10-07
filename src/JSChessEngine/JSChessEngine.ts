@@ -234,7 +234,7 @@ export class JSChessEngine {
    * @param moveData данные хода
    * @param boardSize размер доски
    */
-  static reverseMove = (moveData: MoveData, boardSize: number) => {
+  static reverseMove = (moveData: MoveData, boardSize = 8) => {
     const { from, to, figure, type } = moveData;
 
     const reversedMove: MoveData = {

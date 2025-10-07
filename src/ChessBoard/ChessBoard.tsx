@@ -1,4 +1,4 @@
-import { FENtoGameState, FigureColor, GameResult, MoveData } from "../JSChessEngine";
+import { FENtoGameState, FigureColor, GameResult, MoveData, JSChessEngine } from "../JSChessEngine";
 import React, { FC, useEffect, useState } from "react";
 import styles from './ChessBoard.module.css';
 import { ChessBoardCellsLayout } from "./ChessBoardCellsLayout";
@@ -90,22 +90,28 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
     useEffect(() => {
         if (!change) return;
 
+        const updatedChange = {
+            ...change,
+            move: reversed ? JSChessEngine.reverseMove(change.move) : change.move
+        };
+
         if (change.withTransition) {
             setAnimated(true);
             setTimeout(() => {
-                setNewMove(change);
+                setNewMove(updatedChange);
             }, 10);
             setTimeout(() => {
                 setAnimated(false);
             }, 160); // animation duration 150ms + for 10ms delay
             setTimeout(() => {
-                handleUpdateFEN(change.move.FEN);
+                handleUpdateFEN(updatedChange.move.FEN);
             }, 170);
         } else {
-            setNewMove(change);
-            handleUpdateFEN(change.move.FEN);
+            setNewMove(updatedChange);
+            handleUpdateFEN(updatedChange.move.FEN);
         }
-    }, [change]);
+        
+    }, [change, reversed]);
 
     return (
         <div className={styles.chessBoard}>
