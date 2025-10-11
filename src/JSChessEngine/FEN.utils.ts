@@ -151,7 +151,7 @@ export const FENtoGameState = (
   // Сначала подготавливаем stateNotaion, чтобы вместо цифр были "." - пустые поля
   let preparedStateNotation = '';
   for (let i = 0; i < stateNotaion.length; i++) {
-    // Если симвло число, то заполняем готовую нотацию
+    // Если символ число, то заполняем готовую нотацию
     // точками в таком количестве какое число в нотации
     if (!isNaN(parseInt(stateNotaion[i]))) {
       const dotsCount = parseInt(stateNotaion[i]);
@@ -174,7 +174,7 @@ export const FENtoGameState = (
     gameState.boardState
   );
 
-  // Определение битого поля
+  // Определение битое поля
   if (beatedField !== '-') {
     const posBeatedCell = getPositionByFEN(beatedField);
     gameState.boardState[posBeatedCell[0]][posBeatedCell[1]] = {

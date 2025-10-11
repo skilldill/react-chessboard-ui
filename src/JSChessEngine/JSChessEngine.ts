@@ -242,6 +242,7 @@ export class JSChessEngine {
       from: [boardSize - (from[0] + 1), boardSize - (from[1] + 1)],
       to: [boardSize - (to[0] + 1), boardSize - (to[1] + 1)],
       type,
+      FEN: moveData.FEN,
     };
 
     return reversedMove;

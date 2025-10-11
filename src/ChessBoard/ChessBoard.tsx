@@ -48,8 +48,6 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
         startArrowCoord,
         showFigurePicker,
         markCell,
-        setNewMove,
-        setAnimated,
         handleClick,
         handleGrabEnd,
         handleGrabbing,
@@ -57,7 +55,6 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
         setActualState,
         setPlayerColor,
         setCurrentColor,
-        selectClickFrom,
         selectHoverFrom,
         setInitialState,
         startRenderArrow,
@@ -65,6 +62,7 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
         handleGrabbingCell,
         getHasCheckByCellPos,
         handleSelectFigurePicker,
+        handleChangeFromExternal,
     } = useChessBoardInteractive({ onChange, onEndGame, config });
 
     const handleUpdateFEN = (FEN: string) => {
@@ -88,27 +86,8 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
 
     useEffect(() => {
         if (!change) return;
-
-        const updatedChange = {
-            ...change,
-            move: reversed ? JSChessEngine.reverseMove(change.move) : change.move
-        };
-
-        if (change.withTransition) {
-            setAnimated(true);
-            setTimeout(() => {
-                setNewMove(updatedChange);
-            }, 10);
-            setTimeout(() => {
-                setAnimated(false);
-            }, 160); // animation duration 150ms + for 10ms delay
-            setTimeout(() => {
-                handleUpdateFEN(updatedChange.move.FEN);
-            }, 170);
-        } else {
-            setNewMove(updatedChange);
-            handleUpdateFEN(updatedChange.move.FEN);
-        }
+        const reversedChange = reversed ? JSChessEngine.reverseMove(change.move) : change.move;
+        handleChangeFromExternal(reversedChange);
     }, [change]);
 
     return (

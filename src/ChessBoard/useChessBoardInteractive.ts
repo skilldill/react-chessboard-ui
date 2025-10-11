@@ -204,6 +204,31 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
     return { moveData, attackedPos };
   }
 
+
+  const moveFigureByChange = (change: ChangeMove) => {
+    const { from, to, figure } = change.move;
+    const { updatedCells } = JSChessEngine.changeState(
+      actualState,
+      figure,
+      to,
+      from,
+      boardReversed
+    );
+
+    const linesCheck = JSChessEngine.getLinesWithCheck(
+      updatedCells, 
+      currentColor, 
+      boardReversed
+    );
+
+    setLinesWithCheck(linesCheck);
+    const updatedChange = {
+      ...change,
+      move: boardReversed ? JSChessEngine.reverseMove(change.move) : change.move
+    };
+    setNewMove(updatedChange);
+  }
+
   const moveFigureByClick = (from: CellPos, to: CellPos, figure: Figure) => {
     if (!!playerColor && currentColor !== playerColor) {
       cleanAllForFigure();
@@ -230,6 +255,57 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
     const linesCheck = JSChessEngine.getLinesWithCheck(
       updatedCells, 
       currentColor, 
+      boardReversed
+    );
+
+    setLinesWithCheck(linesCheck);
+
+    setActualState(updatedCells);
+
+    // Пешка дошла до конца доски
+    // Показываем FigurePicker
+    // И изменяем состояние с превращением пешки
+    if (
+      figure.type === 'pawn' &&
+      (to[1] === 0 || to[1] === actualState.length - 1)
+    ) {
+      setTargetPos(to);
+      setShowFigurePicker(true);
+      return {};
+    }
+
+    const colorFEN = currentColor === 'white' ? 'black' : 'white';
+    const FEN = stateToFEN(updatedCells, colorFEN)
+
+    // Собранные данные для отправки
+    const moveData: MoveData = { figure, from, to, FEN };
+    
+    // setMoveVector([from, to]);
+    // onChange(changedState, moveData);
+
+    toggleCurrentColor();
+
+    setClickedFigure(undefined);
+    clearClickedPos();
+    clearGrabbingPos();
+    clearArrows();
+    clearMarkedCells();
+
+    return { moveData, attackedPos };
+  }
+
+  const moveFigureByExternalChange = (from: CellPos, to: CellPos, figure: Figure) => {
+    const { updatedCells, attackedPos } = JSChessEngine.changeState(
+      actualState,
+      figure,
+      to,
+      from,
+      boardReversed
+    );
+
+    const linesCheck = JSChessEngine.getLinesWithCheck(
+      updatedCells, 
+      currentColor,
       boardReversed
     );
 
@@ -310,6 +386,18 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
     clearPossibleMoves();
   }
 
+  const handleChangeFromExternal = (moveData: MoveData) => {    
+    const { attackedPos } = moveFigureByExternalChange(moveData.from, moveData.to, moveData.figure);
+
+    onChange(moveData);
+
+    setAnimated(true);
+    setNewMove({ move: moveData, withTransition: true, attackedPos });
+
+    clearClickedPos();
+    clearClickPossibleMoves();
+  }
+  
   const handleClickForTargetCell = (cellPos: CellPos, withTransition = false) => {
     if (clickedPos[0] === cellPos[0] && clickedPos[1] === cellPos[1]) return;
     if (clickedPos[0] === -1) return;
@@ -484,7 +572,10 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
     startRenderArrow,
     reverseChessBoard,
     handleGrabbingCell,
+    moveFigureByChange,
     getHasCheckByCellPos,
     handleSelectFigurePicker,
+    handleChangeFromExternal,
+    moveFigureByExternalChange,
   }
 }

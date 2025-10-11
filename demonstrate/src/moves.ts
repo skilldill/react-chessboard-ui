@@ -528,3 +528,166 @@ export const PAUL_MORPHY_OPERA_GAME = [
         "FEN": "1n1Rkb1r/p4ppp/4q3/4p1B1/4P3/8/PPP2PPP/2K5 b k - 0 1"
     }
 ];
+
+export const TRANSFORMATION_GAME = [
+    {
+        "figure": {
+            "type": "king",
+            "color": "white",
+            "touched": true
+        },
+        "from": [
+            7,
+            7
+        ],
+        "to": [
+            7,
+            6
+        ],
+        "FEN": "k7/p7/8/8/8/8/7K/8 b - - 0 1"
+    },
+    {
+        "figure": {
+            "type": "pawn",
+            "color": "black",
+            "touched": true
+        },
+        "from": [
+            0,
+            1
+        ],
+        "to": [
+            0,
+            3
+        ],
+        "FEN": "k7/8/8/p7/8/8/7K/8 w - a6 0 1"
+    },
+    {
+        "figure": {
+            "type": "king",
+            "color": "white",
+            "touched": true
+        },
+        "from": [
+            7,
+            6
+        ],
+        "to": [
+            7,
+            5
+        ],
+        "FEN": "k7/8/8/p7/8/7K/8/8 b - - 0 1"
+    },
+    {
+        "figure": {
+            "type": "pawn",
+            "color": "black",
+            "touched": true
+        },
+        "from": [
+            0,
+            3
+        ],
+        "to": [
+            0,
+            4
+        ],
+        "FEN": "k7/8/8/8/p7/7K/8/8 w - - 0 1"
+    },
+    {
+        "figure": {
+            "type": "king",
+            "color": "white",
+            "touched": true
+        },
+        "from": [
+            7,
+            5
+        ],
+        "to": [
+            6,
+            4
+        ],
+        "FEN": "k7/8/8/8/p5K1/8/8/8 b - - 0 1"
+    },
+    {
+        "figure": {
+            "type": "pawn",
+            "color": "black",
+            "touched": true
+        },
+        "from": [
+            0,
+            4
+        ],
+        "to": [
+            0,
+            5
+        ],
+        "FEN": "k7/8/8/8/6K1/p7/8/8 w - - 0 1"
+    },
+    {
+        "figure": {
+            "type": "king",
+            "color": "white",
+            "touched": true
+        },
+        "from": [
+            6,
+            4
+        ],
+        "to": [
+            5,
+            4
+        ],
+        "FEN": "k7/8/8/8/5K2/p7/8/8 b - - 0 1"
+    },
+    {
+        "figure": {
+            "type": "pawn",
+            "color": "black",
+            "touched": true
+        },
+        "from": [
+            0,
+            5
+        ],
+        "to": [
+            0,
+            6
+        ],
+        "FEN": "k7/8/8/8/5K2/8/p7/8 w - - 0 1"
+    },
+    {
+        "figure": {
+            "type": "king",
+            "color": "white",
+            "touched": true
+        },
+        "from": [
+            5,
+            4
+        ],
+        "to": [
+            4,
+            5
+        ],
+        "FEN": "k7/8/8/8/8/4K3/p7/8 b - - 0 1"
+    },
+    {
+        "figure": {
+            "type": "queen",
+            "color": "black",
+            "touched": true
+        },
+        "from": [
+            0,
+            6
+        ],
+        "to": [
+            0,
+            7
+        ],
+        "FEN": "k7/8/8/8/8/4K3/8/q7 b - - 0 1"
+    }
+];

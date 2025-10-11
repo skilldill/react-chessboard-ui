@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './App.css'
 import { ChessBoard, type MoveData } from "../../src";
-import { PAUL_MORPHY_OPERA_GAME } from './moves';
+import { PAUL_MORPHY_OPERA_GAME, TRANSFORMATION_GAME } from './moves';
 
 
 function App() {
@@ -19,19 +19,19 @@ function App() {
     const nextMove = () => {
         if (moveIndex === undefined) {
             setCurrentMove({
-                move: PAUL_MORPHY_OPERA_GAME[0],
+                move: TRANSFORMATION_GAME[0],
                 withTransition: true
             });
             setMoveIndex(0);
             return;
         }
 
-        if (moveIndex + 1 === PAUL_MORPHY_OPERA_GAME.length) {
+        if (moveIndex + 1 === TRANSFORMATION_GAME.length) {
             return;
         }
 
         setCurrentMove({
-            move: PAUL_MORPHY_OPERA_GAME[moveIndex + 1],
+            move: TRANSFORMATION_GAME[moveIndex + 1],
             withTransition: true
         });
 
@@ -54,9 +54,10 @@ function App() {
       ))} */}
 
             <ChessBoard
-                FEN={"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"}
+                // FEN={"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"}
+                FEN={"k7/p7/8/8/8/8/8/7K w - - 0 1"}
                 // onChange={onChange}
-                onChange={() => {}}
+                onChange={onChange}
                 onEndGame={() => {}}
                 change={currentMove}
                 reversed={false} // <~~~ flag for reversing board
