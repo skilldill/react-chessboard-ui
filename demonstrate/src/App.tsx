@@ -11,6 +11,7 @@ function App() {
 
     const onChange = (move: MoveData) => {
         setHistory(() => {
+            console.log([...history, move]);
             return [...history, move];
         });
     }
@@ -60,6 +61,7 @@ function App() {
                 onEndGame={() => {}}
                 change={currentMove}
                 reversed={false} // <~~~ flag for reversing board
+                viewOnly={true}
             />
         </div>
     )

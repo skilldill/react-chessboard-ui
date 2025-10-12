@@ -19,6 +19,7 @@ type ChessBoardProps = {
     reversed?: boolean;
     config?: Partial<ChessBoardConfig>;
     playerColor?: FigureColor;
+    viewOnly?: boolean;
 }
 
 export const ChessBoard: FC<ChessBoardProps> = (props) => {
@@ -30,6 +31,7 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
         reversed,
         config,
         playerColor,
+        viewOnly,
     } = props;
 
     const {
@@ -118,11 +120,11 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
             <ChessBoardControlLayout
                 boardConfig={boardConfig}
                 onClick={handleClick}
-                onGrabStart={selectHoverFrom}
+                onGrabStart={viewOnly ? () => {} : selectHoverFrom}
                 onGrabStartRight={startRenderArrow}
-                onGrabEnd={handleGrabEnd}
+                onGrabEnd={viewOnly ? () => {} : handleGrabEnd}
                 onGrabEndRight={endRenderArrow}
-                onGrabbing={handleGrabbing}
+                onGrabbing={viewOnly ? () => {} : handleGrabbing}
                 onRightClick={markCell}
                 onGrabbingCell={handleGrabbingCell}
             />
