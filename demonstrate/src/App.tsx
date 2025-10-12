@@ -11,7 +11,6 @@ function App() {
 
     const onChange = (move: MoveData) => {
         setHistory(() => {
-            console.log([...history, move]);
             return [...history, move];
         });
     }
@@ -19,19 +18,19 @@ function App() {
     const nextMove = () => {
         if (moveIndex === undefined) {
             setCurrentMove({
-                move: TRANSFORMATION_GAME[0],
+                move: PAUL_MORPHY_OPERA_GAME[0],
                 withTransition: true
             });
             setMoveIndex(0);
             return;
         }
 
-        if (moveIndex + 1 === TRANSFORMATION_GAME.length) {
+        if (moveIndex + 1 === PAUL_MORPHY_OPERA_GAME.length) {
             return;
         }
 
         setCurrentMove({
-            move: TRANSFORMATION_GAME[moveIndex + 1],
+            move: PAUL_MORPHY_OPERA_GAME[moveIndex + 1],
             withTransition: true
         });
 
@@ -54,8 +53,8 @@ function App() {
       ))} */}
 
             <ChessBoard
-                // FEN={"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"}
-                FEN={"k7/p7/8/8/8/8/8/7K w - - 0 1"}
+                FEN={"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"}
+                // FEN={"k7/p7/8/8/8/8/8/7K w - - 0 1"}
                 // onChange={onChange}
                 onChange={onChange}
                 onEndGame={() => {}}

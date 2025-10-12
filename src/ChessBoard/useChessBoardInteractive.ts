@@ -392,7 +392,15 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
     onChange(moveData);
 
     setAnimated(true);
-    setNewMove({ move: moveData, withTransition: true, attackedPos });
+
+    const change: ChangeMove = {
+      move: moveData,
+      withTransition: true,
+      attackedPos,
+      transformTo: moveData.type === 'transform' ? moveData.figure : undefined,
+    };
+
+    setNewMove(change);
 
     clearClickedPos();
     clearClickPossibleMoves();

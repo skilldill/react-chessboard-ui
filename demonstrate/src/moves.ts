@@ -688,6 +688,6 @@ export const TRANSFORMATION_GAME = [
             0,
             7
         ],
-        "FEN": "k7/8/8/8/8/4K3/8/q7 b - - 0 1"
+        "type": "transform",
     }
 ];
