@@ -427,9 +427,11 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
     clearClickPossibleMoves();
   }
 
-  const handleClick = (cellPos: CellPos) => {
+  const handleClick = (cellPos: CellPos, viewOnly = false) => {
     clearMarkedCells();
     clearArrows();
+
+    if (viewOnly) return;
 
     if (clickedPos[0] === -1) {
       selectClickFrom(cellPos);

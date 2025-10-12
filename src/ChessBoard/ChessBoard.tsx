@@ -119,7 +119,7 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
             />
             <ChessBoardControlLayout
                 boardConfig={boardConfig}
-                onClick={handleClick}
+                onClick={(pos) => handleClick(pos, viewOnly)}
                 onGrabStart={viewOnly ? () => {} : selectHoverFrom}
                 onGrabStartRight={startRenderArrow}
                 onGrabEnd={viewOnly ? () => {} : handleGrabEnd}
