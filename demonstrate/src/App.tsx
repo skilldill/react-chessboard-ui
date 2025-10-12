@@ -61,7 +61,7 @@ function App() {
                 onEndGame={() => {}}
                 change={currentMove}
                 reversed={false} // <~~~ flag for reversing board
-                viewOnly={true}
+                // viewOnly={true}
             />
         </div>
     )

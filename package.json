@@ -1,6 +1,6 @@
 {
   "name": "react-chessboard-ui",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "A customizable and interactive chessboard component for React applications. Easily integrate a fully functional and responsive chessboard into your React project with features like drag-and-drop pieces, move validation, and customizable board styles.",
   "author": "skilldill",
   "license": "MIT",
