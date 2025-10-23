@@ -80,7 +80,8 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
 
     useEffect(() => {
         handleUpdateFEN(FEN);
-    }, [FEN]);
+        if (reversed) reverseChessBoard();
+    }, [FEN, reversed]);
 
     useEffect(() => {
         if (reversed) reverseChessBoard();

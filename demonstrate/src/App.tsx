@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css'
 import { ChessBoard, type MoveData } from "../../src";
 import { PAUL_MORPHY_OPERA_GAME, TRANSFORMATION_GAME } from './moves';
@@ -8,6 +8,8 @@ function App() {
     const [moveIndex, setMoveIndex] = useState<number>();
     const [currentMove, setCurrentMove] = useState<any>();
     const [history, setHistory] = useState<MoveData[]>([]);
+    const [initialFEN, setInitialFEN] = useState("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
+
 
     const onChange = (move: MoveData) => {
         setHistory(() => {
@@ -38,6 +40,12 @@ function App() {
         setMoveIndex(moveIndex + 1);
     }
 
+    useEffect(() => {
+        setTimeout(() => {
+            setInitialFEN('rnbqkbnr/pp1ppppp/8/8/8/8/P1PPPPPP/RNBQKBNR b KQkq - 0 1')
+        }, 1000)
+    }, [])
+
     return (
         <div>
             <button onClick={nextMove}>Next move</button>
@@ -54,13 +62,13 @@ function App() {
       ))} */}
 
             <ChessBoard
-                FEN={"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"}
+                FEN={initialFEN}
                 // FEN={"k7/p7/8/8/8/8/8/7K w - - 0 1"}
                 // onChange={onChange}
                 onChange={onChange}
                 onEndGame={() => {}}
                 change={currentMove}
-                reversed={false} // <~~~ flag for reversing board
+                reversed={true} // <~~~ flag for reversing board
                 // viewOnly={true}
             />
         </div>
