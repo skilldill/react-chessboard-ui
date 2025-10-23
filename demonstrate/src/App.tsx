@@ -9,7 +9,7 @@ function App() {
     const [currentMove, setCurrentMove] = useState<any>();
     const [history, setHistory] = useState<MoveData[]>([]);
     const [initialFEN, setInitialFEN] = useState("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
-
+    const [reversed, setReversed] = useState(false);
 
     const onChange = (move: MoveData) => {
         setHistory(() => {
@@ -40,15 +40,21 @@ function App() {
         setMoveIndex(moveIndex + 1);
     }
 
-    useEffect(() => {
+    const reverseBoard = () => {
+        setReversed((prev) => !prev);
+    }
+
+    const setDelayedFen = () => {
         setTimeout(() => {
-            setInitialFEN('rnbqkbnr/pp1ppppp/8/8/8/8/P1PPPPPP/RNBQKBNR b KQkq - 0 1')
+            setInitialFEN('k7/p7/8/8/8/8/7K/8 b - - 0 1')
         }, 1000)
-    }, [])
+    }
 
     return (
         <div>
             <button onClick={nextMove}>Next move</button>
+            <button onClick={reverseBoard}>Reverse</button>
+            <button onClick={setDelayedFen}>Set delayed FEN</button>
             {/* {MOVES.map((move, index) => (
         <button key={index} onClick={() => {
             setCurrentMove({
@@ -68,7 +74,7 @@ function App() {
                 onChange={onChange}
                 onEndGame={() => {}}
                 change={currentMove}
-                reversed={true} // <~~~ flag for reversing board
+                reversed={reversed} // <~~~ flag for reversing board
                 // viewOnly={true}
             />
         </div>
