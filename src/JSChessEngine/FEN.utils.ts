@@ -4,7 +4,7 @@ import {
   FIGURES_LATTERS_NOTATIONS,
   LETTERS,
 } from './chess.consts';
-import { type FigureColor, type Cell, JSChessEngine } from './JSChessEngine';
+import { FigureColor, Cell, JSChessEngine, } from './JSChessEngine';
 
 /**
  * Вовзвращет позицию клетки по состоянию fen

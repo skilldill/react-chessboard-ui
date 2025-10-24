@@ -46,7 +46,8 @@ function App() {
 
     const setDelayedFen = () => {
         setTimeout(() => {
-            setInitialFEN('k7/p7/8/8/8/8/7K/8 b - - 0 1')
+            setInitialFEN('k7/p7/8/8/8/8/7K/8 w - - 0 1');
+            // setReversed(true);
         }, 1000)
     }
 
@@ -74,6 +75,7 @@ function App() {
                 onChange={onChange}
                 onEndGame={() => {}}
                 change={currentMove}
+                // playerColor="black"                
                 reversed={reversed} // <~~~ flag for reversing board
                 // viewOnly={true}
             />
