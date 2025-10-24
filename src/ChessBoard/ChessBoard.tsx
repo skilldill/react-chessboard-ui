@@ -61,7 +61,6 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
         setInitialState,
         setBoardReversed,
         startRenderArrow,
-        reverseChessBoard,
         cleanAllForFigure,
         handleGrabbingCell,
         getHasCheckByCellPos,
@@ -100,7 +99,7 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
                 change={newMove}
                 boardConfig={boardConfig}
                 animated={animated}
-                // reversed={reversed} While block this props
+                // reversed={reversed} ** While blocked this props **
             />
             <ChessBoardInteractiveLayout
                 selectedPos={fromPos}

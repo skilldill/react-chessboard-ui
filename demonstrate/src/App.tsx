@@ -12,6 +12,7 @@ function App() {
     const [reversed, setReversed] = useState(false);
 
     const onChange = (move: MoveData) => {
+        // console.log(move);
         setHistory(() => {
             console.log([...history, move]);
             return [...history, move];
@@ -71,7 +72,6 @@ function App() {
             <ChessBoard
                 FEN={initialFEN}
                 // FEN={"k7/p7/8/8/8/8/8/7K w - - 0 1"}
-                // onChange={onChange}
                 onChange={onChange}
                 onEndGame={() => {}}
                 change={currentMove}

@@ -185,7 +185,9 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
     }
 
     const colorFEN = currentColor === 'white' ? 'black' : 'white';
-    const FEN = stateToFEN(updatedCells, colorFEN)
+    
+    const reversedUpdatedCells = boardReversed ? JSChessEngine.reverseChessBoard(updatedCells) : updatedCells;
+    const FEN = stateToFEN(reversedUpdatedCells, colorFEN);
 
     // Собранные данные для отправки
     const moveData: MoveData = { figure, from, to, FEN };
@@ -275,7 +277,9 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
     }
 
     const colorFEN = currentColor === 'white' ? 'black' : 'white';
-    const FEN = stateToFEN(updatedCells, colorFEN)
+
+    const reversedUpdatedCells = boardReversed ? JSChessEngine.reverseChessBoard(updatedCells) : updatedCells;
+    const FEN = stateToFEN(reversedUpdatedCells, colorFEN);
 
     // Собранные данные для отправки
     const moveData: MoveData = { figure, from, to, FEN };
@@ -414,6 +418,7 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
     if (!foundPosInPossible) return;
     
     const { moveData, attackedPos } = moveFigureByClick(clickedPos, cellPos, clickedFigure);
+
     if (!moveData) return;
 
     onChange(moveData);
