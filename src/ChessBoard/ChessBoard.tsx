@@ -1,5 +1,5 @@
 import { FENtoGameState, FigureColor, GameResult, MoveData, JSChessEngine } from "../JSChessEngine";
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect } from "react";
 import styles from './ChessBoard.module.css';
 import { ChessBoardCellsLayout } from "./ChessBoardCellsLayout";
 import { ChessBoardFiguresLayout } from "./ChessBoardFiguresLayout";
@@ -59,19 +59,23 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
         setCurrentColor,
         selectHoverFrom,
         setInitialState,
+        setBoardReversed,
         startRenderArrow,
         reverseChessBoard,
+        cleanAllForFigure,
         handleGrabbingCell,
         getHasCheckByCellPos,
         handleSelectFigurePicker,
         handleChangeFromExternal,
     } = useChessBoardInteractive({ onChange, onEndGame, config });
 
-    const handleUpdateFEN = (FEN: string) => {
-        const { boardState, currentColor } = FENtoGameState(FEN);
+    const handleUpdateFEN = (FEN: string, reversed: boolean) => {
+        const { boardState, currentColor } = FENtoGameState(FEN, reversed);
+        cleanAllForFigure();
         setInitialState(boardState);
         setActualState(boardState);
         setCurrentColor(currentColor);
+        setBoardReversed(reversed);
     };
 
     useEffect(() => {
@@ -79,13 +83,8 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
     }, [playerColor]);
 
     useEffect(() => {
-        handleUpdateFEN(FEN);
-        if (reversed) reverseChessBoard();
-    }, [FEN, reversed]);
-
-    useEffect(() => {
-        if (reversed) reverseChessBoard();
-    }, [reversed]);
+        handleUpdateFEN(FEN, reversed);
+    }, [FEN, reversed])
 
     useEffect(() => {
         if (!change) return;
@@ -99,9 +98,9 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
             <ChessBoardFiguresLayout
                 initialState={initialState}
                 change={newMove}
-                reversed={reversed}
                 boardConfig={boardConfig}
                 animated={animated}
+                // reversed={reversed} While block this props
             />
             <ChessBoardInteractiveLayout
                 selectedPos={fromPos}

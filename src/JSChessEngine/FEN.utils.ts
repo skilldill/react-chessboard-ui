@@ -4,7 +4,7 @@ import {
   FIGURES_LATTERS_NOTATIONS,
   LETTERS,
 } from './chess.consts';
-import type { FigureColor, Cell } from './JSChessEngine';
+import { FigureColor, Cell, JSChessEngine, } from './JSChessEngine';
 
 /**
  * Вовзвращет позицию клетки по состоянию fen
@@ -138,7 +138,8 @@ export const partFENtoState = (notation: string) => {
  * @param notation Описание текущего состояния от Stockfish https://hxim.github.io/Stockfish-Evaluation-Guide/
  */
 export const FENtoGameState = (
-  FEN: string
+  FEN: string,
+  reversed?: boolean,
 ): { boardState: Cell[][]; currentColor: FigureColor } => {
   const gameState: { boardState: Cell[][]; currentColor: FigureColor } = {
     boardState: [],
@@ -182,6 +183,12 @@ export const FENtoGameState = (
       beated: true,
     };
   }
+
+  if (reversed)
+    return { 
+      boardState: JSChessEngine.reverseChessBoard(gameState.boardState),
+      currentColor: gameState.currentColor,
+    };
 
   return gameState;
 };
