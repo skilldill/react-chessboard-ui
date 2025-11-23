@@ -205,3 +205,41 @@ export const correctGrabbingPosForArrow = (pos: CellPos, boardConfig: ChessBoard
     (pos[0] * boardConfig.cellSize) + (boardConfig.cellSize / 2 - 10), 
     (pos[1] * boardConfig.cellSize) + (boardConfig.cellSize / 2)
 ] as CellPos;
+
+
+/**
+ * Создание тэга для хранение состояния 
+ * разворота доски
+ * 
+ * На момент создания, есть проблема с заданием
+ * разворота доски для слоя фигур - происходит двойной
+ * рендер. Из-за этого доска возврщает в тоже положение
+ * при reversed = true, но состояние игры разворачивается
+ * 
+ * Поэтому принято решение вынести хранение и задание 
+ * разворота доски на уровень data-атрибутов html
+ */
+export const createHtmlReversedStateHolder = () => {
+    if (!window) return;
+
+    const reversedStateHolder = document.createElement('div');
+    reversedStateHolder.setAttribute('id', 'reversed-state-holder');
+    reversedStateHolder.setAttribute('data-reversed-state', 'false');
+    document.body.append(reversedStateHolder);
+}
+
+export const setHtmlReversedStateHolderValue = (reversed: boolean) => {
+    if (!window) return;
+
+    document.getElementById('reversed-state-holder')
+        .setAttribute('data-reversed-state', JSON.stringify(reversed));
+}
+
+export const getHtmlReversedStateHolderValue = () => {
+    if (!window) return false;
+
+    const chessboardReversed = document.getElementById('reversed-state-holder') && document.getElementById('reversed-state-holder')
+        .getAttribute('data-reversed-state') === 'true';
+
+    return chessboardReversed;
+}

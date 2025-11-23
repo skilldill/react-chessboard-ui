@@ -2,7 +2,7 @@ import { Cell, Figure, JSChessEngine } from "../JSChessEngine";
 import React, { FC, useEffect, useState } from "react";
 import styles from './ChessBoard.module.css';
 import cn from 'classnames';
-import { checkIsCastlingMove, getFigureCSS, mapCellsToFiguresArray } from "./utils";
+import { checkIsCastlingMove, getFigureCSS, getHtmlReversedStateHolderValue, mapCellsToFiguresArray } from "./utils";
 import { ChangeMove, ChessBoardConfig } from "./models";
 
 type ChessBoardFiguresLayoutProps = {
@@ -22,6 +22,8 @@ export const ChessBoardFiguresLayout: FC<ChessBoardFiguresLayoutProps> = (props)
     }, [initialState])
 
     useEffect(() => {
+        const chessboardReversed = getHtmlReversedStateHolderValue();
+
         if (!!change) {
             setActualState((prevState) => {
                 const updatedState = [...prevState];
@@ -35,6 +37,31 @@ export const ChessBoardFiguresLayout: FC<ChessBoardFiguresLayoutProps> = (props)
                         const kingIndex = updatedState.findIndex((figure) => 
                             figure.color === 'white' && figure.type === 'king'
                         );
+
+                        if (chessboardReversed) {
+                            if (castlingType === '0-0') {
+                                const rookIndex = updatedState.findIndex((figure) => 
+                                    figure.color === color
+                                    && figure.type === 'rook'
+                                    && figure.position![0] === 7
+                                );
+                                updatedState[rookIndex].position![0] = 4;
+                                updatedState[kingIndex].position![0] = 5;
+    
+                                return updatedState;
+                            }
+    
+                            const rookIndex = updatedState.findIndex((figure) => 
+                                figure.color === color
+                                && figure.type === 'rook'
+                                && figure.position![0] === 0
+                            );
+                            console.log('WHITE', rookIndex);
+                            updatedState[rookIndex].position![0] = 2;
+                            updatedState[kingIndex].position![0] = 1;
+    
+                            return updatedState;
+                        }
 
                         if (castlingType === '0-0') {
                             const rookIndex = updatedState.findIndex((figure) => 
@@ -63,6 +90,31 @@ export const ChessBoardFiguresLayout: FC<ChessBoardFiguresLayoutProps> = (props)
                         const kingIndex = updatedState.findIndex((figure) => 
                             figure.color === 'black' && figure.type === 'king'
                         );
+
+                        if (chessboardReversed) {
+                            if (castlingType === '0-0') {
+                                const rookIndex = updatedState.findIndex((figure) => 
+                                    figure.color === color
+                                    && figure.type === 'rook'
+                                    && figure.position![0] === 7
+                                );
+                                updatedState[rookIndex].position![0] = 4;
+                                updatedState[kingIndex].position![0] = 5;
+    
+                                return updatedState;
+                            }
+    
+                            const rookIndex = updatedState.findIndex((figure) => 
+                                figure.color === color
+                                && figure.type === 'rook'
+                                && figure.position![0] === 0
+                            );
+
+                            updatedState[rookIndex].position![0] = 2;
+                            updatedState[kingIndex].position![0] = 1;
+
+                            return updatedState;
+                        }
 
                         if (castlingType === '0-0') {
                             const rookIndex = updatedState.findIndex((figure) => 

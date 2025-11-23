@@ -9,7 +9,7 @@ import { ChessBoardInteractiveLayout } from "./ChessBoardInteractiveLayout";
 import { ChangeMove, ChessBoardConfig } from "./models";
 import { ArrowLayout } from "./ArrowLayout";
 import { FigurePicker } from "./FigurePicker";
-import { correctGrabbingPosByScroll, correctGrabbingPosForArrow } from "./utils";
+import { correctGrabbingPosByScroll, correctGrabbingPosForArrow, createHtmlReversedStateHolder, setHtmlReversedStateHolderValue } from "./utils";
 
 type ChessBoardProps = {
     FEN: string;
@@ -78,11 +78,18 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
     };
 
     useEffect(() => {
+        createHtmlReversedStateHolder();
+    }, [])
+
+    useEffect(() => {
         setPlayerColor(playerColor);
     }, [playerColor]);
 
     useEffect(() => {
         handleUpdateFEN(FEN, reversed);
+
+        // For check reversed chessboard in FiguresLayout
+        setHtmlReversedStateHolderValue(reversed);
     }, [FEN, reversed])
 
     useEffect(() => {

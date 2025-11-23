@@ -691,3 +691,22 @@ export const TRANSFORMATION_GAME = [
         "type": "transform",
     }
 ];
+
+export const CASTLING_MOVE = [
+    {
+        "figure": {
+            "type": "king",
+            "color": "white",
+            "touched": false
+        },
+        "from": [
+            4,
+            7
+        ],
+        "to": [
+            6,
+            7
+        ],
+        "FEN": "r3k2r/ppppppp/8/8/8/8/PPPPPPPP/R3K2R w KQkq - 0 1"
+    }
+]
