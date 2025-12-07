@@ -1,6 +1,7 @@
 .chessBoard {
     position: relative;
     width: fit-content;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .figuresLayout {
