@@ -33,7 +33,7 @@ export const FigurePicker: FC<FigurePickerProps> = (props) => {
           }}
           onClick={() => handleChange(figure)}
         >
-          {boardConfig.piecesMap[getFigureCSS(figure)]('80%')}
+          {boardConfig.piecesMap[getFigureCSS(figure)](`${boardConfig.figureSizePercent}%`)}
         </div>
       ))}
     </div>

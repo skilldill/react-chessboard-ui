@@ -35,6 +35,6 @@ export const HoldedFigure: FC<HoldedFigureProps> = (props) => {
                 width: boardConfig.cellSize,
                 height: boardConfig.cellSize,
             }}
-        > {boardConfig.piecesMap[getFigureCSS(holdedFigure)]('80%')}</div>
+        > {boardConfig.piecesMap[getFigureCSS(holdedFigure)](`${boardConfig.figureSizePercent}%`)}</div>
     );
 }

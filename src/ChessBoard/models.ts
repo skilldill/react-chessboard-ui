@@ -6,6 +6,7 @@ export interface ChessPiecesMap {
 
 export type ChessBoardConfig = {
     cellSize: number;
+    figureSizePercent: number;
     whiteCellColor: string;
     blackCellColor: string;
     selectedCellColor: string;

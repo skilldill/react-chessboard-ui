@@ -78,6 +78,7 @@ function App() {
                 onChange={onChange}
                 onEndGame={() => {}}
                 change={currentMove}
+                config={{ figureSizePercent: 100 }}
                 // playerColor="black"                
                 reversed={reversed} // <~~~ flag for reversing board
                 // viewOnly={true}
