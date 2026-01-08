@@ -509,11 +509,15 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
       figure
     );
 
+    const colorFEN = currentColor === 'white' ? 'black' : 'white';
+    const FEN = stateToFEN(updatedCells, colorFEN)
+    
     const moveData: MoveData = {
       figure,
       from: startPos,
       to: targetPos,
       type: 'transform',
+      FEN,
     };
 
     onChange(moveData);
