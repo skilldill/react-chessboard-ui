@@ -1,5 +1,5 @@
 import { Cell, CellPos, Figure, FigureColor, GameResult, JSChessEngine, MoveData, stateToFEN } from "../JSChessEngine";
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { checkIsPossibleMove, checkPositionsHas, correctGrabbingPosForArrow, getChessBoardConfig, hasCheck } from "./utils";
 import { ArrowCoords, ChangeMove, ChessBoardConfig } from "./models";
 import { DEFAULT_CHESSBORD_CONFIG } from "./constants";
@@ -51,21 +51,29 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
   const clearClickedPos = () => setClickedPos([-1, -1]);
   const clearArrows = () => setArrowsCoords([]);
 
+  // КОСТЫЛЬ: позже исправить
+  // Необходимо для определения первого рендера
+  // Если это не фиксировать, то при появлении
+  // уже приходит сообщение о том что результат игры PAT
+  const firstRender = useRef(false);
+
   useEffect(() => {
     setBoardConfig(getChessBoardConfig(config));
   }, []);
 
   useEffect(() => {
-    if (linesWithCheck.length > 0) {
+    if (firstRender.current) {
       const gameResult = JSChessEngine.getGameResult(
         actualState,
         linesWithCheck,
         currentColor!,
         boardReversed
       );
-
+  
       if (gameResult)
         onEndGame(gameResult);
+    } else {
+      firstRender.current = true;
     }
   }, [actualState, linesWithCheck, boardReversed, currentColor])
 

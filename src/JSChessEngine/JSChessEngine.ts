@@ -2181,7 +2181,7 @@ export class JSChessEngine {
 
     // Суммируем все значения
     const countsSumResult = countsNextMoves.reduce(
-      (prevValue, curentValue) => prevValue + curentValue
+      (prevValue, curentValue) => prevValue + curentValue, 0
     );
 
     // Мат
