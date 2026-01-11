@@ -357,6 +357,7 @@ export class JSChessEngine {
    * @returns
    */
   static hasFigure = (state: Cell[][], pos: CellPos) => {
+    if (!state[pos[1]]) return false;
     return !!state[pos[1]][pos[0]]?.figure;
   };
 
