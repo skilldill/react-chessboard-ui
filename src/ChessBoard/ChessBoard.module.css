@@ -2,6 +2,15 @@
     position: relative;
     width: fit-content;
     -webkit-tap-highlight-color: transparent;
+    /* Предотвращение выделения - все префиксы для максимальной совместимости */
+    -webkit-touch-callout: none; /* Отключает контекстное меню на iOS */
+    -webkit-user-select: none;   /* Safari, Chrome */
+    -khtml-user-select: none;    /* Konqueror */
+    -moz-user-select: none;      /* Firefox */
+    -ms-user-select: none;       /* IE/Edge */
+    user-select: none;           /* Стандартное свойство */
+    /* Предотвращение перетаскивания */
+    -webkit-user-drag: none;
 }
 
 .figuresLayout {
@@ -67,6 +76,14 @@
     justify-content: center;
     align-items: center;
     transition: all .15s ease-out;
+
+    /* for stop select images */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
 }
 
 .holdedFigure {

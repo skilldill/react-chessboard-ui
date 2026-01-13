@@ -413,6 +413,12 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
     setNewMove(change);
 
     clearClickedPos();
+
+    // Очистка фигуры, которую держат для хода
+    setHoldedFigure(undefined);
+    clearFromPos();
+    clearPossibleMoves();
+
     clearClickPossibleMoves();
   }
   

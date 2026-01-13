@@ -4,7 +4,7 @@ import { ChessBoard, type MoveData } from "../../src";
 import { PAUL_MORPHY_OPERA_GAME, TRANSFORMATION_GAME, CASTLING_MOVE } from './moves';
 
 
-const MOVES = CASTLING_MOVE;
+const MOVES = PAUL_MORPHY_OPERA_GAME;
 
 function App() {
     const [moveIndex, setMoveIndex] = useState<number>();
@@ -72,11 +72,11 @@ function App() {
       ))} */}
 
             <ChessBoard
-                // FEN={initialFEN}
+                FEN={initialFEN}
                 // FEN={"k7/p6P/8/8/8/8/8/7K w - - 0 1"}
                 // FEN={"1K6/3q4/k7/8/8/8/p7/8 b - - 0 1"}
                 // FEN={"1K6/3q4/k7/8/8/8/p7/8 b - - 0 1"}
-                FEN={"r3k2r/pppppppp/8/8/8/8/PPPPPPPP/R3K2R w KQkq - 0 1"}
+                // FEN={"r3k2r/pppppppp/8/8/8/8/PPPPPPPP/R3K2R w KQkq - 0 1"}
                 onChange={onChange}
                 onEndGame={console.log}
                 change={currentMove}
