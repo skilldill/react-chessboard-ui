@@ -14,8 +14,16 @@ type ChessBoardFiguresLayoutProps = {
 }
 
 export const ChessBoardFiguresLayout: FC<ChessBoardFiguresLayoutProps> = (props) => {
-    const { initialState, change, reversed, boardConfig, animated } = props;
-    const [actualState, setActualState] = useState<Figure[]>([]);
+    const { 
+        initialState, 
+        change, 
+        reversed, 
+        boardConfig,
+        animated,
+    } = props;
+
+    // Расширяем для эффекта съедания фигуры
+    const [actualState, setActualState] = useState<(Figure & { beated?: boolean })[]>([]);
 
     useEffect(() => {
         setActualState(mapCellsToFiguresArray(initialState));
@@ -154,9 +162,9 @@ export const ChessBoardFiguresLayout: FC<ChessBoardFiguresLayoutProps> = (props)
                 });
 
                 if (foundAttactedFigure && foundAttactedFigure.color !== move.figure.color) {
-                    foundAttactedFigure.color === 'white'
-                    ? foundAttactedFigure.position = [8, foundAttactedFigure.position![1]]
-                    : foundAttactedFigure.position = [-1, foundAttactedFigure.position![1]]
+                    // TODO: Кастомизация анимации исчезновения фигуры
+                    foundAttactedFigure.beated = true;
+                    boardConfig.onHidePieces(foundAttactedFigure);
                 };
 
                 const foundFigureByPositionFrom = updatedState.find((figure) => 
@@ -201,7 +209,8 @@ export const ChessBoardFiguresLayout: FC<ChessBoardFiguresLayoutProps> = (props)
                 <div 
                     key={i}
                     className={cn([styles.figure], {
-                        [styles.hiddenFigure]: figure.position![0] === -1 || figure.position![0] === 8 
+                        // TODO: Кастомизация анимации исчезновения фигуры
+                        [boardConfig.cssHidePieceEffect]: figure.beated,
                     })}
                     style={{ 
                         top: `${boardConfig.cellSize * figure.position![1]}px`, 

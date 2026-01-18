@@ -94,7 +94,7 @@
     opacity: .4;
 }
 
-.hiddenFigure {
+.hiddenFigureEffect {
     opacity: 0;
     transform: rotate(-90deg);
 }

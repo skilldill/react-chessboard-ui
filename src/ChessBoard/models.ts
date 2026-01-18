@@ -16,6 +16,8 @@ export type ChessBoardConfig = {
     arrowColor: string;
     checkedCellColor: string;
     piecesMap: ChessPiecesMap;
+    cssHidePieceEffect: string;
+    onHidePieces: (piece: Figure) => void;
 }
 
 export type ChangeMove = {

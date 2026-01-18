@@ -1,5 +1,7 @@
+import { Figure } from "../JSChessEngine";
 import { CHESS_PIECES_MAP } from "./chessPieciesMap";
 import { ChessBoardConfig } from "./models";
+import styles from './ChessBoard.module.css';
 
 export const DEFAULT_CELL_SIZE = 92;
 export const DEFAULT_FIGURE_SIZE_PERCENT = 80;
@@ -13,6 +15,13 @@ export const DEFAULT_ARROW_COLOR = '#6ac2fd';
 export const DEFAULT_MARKED_CELL_COLOR = '#3697ce';
 export const DEFAULT_CHECKED_CELL_COLOR = '#e95b5c';
 export const DEFAULT_PIECES_MAP = CHESS_PIECES_MAP;
+export const DEFAULT_CSS_HIDE_PIECES_EFFECT = styles.hiddenFigureEffect;
+export const DEFAULT_HIDE_PIECES_HANDLER = (figure: Figure) => {
+    figure.color === 'white'
+        ? figure.position = [8, figure.position![1]]
+        : figure.position = [-1, figure.position![1]];
+};
+
 
 export const DEFAULT_CHESSBORD_CONFIG: ChessBoardConfig = {
     cellSize: DEFAULT_CELL_SIZE,
@@ -26,4 +35,6 @@ export const DEFAULT_CHESSBORD_CONFIG: ChessBoardConfig = {
     markedCellColor: DEFAULT_MARKED_CELL_COLOR,
     checkedCellColor: DEFAULT_CHECKED_CELL_COLOR,
     piecesMap: DEFAULT_PIECES_MAP,
+    cssHidePieceEffect: DEFAULT_CSS_HIDE_PIECES_EFFECT,
+    onHidePieces: DEFAULT_HIDE_PIECES_HANDLER,
 }

@@ -80,7 +80,15 @@ function App() {
                 onChange={onChange}
                 onEndGame={console.log}
                 change={currentMove}
-                config={{ figureSizePercent: 100 }}
+                config={{ 
+                    figureSizePercent: 100,
+                    onHidePieces: (piece) => {
+                        setTimeout(() => {
+                            piece.position = [8, piece.position![1]]
+                        }, 1000)
+                    },
+                    cssHidePieceEffect: 'hideFigureEffectWithLight'
+                }}
                 // playerColor="black"                
                 reversed={reversed} // <~~~ flag for reversing board
                 // viewOnly={true}
