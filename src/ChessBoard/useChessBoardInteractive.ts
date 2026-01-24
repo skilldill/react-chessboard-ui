@@ -24,6 +24,7 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
   const [currentColor, setCurrentColor] = useState<FigureColor>('white');
   const [playerColor, setPlayerColor] = useState<FigureColor>();
   const [newMove, setNewMove] = useState<ChangeMove>();
+  const [movesTrail, setMovesTrail] = useState<[CellPos, CellPos]>();
   const [linesWithCheck, setLinesWithCheck] = useState<CellPos[][]>([]);
   const [markedCells, setMarkedCells] = useState<CellPos[]>([]);
   const [grabbingCell, setGrabbingCell] = useState<CellPos>([-1, -1]);
@@ -237,6 +238,7 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
       move: boardReversed ? JSChessEngine.reverseMove(change.move) : change.move
     };
     setNewMove(updatedChange);
+    setMovesTrail([from, to]);
   }
 
   const moveFigureByClick = (from: CellPos, to: CellPos, figure: Figure) => {
@@ -393,6 +395,7 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
 
     setAnimated(withTransition);
     setNewMove({ move: moveData, withTransition, attackedPos });
+    setMovesTrail([moveData.from, moveData.to]);
 
     clearGrabbingPos();
     clearPossibleMoves();
@@ -411,6 +414,7 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
     };
 
     setNewMove(change);
+    setMovesTrail([moveData.from, moveData.to]);
 
     clearClickedPos();
 
@@ -439,6 +443,7 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
 
     setAnimated(withTransition);
     setNewMove({ move: moveData, withTransition, attackedPos });
+    setMovesTrail([moveData.from, moveData.to]);
 
     clearClickedPos();
     clearClickPossibleMoves();
@@ -542,6 +547,7 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
       withTransition: false, 
       transformTo: figure,
     });
+    setMovesTrail([moveData.from, moveData.to]);
 
     const linesWithCheck = JSChessEngine.getLinesWithCheck(
       updatedCells, 
@@ -572,6 +578,7 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
     fromPos,
     newMove,
     animated,
+    movesTrail,
     boardConfig,
     markedCells,
     grabbingPos,

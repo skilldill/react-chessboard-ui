@@ -2,15 +2,21 @@ import React, { FC } from "react";
 import styles from './ChessBoard.module.css';
 import { getFilledArrayBySize, getIsLightCell } from "./utils";
 import { ChessBoardConfig } from "./models";
+import { CellPos } from "../JSChessEngine";
 
 const BASE_BOARD_SIZE = 8;
 
 type ChessBoardCellsLayoutProps = {
-    size?: number;
     boardConfig: ChessBoardConfig;
+    size?: number;
+    movesTrail?: [CellPos, CellPos];
 }
 
-export const ChessBoardCellsLayout: FC<ChessBoardCellsLayoutProps> = ({ size = BASE_BOARD_SIZE, boardConfig }) => {
+export const ChessBoardCellsLayout: FC<ChessBoardCellsLayoutProps> = ({ 
+    size = BASE_BOARD_SIZE, 
+    boardConfig,
+    movesTrail,
+}) => {
     return (
         <div>
             {getFilledArrayBySize(size).map((_, j) => 
@@ -23,7 +29,12 @@ export const ChessBoardCellsLayout: FC<ChessBoardCellsLayoutProps> = ({ size = B
                                 backgroundColor: getIsLightCell(j, i) ? boardConfig.whiteCellColor : boardConfig.blackCellColor,
                             }}
                             key={`cells-layout-${i}`}
-                        ></div>
+                        >
+                            {movesTrail && (
+                                movesTrail[0][0] === i && movesTrail[0][1] === j ||
+                                movesTrail[1][0] === i && movesTrail[1][1] === j
+                            ) && <div className={styles.movesTrail}/>}
+                        </div>
                     ))}
                 </div>
             )}
