@@ -91,7 +91,6 @@ function App() {
                 }}
                 // playerColor="black"                
                 reversed={reversed} // <~~~ flag for reversing board
-                showMovesTrail={false}
                 // viewOnly={true}
             />
         </div>

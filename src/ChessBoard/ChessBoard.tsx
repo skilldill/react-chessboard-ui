@@ -52,6 +52,7 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
         showFigurePicker,
         markCell,
         handleClick,
+        setAnimated,
         handleGrabEnd,
         handleGrabbing,
         endRenderArrow,
@@ -72,6 +73,7 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
     const handleUpdateFEN = (FEN: string, reversed: boolean) => {
         const { boardState, currentColor } = FENtoGameState(FEN, reversed);
         cleanAllForFigure();
+        setAnimated(false);
         setInitialState(boardState);
         setActualState(boardState);
         setCurrentColor(currentColor);
@@ -96,7 +98,7 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
     useEffect(() => {
         if (!change) return;
         const reversedChange = reversed ? JSChessEngine.reverseMove(change.move) : change.move;
-        handleChangeFromExternal(reversedChange);
+        handleChangeFromExternal(reversedChange, change.withTransition);
     }, [change]);
 
     return (

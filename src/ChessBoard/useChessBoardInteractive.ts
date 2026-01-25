@@ -401,10 +401,10 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
     clearPossibleMoves();
   }
 
-  const handleChangeFromExternal = (moveData: MoveData) => {    
+  const handleChangeFromExternal = (moveData: MoveData, withTransition = true) => {    
     const { attackedPos } = moveFigureByExternalChange(moveData.from, moveData.to, moveData.figure);
 
-    setAnimated(true);
+    setAnimated(withTransition);
 
     const change: ChangeMove = {
       move: moveData,
