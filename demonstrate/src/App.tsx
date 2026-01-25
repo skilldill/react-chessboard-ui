@@ -91,6 +91,7 @@ function App() {
                 }}
                 // playerColor="black"                
                 reversed={reversed} // <~~~ flag for reversing board
+                moveHighlight={[[1, 1], [7, 7]]}
                 // viewOnly={true}
             />
         </div>

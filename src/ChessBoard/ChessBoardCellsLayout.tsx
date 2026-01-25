@@ -10,12 +10,14 @@ type ChessBoardCellsLayoutProps = {
     boardConfig: ChessBoardConfig;
     size?: number;
     movesTrail?: [CellPos, CellPos];
+    moveHighlight?: [CellPos, CellPos];
 }
 
 export const ChessBoardCellsLayout: FC<ChessBoardCellsLayoutProps> = ({ 
     size = BASE_BOARD_SIZE, 
     boardConfig,
     movesTrail,
+    moveHighlight,
 }) => {
     return (
         <div>
@@ -33,6 +35,11 @@ export const ChessBoardCellsLayout: FC<ChessBoardCellsLayoutProps> = ({
                             {movesTrail && (
                                 movesTrail[0][0] === i && movesTrail[0][1] === j ||
                                 movesTrail[1][0] === i && movesTrail[1][1] === j
+                            ) && <div className={styles.movesTrail}/>}
+
+                            {moveHighlight && (
+                                moveHighlight[0][0] === i && moveHighlight[0][1] === j ||
+                                moveHighlight[1][0] === i && moveHighlight[1][1] === j
                             ) && <div className={styles.movesTrail}/>}
                         </div>
                     ))}

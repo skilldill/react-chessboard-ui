@@ -1,4 +1,4 @@
-import { FENtoGameState, FigureColor, GameResult, MoveData, JSChessEngine } from "../JSChessEngine";
+import { FENtoGameState, FigureColor, GameResult, MoveData, JSChessEngine, CellPos } from "../JSChessEngine";
 import React, { FC, useEffect } from "react";
 import styles from './ChessBoard.module.css';
 import { ChessBoardCellsLayout } from "./ChessBoardCellsLayout";
@@ -20,6 +20,7 @@ type ChessBoardProps = {
     config?: Partial<ChessBoardConfig>;
     playerColor?: FigureColor;
     viewOnly?: boolean;
+    moveHighlight?: [CellPos, CellPos];
 }
 
 export const ChessBoard: FC<ChessBoardProps> = (props) => {
@@ -32,6 +33,7 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
         config,
         playerColor,
         viewOnly,
+        moveHighlight,
     } = props;
 
     const {
@@ -106,6 +108,7 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
             <ChessBoardCellsLayout 
                 boardConfig={boardConfig}
                 movesTrail={boardConfig.showMovesTrail && movesTrail}
+                moveHighlight={moveHighlight}
             />
             <ChessBoardFiguresLayout
                 initialState={initialState}
