@@ -15,7 +15,6 @@ type ChessBoardProps = {
     FEN: string;
     onChange: (moveData: MoveData) => void;
     onEndGame: (result: GameResult) => void;
-    showMovesTrail?: boolean;
     change?: ChangeMove;
     reversed?: boolean;
     config?: Partial<ChessBoardConfig>;
@@ -33,7 +32,6 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
         config,
         playerColor,
         viewOnly,
-        showMovesTrail = true,
     } = props;
 
     const {
@@ -105,7 +103,7 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
         <div className={styles.chessBoard}>
             <ChessBoardCellsLayout 
                 boardConfig={boardConfig}
-                movesTrail={showMovesTrail && movesTrail}
+                movesTrail={boardConfig.showMovesTrail && movesTrail}
             />
             <ChessBoardFiguresLayout
                 initialState={initialState}

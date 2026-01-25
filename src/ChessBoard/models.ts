@@ -17,6 +17,7 @@ export type ChessBoardConfig = {
     checkedCellColor: string;
     piecesMap: ChessPiecesMap;
     cssHidePieceEffect: string;
+    showMovesTrail: boolean;
     onHidePieces: (piece: Figure) => void;
 }
 

@@ -87,10 +87,11 @@ function App() {
                             piece.position = [8, piece.position![1]]
                         }, 1000)
                     },
-                    cssHidePieceEffect: 'hideFigureEffectWithBurn'
+                    // cssHidePieceEffect: 'hideFigureEffectWithBurn'
                 }}
                 // playerColor="black"                
                 reversed={reversed} // <~~~ flag for reversing board
+                showMovesTrail={false}
                 // viewOnly={true}
             />
         </div>

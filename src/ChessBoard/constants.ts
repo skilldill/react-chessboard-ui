@@ -16,6 +16,7 @@ export const DEFAULT_MARKED_CELL_COLOR = '#3697ce';
 export const DEFAULT_CHECKED_CELL_COLOR = '#e95b5c';
 export const DEFAULT_PIECES_MAP = CHESS_PIECES_MAP;
 export const DEFAULT_CSS_HIDE_PIECES_EFFECT = styles.hiddenFigureEffect;
+export const DEFAULT_SHOW_MOVES_TRAIL = true;
 export const DEFAULT_HIDE_PIECES_HANDLER = (figure: Figure) => {
     figure.color === 'white'
         ? figure.position = [8, figure.position![1]]
@@ -36,5 +37,6 @@ export const DEFAULT_CHESSBORD_CONFIG: ChessBoardConfig = {
     checkedCellColor: DEFAULT_CHECKED_CELL_COLOR,
     piecesMap: DEFAULT_PIECES_MAP,
     cssHidePieceEffect: DEFAULT_CSS_HIDE_PIECES_EFFECT,
+    showMovesTrail: DEFAULT_SHOW_MOVES_TRAIL,
     onHidePieces: DEFAULT_HIDE_PIECES_HANDLER,
 }
