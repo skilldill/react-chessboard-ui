@@ -95,3 +95,12 @@ button:focus-visible {
   background-color: indigo;
   animation: highlight 2s linear 0s infinite;
 }
+
+.customMarkMove {
+  background-color: #000 !important;
+}
+
+.holdedPiece {
+  transform-origin: center;
+  transform: scale(1.5);
+}

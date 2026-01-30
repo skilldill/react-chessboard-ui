@@ -204,23 +204,23 @@ export const ChessBoardFiguresLayout: FC<ChessBoardFiguresLayoutProps> = (props)
     }, [reversed, initialState])
 
     return (
-        <div className={styles.figuresLayout}>
+        <div className={styles.piecesLayout}>
             {actualState.map((figure, i) => 
                 <div 
                     key={i}
-                    className={cn([styles.figure], {
+                    className={cn([styles.piece], {
                         // TODO: Кастомизация анимации исчезновения фигуры
                         [boardConfig.hidePieceEffectClassName]: figure.beated,
                     })}
                     style={{ 
-                        top: `${boardConfig.cellSize * figure.position![1]}px`, 
-                        left: `${boardConfig.cellSize * figure.position![0]}px`,
+                        top: `${boardConfig.squareSize * figure.position![1]}px`, 
+                        left: `${boardConfig.squareSize * figure.position![0]}px`,
                         transition: !!change && animated ? 'all .15s ease-out' : 'none',
-                        width: boardConfig.cellSize,
-                        height: boardConfig.cellSize,
+                        width: boardConfig.squareSize,
+                        height: boardConfig.squareSize,
                     }}
                 >
-                    {boardConfig.piecesMap[getFigureCSS(figure)] && boardConfig.piecesMap[getFigureCSS(figure)](`${boardConfig.figureSizePercent}%`)}
+                    {boardConfig.piecesMap[getFigureCSS(figure)] && boardConfig.piecesMap[getFigureCSS(figure)](`${boardConfig.pieceSizePercent}%`)}
                 </div>
             )}
         </div>

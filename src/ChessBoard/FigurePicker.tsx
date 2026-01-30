@@ -22,18 +22,18 @@ export const FigurePicker: FC<FigurePickerProps> = (props) => {
   );
 
   return (
-    <div className={styles.figurePicker}>
+    <div className={styles.piecePicker}>
       {getFiguresByColor(color, forPawnTransform).map((figure) => (
         <div
           key={figure.type}
-          className={styles.figurePickerItem}
+          className={styles.piecePickerItem}
           style={{
-            width: boardConfig.cellSize,
-            height: boardConfig.cellSize,
+            width: boardConfig.squareSize,
+            height: boardConfig.squareSize,
           }}
           onClick={() => handleChange(figure)}
         >
-          {boardConfig.piecesMap[getFigureCSS(figure)](`${boardConfig.figureSizePercent}%`)}
+          {boardConfig.piecesMap[getFigureCSS(figure)](`${boardConfig.pieceSizePercent}%`)}
         </div>
       ))}
     </div>

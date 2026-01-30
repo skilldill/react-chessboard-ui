@@ -133,17 +133,10 @@ export const calcAngle = (start: number[], end: number[]) => {
 export const getChessBoardConfig = (config: Partial<ChessBoardConfig> | undefined): ChessBoardConfig => {
     if (!config) return DEFAULT_CHESSBORD_CONFIG;
 
-    const configKeyes = Object.keys(DEFAULT_CHESSBORD_CONFIG);
-
-    const buildedConfig: Record<string, string | number | ChessPiecesMap> = {};
-
-    configKeyes.forEach((key) => {
-        buildedConfig[key as keyof ChessBoardConfig] =
-            config[key as keyof ChessBoardConfig]
-            || DEFAULT_CHESSBORD_CONFIG[key as keyof ChessBoardConfig]
-    });
-
-    return buildedConfig as ChessBoardConfig;
+    return {
+        ...DEFAULT_CHESSBORD_CONFIG,
+        ...config,
+    };
 }
 
 /**
@@ -202,8 +195,8 @@ export const correctGrabbingPosByScroll = (pos: CellPos) => {
  * Корректирует указатели стрелки
  */
 export const correctGrabbingPosForArrow = (pos: CellPos, boardConfig: ChessBoardConfig) => [
-    (pos[0] * boardConfig.cellSize) + (boardConfig.cellSize / 2 - 10), 
-    (pos[1] * boardConfig.cellSize) + (boardConfig.cellSize / 2)
+    (pos[0] * boardConfig.squareSize) + (boardConfig.squareSize / 2 - 10), 
+    (pos[1] * boardConfig.squareSize) + (boardConfig.squareSize / 2)
 ] as CellPos;
 
 

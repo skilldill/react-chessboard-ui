@@ -91,8 +91,8 @@ export const ChessBoardControlLayout: FC<ChessBoardControlLayoutProps> = (props)
                             key={`control-layout-${i}`}
                             className={styles.controlCell}
                             style={{ 
-                                width: boardConfig.cellSize, 
-                                height: boardConfig.cellSize 
+                                width: boardConfig.squareSize, 
+                                height: boardConfig.squareSize 
                             }}
                             onClick={() => handleClick([i, j])}
                             onMouseDown={handleGrabStart([i, j])}

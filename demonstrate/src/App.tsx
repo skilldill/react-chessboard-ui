@@ -81,7 +81,7 @@ function App() {
                 onEndGame={console.log}
                 change={currentMove}
                 config={{ 
-                    figureSizePercent: 100,
+                    pieceSizePercent: 100,
                     onHidePieces: (piece) => {
                         setTimeout(() => {
                             piece.position = [8, piece.position![1]]
@@ -90,6 +90,8 @@ function App() {
                     lightSquareClassName: 'lightSquareCustom',
                     darkSquareClassName: 'darkSquareCustom',
                     squareHighlightClassName: 'highlightCustom',
+                    possibleMoveMarkClassName: 'customMarkMove',
+                    holdedPieceClassName: 'holdedPiece'
                     // hidePieceEffectClassName: 'hideFigureEffectWithBurn'
                 }}
                 // playerColor="black"                

@@ -490,8 +490,8 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
 
   const startRenderArrow = (pos: CellPos) => {
     const startPos: CellPos = [
-      (pos[0] + 1) * boardConfig.cellSize - boardConfig.cellSize / 2 - 10,
-      (pos[1] + 1) * boardConfig.cellSize - boardConfig.cellSize / 2,
+      (pos[0] + 1) * boardConfig.squareSize - boardConfig.squareSize / 2 - 10,
+      (pos[1] + 1) * boardConfig.squareSize - boardConfig.squareSize / 2,
     ];
 
     setStartArrowCoord(startPos);

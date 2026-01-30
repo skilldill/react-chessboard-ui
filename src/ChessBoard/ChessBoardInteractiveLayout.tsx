@@ -5,7 +5,6 @@ import cn from 'classnames';
 import { CellPos, Figure } from "../JSChessEngine";
 import { HoldedFigure } from "./HoldedFigure";
 import { ChessBoardConfig } from "./models";
-import { FACTOR_FOR_SIZE_CIRCLE_MARK } from "./constants";
 
 const BASE_BOARD_SIZE = 8
 
@@ -45,47 +44,37 @@ export const ChessBoardInteractiveLayout: FC<ChessBoardInteractiveLayoutProps> =
                         {getFilledArrayBySize(size).map((_, i) => (
                             <div 
                                 className={cn(styles.interactiveCell, { 
-                                    [styles.selectedCell]: selectedPos[0] === i && selectedPos[1] === j,
-                                    [styles.markedCell]: checkIsPossibleMove(markedCells, [i, j]),
-                                    [styles.checkedCell]: onHasCheck([i, j])
+                                    [`${styles.selectedSquare} ${boardConfig.selectedSquareClassName}`]: selectedPos[0] === i && selectedPos[1] === j,
+                                    [`${styles.pickedSquare} ${boardConfig.pickedSquareClassName}`]: checkIsPossibleMove(markedCells, [i, j]),
+                                    [`${styles.checkedSquare} ${boardConfig.checkedSquareClassName}`]: onHasCheck([i, j])
                                 })}
                                 key={`interactive-layout-${i}`}
                                 style={{
-                                    width: boardConfig.cellSize,
-                                    height: boardConfig.cellSize,
-                                    backgroundColor: selectedPos[0] === i && selectedPos[1] === j 
-                                        ? boardConfig.selectedCellColor
-                                        : 'transparent',
-                                    border: selectedPos[0] === i && selectedPos[1] === j 
-                                        ? boardConfig.selectedCellBorder
-                                        : 'none',
-                                    boxShadow: checkIsPossibleMove(markedCells, [i, j])
-                                        ? `inset 0 0 30px ${boardConfig.markedCellColor}`
-                                        : onHasCheck([i, j]) ? `inset 0 0 30px ${boardConfig.checkedCellColor}`
-                                        : 'none'
+                                    width: boardConfig.squareSize,
+                                    height: boardConfig.squareSize,
                                 }}
                             >
                                 {selectedPos[0] === i && selectedPos[1] === j && holdedFigure && (
                                     <div 
                                         className={cn([
-                                            styles.figure,
-                                            styles.holdedFigure,
+                                            styles.piece,
+                                            styles.holdedPiece,
+                                            // boardConfig.holdedPieceClassName, // Доработать
                                         ], {
-                                            [styles.bluredFigure]: grabbingPos[0] !== -1,
+                                            [styles.bluredPiece]: grabbingPos[0] !== -1,
                                         })}
                                         style={{
-                                            width: boardConfig.cellSize,
-                                            height: boardConfig.cellSize,
+                                            width: boardConfig.squareSize,
+                                            height: boardConfig.squareSize,
                                         }}
-                                    >{boardConfig.piecesMap[getFigureCSS(holdedFigure)](`${boardConfig.figureSizePercent}%`)}</div>
+                                    >{boardConfig.piecesMap[getFigureCSS(holdedFigure)](`${boardConfig.pieceSizePercent}%`)}</div>
                                 )}
                                 {checkIsPossibleMove(possibleMoves, [i, j]) && (
                                     <div 
-                                        className={styles.possibleMoveMark}
+                                        className={cn([styles.possibleMoveMark, boardConfig.possibleMoveMarkClassName])}
                                         style={{
-                                            width: boardConfig.cellSize / FACTOR_FOR_SIZE_CIRCLE_MARK,
-                                            height: boardConfig.cellSize / FACTOR_FOR_SIZE_CIRCLE_MARK,
-                                            backgroundColor: boardConfig.circleMarkColor,
+                                            width: boardConfig.squareSize / boardConfig.factorForSizeCircleMark,
+                                            height: boardConfig.squareSize / boardConfig.factorForSizeCircleMark,
                                         }}
                                     />
                                 )}
