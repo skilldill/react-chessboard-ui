@@ -87,7 +87,10 @@ function App() {
                             piece.position = [8, piece.position![1]]
                         }, 1000)
                     },
-                    // cssHidePieceEffect: 'hideFigureEffectWithBurn'
+                    lightSquareClassName: 'lightSquareCustom',
+                    darkSquareClassName: 'darkSquareCustom',
+                    squareHighlightClassName: 'highlightCustom',
+                    // hidePieceEffectClassName: 'hideFigureEffectWithBurn'
                 }}
                 // playerColor="black"                
                 reversed={reversed} // <~~~ flag for reversing board

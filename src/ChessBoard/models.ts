@@ -5,6 +5,8 @@ export interface ChessPiecesMap {
 }
 
 export type ChessBoardConfig = {
+
+    // Non domain names with "cell" and "figure"
     cellSize: number;
     figureSizePercent: number;
     whiteCellColor: string;
@@ -12,11 +14,21 @@ export type ChessBoardConfig = {
     selectedCellColor: string;
     selectedCellBorder: string;
     markedCellColor: string;
+    checkedCellColor: string;
+
+    // Right domain names
+    squareSize: number;
+    pieceSizePercent: number;
+    lightSquareClassName: string;
+    darkSquareClassName: string;
+    pickedSquareClassName: string;
+    checkedSquareClassName: string;
+    hidePieceEffectClassName: string;
+    squareHighlightClassName: string;
+
     circleMarkColor: string;
     arrowColor: string;
-    checkedCellColor: string;
     piecesMap: ChessPiecesMap;
-    cssHidePieceEffect: string;
     showMovesTrail: boolean;
     onHidePieces: (piece: Figure) => void;
 }

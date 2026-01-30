@@ -210,7 +210,7 @@ export const ChessBoardFiguresLayout: FC<ChessBoardFiguresLayoutProps> = (props)
                     key={i}
                     className={cn([styles.figure], {
                         // TODO: Кастомизация анимации исчезновения фигуры
-                        [boardConfig.cssHidePieceEffect]: figure.beated,
+                        [boardConfig.hidePieceEffectClassName]: figure.beated,
                     })}
                     style={{ 
                         top: `${boardConfig.cellSize * figure.position![1]}px`, 

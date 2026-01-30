@@ -153,3 +153,11 @@
     box-shadow: inset 0 0 11px #3697ce80 !important;
     background-color: #B8E6FE;
 }
+
+.lightSquare {
+    background-color: #fafafc;
+}
+
+.darkSquare {
+    background-color: #d8d9e6;
+}
