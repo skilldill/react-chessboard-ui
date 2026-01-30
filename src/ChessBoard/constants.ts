@@ -1,4 +1,4 @@
-import { Figure } from "../JSChessEngine";
+import { Piece } from "../JSChessEngine";
 import { CHESS_PIECES_MAP } from "./chessPieciesMap";
 import { ChessBoardConfig } from "./models";
 import styles from './ChessBoard.module.css';
@@ -14,7 +14,7 @@ export const DEFAULT_MARKED_CELL_COLOR = '#3697ce';
 export const DEFAULT_CHECKED_CELL_COLOR = '#e95b5c';
 export const DEFAULT_PIECES_MAP = CHESS_PIECES_MAP;
 export const DEFAULT_SHOW_MOVES_TRAIL = true;
-export const DEFAULT_HIDE_PIECES_HANDLER = (figure: Figure) => {
+export const DEFAULT_HIDE_PIECES_HANDLER = (figure: Piece) => {
     figure.color === 'white'
         ? figure.position = [8, figure.position![1]]
         : figure.position = [-1, figure.position![1]];

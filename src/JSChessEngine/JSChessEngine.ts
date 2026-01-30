@@ -1,20 +1,27 @@
-export type FigureType =
+type FigureType =
   | 'pawn'
   | 'bishop'
   | 'knight'
   | 'rook'
   | 'queen'
   | 'king';
-export type FigureColor = 'white' | 'black';
 
-export type CellPos = [number, number];
+type FigureColor = 'white' | 'black';
 
-export interface Figure {
+type CellPos = [number, number];
+
+interface Figure {
   type: FigureType;
   color: FigureColor;
   touched?: boolean;
   position?: CellPos;
 }
+
+// For version 2.0, names from chess domain
+export type Piece = Figure;
+export type PieceColor = FigureColor;
+export type SquarePos = CellPos;
+export type PieceType = FigureType;
 
 export type CellColor = 'white' | 'black';
 

@@ -72,8 +72,8 @@ function App() {
       ))} */}
 
             <ChessBoard
-                FEN={initialFEN}
-                // FEN={"k7/p6P/8/8/8/8/8/7K w - - 0 1"}
+                // FEN={initialFEN}
+                FEN={"k7/p6P/8/8/8/8/8/7K w - - 0 1"}
                 // FEN={"1K6/3q4/k7/8/8/8/p7/8 b - - 0 1"}
                 // FEN={"1K6/3q4/k7/8/8/8/p7/8 b - - 0 1"}
                 // FEN={"r3k2r/pppppppp/8/8/8/8/PPPPPPPP/R3K2R w KQkq - 0 1"}

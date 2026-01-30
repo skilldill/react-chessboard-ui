@@ -1,21 +1,21 @@
 import React, { FC, useCallback } from 'react';
 import styles from './ChessBoard.module.css';
 import { getFigureCSS, getFiguresByColor } from './utils';
-import { Figure, FigureColor } from '../JSChessEngine';
+import { Piece, PieceColor } from '../JSChessEngine';
 import { ChessBoardConfig } from './models';
 
 interface FigurePickerProps {
   boardConfig: ChessBoardConfig;
-  color: FigureColor;
+  color: PieceColor;
   forPawnTransform?: boolean;
-  onSelect: (figure: Figure) => void;
+  onSelect: (figure: Piece) => void;
 }
 
 export const FigurePicker: FC<FigurePickerProps> = (props) => {
   const { boardConfig, color, onSelect, forPawnTransform = false } = props;
 
   const handleChange = useCallback(
-    (figure: Figure) => {
+    (figure: Piece) => {
       onSelect(figure);
     },
     [onSelect]

@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import styles from './ChessBoard.module.css';
 import { getFilledArrayBySize, getIsLightCell } from "./utils";
 import { ChessBoardConfig } from "./models";
-import { CellPos } from "../JSChessEngine";
+import { SquarePos } from "../JSChessEngine";
 import cn from 'classnames';
 
 const BASE_BOARD_SIZE = 8;
@@ -10,8 +10,8 @@ const BASE_BOARD_SIZE = 8;
 type ChessBoardCellsLayoutProps = {
     boardConfig: ChessBoardConfig;
     size?: number;
-    movesTrail?: [CellPos, CellPos];
-    moveHighlight?: [CellPos, CellPos];
+    movesTrail?: [SquarePos, SquarePos];
+    moveHighlight?: [SquarePos, SquarePos];
 }
 
 export const ChessBoardCellsLayout: FC<ChessBoardCellsLayoutProps> = ({ 

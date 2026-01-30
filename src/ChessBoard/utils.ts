@@ -1,11 +1,11 @@
-import { Cell, CellPos, Figure, FigureColor, FigureType, MoveData } from "../JSChessEngine";
-import { ChessBoardConfig, ChessPiecesMap } from "./models";
+import { Cell, SquarePos, Piece, PieceColor, PieceType, MoveData } from "../JSChessEngine";
+import { ChessBoardConfig } from "./models";
 import { DEFAULT_CHESSBORD_CONFIG } from "./constants";
 
 /**
  * Возвращает класс для фигуры в клетке
  */
-export const getFigureCSS = (figure: Figure) =>
+export const getFigureCSS = (figure: Piece) =>
     `${figure.type}-${figure.color}`;
 
 /**
@@ -32,8 +32,8 @@ export const getFilledArrayBySize = (size: number) => {
  * Возвращает только массив фигурам у которых
  * есть поле position
  */
-export const mapCellsToFiguresArray = (boardState: Cell[][]) => {
-    const figuresWithPosition: Figure[] = [];
+export const mapCellsToFiguresArray = (boardState: Cell[][]): Piece[] => {
+    const figuresWithPosition: Piece[] = [];
 
     boardState.forEach((row, j) => row.forEach((cell, i) => {
         if (cell.figure) {
@@ -52,7 +52,7 @@ export const mapCellsToFiguresArray = (boardState: Cell[][]) => {
  * @param possibleMoves Список возможных ходов
  * @param position позиция для проверки
  */
-export const checkIsPossibleMove = (possibleMoves: CellPos[], position: CellPos) => {
+export const checkIsPossibleMove = (possibleMoves: SquarePos[], position: SquarePos) => {
     return !!possibleMoves.find((possibleMove) =>
         possibleMove[0] === position[0] && possibleMove[1] === position[1]
     );
@@ -65,8 +65,8 @@ export const checkIsPossibleMove = (possibleMoves: CellPos[], position: CellPos)
  * @param pos позиция
  */
 export const checkPositionsHas = (
-    positions: CellPos[] | undefined,
-    pos: CellPos
+    positions: SquarePos[] | undefined,
+    pos: SquarePos
 ) => {
     if (!positions) return false;
 
@@ -92,7 +92,7 @@ export const checkIsCastlingMove = (moveData: MoveData) => {
 /**
  * Проверка клетки, на то есть ли шах
  */
-export const hasCheck = (cell: Cell, currentColor: FigureColor, linesWithCheck: CellPos[][]) =>
+export const hasCheck = (cell: Cell, currentColor: PieceColor, linesWithCheck: SquarePos[][]) =>
     !!cell.figure &&
     cell.figure.type === 'king' &&
     cell.figure.color === currentColor &&
@@ -145,11 +145,11 @@ export const getChessBoardConfig = (config: Partial<ChessBoardConfig> | undefine
  * @param forPawnTransform только фигуры для превращения пешки
  */
 export const getFiguresByColor = (
-    color: FigureColor,
+    color: PieceColor,
     forPawnTransform = false
-): Figure[] => {
+): Piece[] => {
     if (forPawnTransform) {
-        const figureNamesForPawn: FigureType[] = [
+        const figureNamesForPawn: PieceType[] = [
             'queen',
             'rook',
             'bishop',
@@ -162,7 +162,7 @@ export const getFiguresByColor = (
         }));
     }
 
-    const figureNames: FigureType[] = [
+    const figureNames: PieceType[] = [
         'pawn',
         'knight',
         'bishop',
@@ -181,23 +181,23 @@ export const getFiguresByColor = (
  * Корректирует позицию захвата курсором
  * коррекция происходит по сроллу
  */
-export const correctGrabbingPosByScroll = (pos: CellPos) => {
+export const correctGrabbingPosByScroll = (pos: SquarePos) => {
     if (typeof window === 'undefined')
         return pos;
 
     return [
         pos[0] - window.scrollX,
         pos[1] - window.scrollY,
-    ] as CellPos;
+    ] as SquarePos;
 }
 
 /**
  * Корректирует указатели стрелки
  */
-export const correctGrabbingPosForArrow = (pos: CellPos, boardConfig: ChessBoardConfig) => [
+export const correctGrabbingPosForArrow = (pos: SquarePos, boardConfig: ChessBoardConfig) => [
     (pos[0] * boardConfig.squareSize) + (boardConfig.squareSize / 2 - 10), 
     (pos[1] * boardConfig.squareSize) + (boardConfig.squareSize / 2)
-] as CellPos;
+] as SquarePos;
 
 
 /**

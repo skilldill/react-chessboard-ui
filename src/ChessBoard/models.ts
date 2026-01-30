@@ -1,4 +1,4 @@
-import { CellPos, Figure, MoveData } from "../JSChessEngine"
+import { SquarePos, Piece, MoveData } from "../JSChessEngine"
 
 export interface ChessPiecesMap {
     [key: string]: (size: string) => JSX.Element;
@@ -23,14 +23,14 @@ export type ChessBoardConfig = {
     arrowColor: string;
     piecesMap: ChessPiecesMap;
     showMovesTrail: boolean;
-    onHidePieces: (piece: Figure) => void;
+    onHidePieces: (piece: Piece) => void;
 }
 
 export type ChangeMove = {
     move: MoveData;
     withTransition?: boolean;
-    attackedPos?: CellPos; // for pawn and beated field
-    transformTo?: Figure;
+    attackedPos?: SquarePos; // for pawn and beated field
+    transformTo?: Piece;
 }
 
 export type ArrowCoords = { start: number[]; end: number[] };
