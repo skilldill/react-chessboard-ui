@@ -1,4 +1,4 @@
-type FigureType =
+export type FigureType =
   | 'pawn'
   | 'bishop'
   | 'knight'
@@ -6,11 +6,11 @@ type FigureType =
   | 'queen'
   | 'king';
 
-type FigureColor = 'white' | 'black';
+export type FigureColor = 'white' | 'black';
 
-type CellPos = [number, number];
+export type CellPos = [number, number];
 
-interface Figure {
+export interface Figure {
   type: FigureType;
   color: FigureColor;
   touched?: boolean;
