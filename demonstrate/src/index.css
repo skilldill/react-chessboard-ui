@@ -66,3 +66,41 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.lightSquareCustom {
+  background-color: yellow;
+}
+
+.darkSquareCustom {
+  background-color: red;
+  background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7CS5ukZALgk-JwVCAKfEFv2FF1cGSGrQYfg&s);
+}
+
+
+@keyframes highlight {
+  0% {
+    background-color: indianred;
+  }
+  
+  50% {
+    background-color: indigo;
+  }
+
+  100% {
+    background-color: indianred;
+  }
+}
+
+.highlightCustom {
+  background-color: indigo;
+  animation: highlight 2s linear 0s infinite;
+}
+
+.customMarkMove {
+  background-color: #000 !important;
+}
+
+.holdedPiece {
+  transform-origin: center;
+  transform: scale(1.5);
+}

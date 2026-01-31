@@ -2,7 +2,7 @@ import React, { FC, MouseEvent, useState } from "react";
 import styles from './ChessBoard.module.css';
 import { getFilledArrayBySize } from "./utils";
 import cn from 'classnames';
-import { CellPos } from "../JSChessEngine";
+import { SquarePos } from "../JSChessEngine";
 import { ChessBoardConfig } from "./models";
 
 const BASE_BOARD_SIZE = 8
@@ -11,14 +11,14 @@ type ChessBoardControlLayoutProps = {
     size?: number;
     boardConfig: ChessBoardConfig;
 
-    onClick: (position: CellPos) => void;
-    onGrabStart: (position: CellPos) => void;
-    onGrabStartRight: (position: CellPos) => void;
-    onGrabEnd: (position: CellPos) => void;
-    onGrabEndRight: (position: CellPos) => void;
+    onClick: (position: SquarePos) => void;
+    onGrabStart: (position: SquarePos) => void;
+    onGrabStartRight: (position: SquarePos) => void;
+    onGrabEnd: (position: SquarePos) => void;
+    onGrabEndRight: (position: SquarePos) => void;
     onGrabbing: (x: number, y: number) => void;
-    onRightClick: (position: CellPos) => void;
-    onGrabbingCell: (position: CellPos) => void;
+    onRightClick: (position: SquarePos) => void;
+    onGrabbingCell: (position: SquarePos) => void;
 }
 
 export const ChessBoardControlLayout: FC<ChessBoardControlLayoutProps> = (props) => {
@@ -37,11 +37,11 @@ export const ChessBoardControlLayout: FC<ChessBoardControlLayoutProps> = (props)
 
     const [pressed, setPressed] = useState(false);
 
-    const handleClick = (cellPos: CellPos) => {
+    const handleClick = (cellPos: SquarePos) => {
         onClick(cellPos);
     }
 
-    const handleGrabStart = (cellPos: CellPos) => (event: MouseEvent) => {
+    const handleGrabStart = (cellPos: SquarePos) => (event: MouseEvent) => {
         setPressed(true);
         if (event.button === 0) {
             onGrabStart(cellPos);
@@ -52,7 +52,7 @@ export const ChessBoardControlLayout: FC<ChessBoardControlLayoutProps> = (props)
         }
     }
 
-    const handleGrabEnd = (cellPos: CellPos) => (event: MouseEvent) => {
+    const handleGrabEnd = (cellPos: SquarePos) => (event: MouseEvent) => {
         if (event.button === 0) {
             setPressed(false);
             onGrabEnd(cellPos);
@@ -70,12 +70,12 @@ export const ChessBoardControlLayout: FC<ChessBoardControlLayoutProps> = (props)
         }
     }
 
-    const handleContextMenu = (cellPos: CellPos) => (event: MouseEvent) => {
+    const handleContextMenu = (cellPos: SquarePos) => (event: MouseEvent) => {
         event.preventDefault();
         onRightClick(cellPos);
     }
 
-    const handleGrabbingCell = (cellPos: CellPos) => {
+    const handleGrabbingCell = (cellPos: SquarePos) => {
         onGrabbingCell(cellPos);
     }
 
@@ -91,8 +91,8 @@ export const ChessBoardControlLayout: FC<ChessBoardControlLayoutProps> = (props)
                             key={`control-layout-${i}`}
                             className={styles.controlCell}
                             style={{ 
-                                width: boardConfig.cellSize, 
-                                height: boardConfig.cellSize 
+                                width: boardConfig.squareSize, 
+                                height: boardConfig.squareSize 
                             }}
                             onClick={() => handleClick([i, j])}
                             onMouseDown={handleGrabStart([i, j])}

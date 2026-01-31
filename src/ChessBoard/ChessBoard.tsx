@@ -1,4 +1,4 @@
-import { FENtoGameState, FigureColor, GameResult, MoveData, JSChessEngine, CellPos } from "../JSChessEngine";
+import { FENtoGameState, PieceColor, GameResult, MoveData, JSChessEngine, SquarePos } from "../JSChessEngine";
 import React, { FC, useEffect } from "react";
 import styles from './ChessBoard.module.css';
 import { ChessBoardCellsLayout } from "./ChessBoardCellsLayout";
@@ -18,9 +18,9 @@ type ChessBoardProps = {
     change?: ChangeMove;
     reversed?: boolean;
     config?: Partial<ChessBoardConfig>;
-    playerColor?: FigureColor;
+    playerColor?: PieceColor;
     viewOnly?: boolean;
-    moveHighlight?: [CellPos, CellPos];
+    moveHighlight?: [SquarePos, SquarePos];
 }
 
 export const ChessBoard: FC<ChessBoardProps> = (props) => {
@@ -144,7 +144,7 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
                 onGrabbingCell={handleGrabbingCell}
             />
             {showFigurePicker && (
-                <div className={styles.chessBoardFigurePicker}>
+                <div className={styles.chessBoardPiecePicker}>
                     <FigurePicker
                         boardConfig={boardConfig}
                         color={currentColor}

@@ -24,17 +24,17 @@ export const HoldedFigure: FC<HoldedFigureProps> = (props) => {
     return isCanShowFigure && (
         <div 
             className={cn([
-                styles.figure,
-                styles.holdedFigure, 
+                styles.piece,
+                styles.holdedPiece, 
             ])}
             style={{ 
                 position: 'fixed',
                 zIndex: 6,
-                top: `${grabbingPos[1] - boardConfig.cellSize / 2}px`,
-                left: `${grabbingPos[0] - boardConfig.cellSize / 2}px`,
-                width: boardConfig.cellSize,
-                height: boardConfig.cellSize,
+                top: `${grabbingPos[1] - boardConfig.squareSize / 2}px`,
+                left: `${grabbingPos[0] - boardConfig.squareSize / 2}px`,
+                width: boardConfig.squareSize,
+                height: boardConfig.squareSize,
             }}
-        > {boardConfig.piecesMap[getFigureCSS(holdedFigure)](`${boardConfig.figureSizePercent}%`)}</div>
+        > {boardConfig.piecesMap[getFigureCSS(holdedFigure)](`${boardConfig.pieceSizePercent}%`)}</div>
     );
 }

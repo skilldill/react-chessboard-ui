@@ -1,39 +1,39 @@
 import React, { FC, useCallback } from 'react';
 import styles from './ChessBoard.module.css';
 import { getFigureCSS, getFiguresByColor } from './utils';
-import { Figure, FigureColor } from '../JSChessEngine';
+import { Piece, PieceColor } from '../JSChessEngine';
 import { ChessBoardConfig } from './models';
 
 interface FigurePickerProps {
   boardConfig: ChessBoardConfig;
-  color: FigureColor;
+  color: PieceColor;
   forPawnTransform?: boolean;
-  onSelect: (figure: Figure) => void;
+  onSelect: (figure: Piece) => void;
 }
 
 export const FigurePicker: FC<FigurePickerProps> = (props) => {
   const { boardConfig, color, onSelect, forPawnTransform = false } = props;
 
   const handleChange = useCallback(
-    (figure: Figure) => {
+    (figure: Piece) => {
       onSelect(figure);
     },
     [onSelect]
   );
 
   return (
-    <div className={styles.figurePicker}>
+    <div className={styles.piecePicker}>
       {getFiguresByColor(color, forPawnTransform).map((figure) => (
         <div
           key={figure.type}
-          className={styles.figurePickerItem}
+          className={styles.piecePickerItem}
           style={{
-            width: boardConfig.cellSize,
-            height: boardConfig.cellSize,
+            width: boardConfig.squareSize,
+            height: boardConfig.squareSize,
           }}
           onClick={() => handleChange(figure)}
         >
-          {boardConfig.piecesMap[getFigureCSS(figure)](`${boardConfig.figureSizePercent}%`)}
+          {boardConfig.piecesMap[getFigureCSS(figure)](`${boardConfig.pieceSizePercent}%`)}
         </div>
       ))}
     </div>

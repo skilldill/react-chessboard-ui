@@ -72,8 +72,8 @@ function App() {
       ))} */}
 
             <ChessBoard
-                FEN={initialFEN}
-                // FEN={"k7/p6P/8/8/8/8/8/7K w - - 0 1"}
+                // FEN={initialFEN}
+                FEN={"k7/p6P/8/8/8/8/8/7K w - - 0 1"}
                 // FEN={"1K6/3q4/k7/8/8/8/p7/8 b - - 0 1"}
                 // FEN={"1K6/3q4/k7/8/8/8/p7/8 b - - 0 1"}
                 // FEN={"r3k2r/pppppppp/8/8/8/8/PPPPPPPP/R3K2R w KQkq - 0 1"}
@@ -81,13 +81,18 @@ function App() {
                 onEndGame={console.log}
                 change={currentMove}
                 config={{ 
-                    figureSizePercent: 100,
+                    pieceSizePercent: 100,
                     onHidePieces: (piece) => {
                         setTimeout(() => {
                             piece.position = [8, piece.position![1]]
                         }, 1000)
                     },
-                    // cssHidePieceEffect: 'hideFigureEffectWithBurn'
+                    lightSquareClassName: 'lightSquareCustom',
+                    darkSquareClassName: 'darkSquareCustom',
+                    squareHighlightClassName: 'highlightCustom',
+                    possibleMoveMarkClassName: 'customMarkMove',
+                    holdedPieceClassName: 'holdedPiece'
+                    // hidePieceEffectClassName: 'hideFigureEffectWithBurn'
                 }}
                 // playerColor="black"                
                 reversed={reversed} // <~~~ flag for reversing board
