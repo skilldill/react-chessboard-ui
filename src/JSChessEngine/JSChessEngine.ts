@@ -1438,6 +1438,10 @@ export class JSChessEngine {
 
     let isPossibleCastling = true;
 
+    // Удаляем последний ход, чтобы длинную рокеровку считать правильно
+    if (castlingPathWithoutRook.length > 2)
+      castlingPathWithoutRook.pop(); 
+
     for (let i = 0; i < allAttackedPositionsByEnemys.length; i++) {
       const attackedPos = allAttackedPositionsByEnemys[i];
 
