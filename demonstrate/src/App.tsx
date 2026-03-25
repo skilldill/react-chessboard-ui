@@ -73,10 +73,10 @@ function App() {
 
             <ChessBoard
                 // FEN={initialFEN}
-                // FEN={"k7/p6P/8/8/8/8/8/7K w - - 0 1"}
+                FEN={"k7/p6P/8/8/8/8/8/7K w - - 0 1"}
                 // FEN={"1K6/3q4/k7/8/8/8/p7/8 b - - 0 1"}
                 // FEN={"1K6/3q4/k7/8/8/8/p7/8 b - - 0 1"}
-                FEN={"r3k2r/pppppppp/8/8/8/8/PPPPPPPP/R3K2R w KQkq - 0 1"}
+                // FEN={"r3k2r/pppppppp/8/8/8/8/PPPPPPPP/R3K2R w KQkq - 0 1"}
                 // FEN={"r3k2r/8/8/8/8/8/8/R3K2R w KQkq - 0 1"}
                 onChange={onChange}
                 onEndGame={console.log}
@@ -98,6 +98,7 @@ function App() {
                 // playerColor="black"                
                 reversed={reversed} // <~~~ flag for reversing board
                 moveHighlight={[[1, 1], [7, 7]]}
+                moveArrows={[{ start: [0, 1], end: [7, 7] }, { start: [2, 2], end: [1, 1] }]}
                 // viewOnly={true}
             />
         </div>

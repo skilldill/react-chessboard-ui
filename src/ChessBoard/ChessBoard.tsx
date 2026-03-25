@@ -1,4 +1,4 @@
-import { FENtoGameState, PieceColor, GameResult, MoveData, JSChessEngine, SquarePos } from "../JSChessEngine";
+import { FENtoGameState, PieceColor, GameResult, MoveData, JSChessEngine, SquarePos, CellPos } from "../JSChessEngine";
 import React, { FC, useEffect } from "react";
 import styles from './ChessBoard.module.css';
 import { ChessBoardCellsLayout } from "./ChessBoardCellsLayout";
@@ -6,7 +6,7 @@ import { ChessBoardFiguresLayout } from "./ChessBoardFiguresLayout";
 import { ChessBoardControlLayout } from "./ChessBoardControlLayout";
 import { useChessBoardInteractive } from "./useChessBoardInteractive";
 import { ChessBoardInteractiveLayout } from "./ChessBoardInteractiveLayout";
-import { ChangeMove, ChessBoardConfig } from "./models";
+import { ArrowCoords, ChangeMove, ChessBoardConfig } from "./models";
 import { ArrowLayout } from "./ArrowLayout";
 import { FigurePicker } from "./FigurePicker";
 import { correctGrabbingPosByScroll, correctGrabbingPosForArrow, createHtmlReversedStateHolder, setHtmlReversedStateHolderValue } from "./utils";
@@ -21,6 +21,7 @@ type ChessBoardProps = {
     playerColor?: PieceColor;
     viewOnly?: boolean;
     moveHighlight?: [SquarePos, SquarePos];
+    moveArrows?: ArrowCoords[];
 }
 
 export const ChessBoard: FC<ChessBoardProps> = (props) => {
@@ -34,6 +35,7 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
         playerColor,
         viewOnly,
         moveHighlight,
+        moveArrows = [],
     } = props;
 
     const {
@@ -103,6 +105,12 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
         handleChangeFromExternal(reversedChange, change.withTransition);
     }, [change]);
 
+    // Coordinates will recalculated for board's pixels
+    const externalArrows = moveArrows.map((arrow) => ({
+        start: correctGrabbingPosForArrow(arrow.start as CellPos, boardConfig),
+        end: correctGrabbingPosForArrow(arrow.end as CellPos, boardConfig),
+    }));
+
     return (
         <div className={styles.chessBoard}>
             <ChessBoardCellsLayout 
@@ -128,6 +136,7 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
             />
             <ArrowLayout 
                 arrowsCoords={arrowsCoords}
+                externalArrowsCoords={externalArrows}
                 startArrowCoord={startArrowCoord}
                 grabbingPos={correctGrabbingPosForArrow(grabbingCell, boardConfig)}
                 boardConfig={boardConfig}

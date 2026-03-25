@@ -7,6 +7,7 @@ import styles from './ChessBoard.module.css';
 type ArrowLayoutType = {
     startArrowCoord: CellPos;
     arrowsCoords: ArrowCoords[];
+    externalArrowsCoords?: ArrowCoords[];
     grabbingPos: CellPos;
     boardConfig: ChessBoardConfig;
 }
@@ -16,7 +17,8 @@ export const ArrowLayout: FC<ArrowLayoutType> = (props) => {
         startArrowCoord,
         arrowsCoords,
         grabbingPos,
-        boardConfig
+        boardConfig,
+        externalArrowsCoords = [],
     } = props;
 
     return (
@@ -26,6 +28,9 @@ export const ArrowLayout: FC<ArrowLayoutType> = (props) => {
             )}
             {arrowsCoords.map((coords, i) => (
                 <Arrow key={i} {...coords} color={boardConfig.arrowColor} />
+            ))}
+            {externalArrowsCoords.map((coords, i) => (
+                <Arrow key={`extArrow_${i}`} {...coords} color={boardConfig.arrowColor} />
             ))}
         </div>
     );
