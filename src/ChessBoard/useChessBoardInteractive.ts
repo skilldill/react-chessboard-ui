@@ -98,8 +98,10 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
   }
 
   // It's common select for click event and hover event  
-  const selectFigureFrom = (cellPos: CellPos) => {
-    const cell = actualState[cellPos[1]][cellPos[0]];
+  const selectFigureFrom = (cellPos: CellPos, extActualState?: Cell[][]) => {
+    const nowState = extActualState || actualState;
+
+    const cell = nowState[cellPos[1]][cellPos[0]];
 
     if (!cell.figure) {
       cleanAllForFigure();
@@ -108,7 +110,6 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
 
     const { figure } = cell;
 
-    
     if (figure.color !== currentColor && !playerColor) {
       cleanAllForFigure();
       return { figure: undefined, nextMoves: [] };
@@ -120,7 +121,7 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
     }
 
     const nextMoves = JSChessEngine.getNextMoves(
-      actualState,
+      nowState,
       cellPos,
       linesWithCheck,
       boardReversed
@@ -325,6 +326,17 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
 
     setLinesWithCheck(linesCheck);
 
+    // Premove
+    if (fromPos[0] !== -1) {
+      const nextMoves = JSChessEngine.getNextMoves(
+        updatedCells,
+        fromPos,
+        linesCheck,
+        boardReversed
+      );
+      setPossibleMoves(nextMoves);
+    }
+
     setActualState(updatedCells);
 
     // Пешка дошла до конца доски
@@ -352,7 +364,7 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
 
     setClickedFigure(undefined);
     clearClickedPos();
-    clearGrabbingPos();
+    // clearGrabbingPos(); 
     clearArrows();
     clearMarkedCells();
 
@@ -419,9 +431,11 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
     clearClickedPos();
 
     // Очистка фигуры, которую держат для хода
-    setHoldedFigure(undefined);
-    clearFromPos();
-    clearPossibleMoves();
+    // TODO: для премува, нужно тут заново пересчитывать возможные ходы
+    // ПОКА ЧТО ЗАБЛОКИРОВАЛ ОЧИСТКУ СОСТОЯНИЯ
+    // setHoldedFigure(undefined);
+    // clearFromPos();
+    // clearPossibleMoves();
 
     clearClickPossibleMoves();
   }

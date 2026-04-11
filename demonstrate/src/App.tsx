@@ -54,11 +54,36 @@ function App() {
         }, 1000)
     }
 
+    const setDelayedMove = () => {
+        setTimeout(() => {
+            setCurrentMove({
+                move: {
+                    "figure": {
+                        "type": "pawn",
+                        "color": "black",
+                        "touched": true
+                    },
+                    "from": [
+                        4,
+                        1
+                    ],
+                    "to": [
+                        4,
+                        3
+                    ],
+                    "FEN": "r3k2r/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/R3K2R w - e6 0 1"
+                },
+                withTransition: true
+            });
+        }, 3000)
+    }
+
     return (
         <div>
             <button onClick={nextMove}>Next move</button>
             <button onClick={reverseBoard}>Reverse</button>
             <button onClick={setDelayedFen}>Set delayed FEN</button>
+            <button onClick={setDelayedMove}>Delayed move</button>
             {/* {MOVES.map((move, index) => (
         <button key={index} onClick={() => {
             setCurrentMove({
@@ -81,7 +106,7 @@ function App() {
                 onChange={onChange}
                 onEndGame={console.log}
                 change={currentMove}
-                config={{ 
+                config={{
                     pieceSizePercent: 100,
                     onHidePieces: (piece) => {
                         setTimeout(() => {
@@ -95,11 +120,11 @@ function App() {
                     holdedPieceClassName: 'holdedPiece',
                     hidePieceEffectClassName: 'hideFigureEffectWithBurn'
                 }}
-                // playerColor="black"                
+                playerColor="white"                
                 reversed={reversed} // <~~~ flag for reversing board
-                // moveHighlight={[[1, 1], [7, 7]]}
-                // moveArrows={[{ start: [0, 1], end: [7, 7] }, { start: [2, 2], end: [1, 1] }]}
-                // viewOnly={true}
+            // moveHighlight={[[1, 1], [7, 7]]}
+            // moveArrows={[{ start: [0, 1], end: [7, 7] }, { start: [2, 2], end: [1, 1] }]}
+            // viewOnly={true}
             />
         </div>
     )
