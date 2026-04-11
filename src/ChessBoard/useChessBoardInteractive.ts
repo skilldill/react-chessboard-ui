@@ -455,7 +455,10 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
 
     if (viewOnly) return;
 
-    if (clickedPos[0] === -1) {
+    // TODO: оптимизировать проверку, так как два раза проходить доску это долго
+    if ((clickedPos[0] === -1) || 
+      (JSChessEngine.hasFigure(actualState, cellPos) && JSChessEngine.getFigureColor(actualState, cellPos) === currentColor)
+    ) {
       selectClickFrom(cellPos);
       return;
     }
