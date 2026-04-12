@@ -338,6 +338,7 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
       ) {
         clearFromPos();
         setHoldedFigure(undefined);
+        setPossibleMoves([]);
       } else {
         const nextMoves = JSChessEngine.getNextMoves(
           updatedCells,
