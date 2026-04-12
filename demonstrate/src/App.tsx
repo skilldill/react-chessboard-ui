@@ -120,7 +120,7 @@ function App() {
                     holdedPieceClassName: 'holdedPiece',
                     hidePieceEffectClassName: 'hideFigureEffectWithBurn'
                 }}
-                // playerColor="white"                
+                playerColor="white"                
                 reversed={reversed} // <~~~ flag for reversing board
             // moveHighlight={[[1, 1], [7, 7]]}
             // moveArrows={[{ start: [0, 1], end: [7, 7] }, { start: [2, 2], end: [1, 1] }]}

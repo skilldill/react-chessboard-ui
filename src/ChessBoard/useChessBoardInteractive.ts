@@ -328,13 +328,25 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
 
     // Premove
     if (fromPos[0] !== -1) {
-      const nextMoves = JSChessEngine.getNextMoves(
-        updatedCells,
-        fromPos,
-        linesCheck,
-        boardReversed
-      );
-      setPossibleMoves(nextMoves);
+      // Проверить, что фигуру которую держат
+      // Не съели следующим ходом
+      const figureFromPos = updatedCells[fromPos[1]][fromPos[0]].figure;
+      if (
+        !figureFromPos ||
+        figureFromPos.type !== holdedFigure.type ||
+        figureFromPos.color !== holdedFigure.color
+      ) {
+        clearFromPos();
+        setHoldedFigure(undefined);
+      } else {
+        const nextMoves = JSChessEngine.getNextMoves(
+          updatedCells,
+          fromPos,
+          linesCheck,
+          boardReversed
+        );
+        setPossibleMoves(nextMoves);
+      }
     }
 
     setActualState(updatedCells);
