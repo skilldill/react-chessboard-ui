@@ -28,6 +28,7 @@ export type CellColor = 'white' | 'black';
 export interface Cell {
   figure?: Figure;
   beated?: boolean;
+  beatedFor?: FigureColor;
 }
 
 export interface ChessBoardConfig {
@@ -1309,7 +1310,10 @@ export class JSChessEngine {
             !JSChessEngine.checkEnemyKing(state, pos, target.pos)) ||
           // Если поле битое
           (JSChessEngine.checkInBorderBoard(state, target.pos) &&
-            JSChessEngine.checkBeatedCell(state, target.pos))
+            // Проверка на то что поле битое для пешки противника
+            // То есть, чтобы битое поле показывалось только для противника
+            (JSChessEngine.checkBeatedCell(state, target.pos)) && (state[target.pos[1]][target.pos[0]].beatedFor !== pawnColor)
+          )
         );
     }
   };
@@ -2054,7 +2058,7 @@ export class JSChessEngine {
           i === targetPos[0] //these
         ) {
           attackedPos = [i, j];
-          return { figure: undefined, beated: false };
+          return { figure: undefined, beated: false, beatedFor: undefined };
         }
 
         // Если пешка сходила на две клетки вперед
@@ -2067,12 +2071,12 @@ export class JSChessEngine {
               (diff > 0 && j === targetPos[1] - 1 && targetPos[0] === i) ||
               (diff < 0 && j === targetPos[1] + 1 && targetPos[0] === i)
             ) {
-              return { figure: undefined, beated: true };
+              return { figure: undefined, beated: true, beatedFor: currentFigure.color };
             }
           }
         }
 
-        return { ...cell, beated: cell.beated ? false : cell.beated };
+        return { ...cell, beated: cell.beated ? false : cell.beated, beatedFor: cell.beated ? undefined : cell.beatedFor };
       })
     );
 
