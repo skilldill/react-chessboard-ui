@@ -346,7 +346,9 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
           linesCheck,
           boardReversed
         );
+
         setPossibleMoves(nextMoves);
+        setClickPossibleMoves(nextMoves);
       }
     }
 
@@ -375,8 +377,8 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
 
     toggleCurrentColor();
 
-    setClickedFigure(undefined);
-    clearClickedPos();
+    // setClickedFigure(undefined);
+    // clearClickedPos();
     // clearGrabbingPos(); 
     clearArrows();
     clearMarkedCells();
@@ -426,7 +428,7 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
     clearPossibleMoves();
   }
 
-  const handleChangeFromExternal = (moveData: MoveData, withTransition = true) => {    
+  const handleChangeFromExternal = (moveData: MoveData, withTransition = true) => {
     const { attackedPos } = moveFigureByExternalChange(moveData.from, moveData.to, moveData.figure);
 
     setAnimated(withTransition);
@@ -441,7 +443,7 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
     setNewMove(change);
     setMovesTrail([moveData.from, moveData.to]);
 
-    clearClickedPos();
+    // clearClickedPos();
 
     // Очистка фигуры, которую держат для хода
     // TODO: для премува, нужно тут заново пересчитывать возможные ходы
@@ -450,7 +452,7 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
     // clearFromPos();
     // clearPossibleMoves();
 
-    clearClickPossibleMoves();
+    // clearClickPossibleMoves();
   }
   
   const handleClickForTargetCell = (cellPos: CellPos, withTransition = false) => {
