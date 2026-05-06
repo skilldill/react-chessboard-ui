@@ -1,4 +1,4 @@
-import { FENtoGameState, PieceColor, GameResult, MoveData, JSChessEngine, SquarePos, CellPos } from "../JSChessEngine";
+import { FENtoGameState, PieceColor, GameResult, MoveData, JSChessEngine, SquarePos, CellPos, FigureColor } from "../JSChessEngine";
 import React, { FC, useEffect } from "react";
 import styles from './ChessBoard.module.css';
 import { ChessBoardCellsLayout } from "./ChessBoardCellsLayout";
@@ -56,33 +56,18 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
         showFigurePicker,
         markCell,
         handleClick,
-        setAnimated,
         handleGrabEnd,
         handleGrabbing,
         endRenderArrow,
-        setActualState,
         setPlayerColor,
-        setCurrentColor,
+        handleUpdateFEN,
         selectHoverFrom,
-        setInitialState,
-        setBoardReversed,
         startRenderArrow,
-        cleanAllForFigure,
         handleGrabbingCell,
         getHasCheckByCellPos,
         handleSelectFigurePicker,
         handleChangeFromExternal,
     } = useChessBoardInteractive({ onChange, onEndGame, config });
-
-    const handleUpdateFEN = (FEN: string, reversed: boolean) => {
-        const { boardState, currentColor } = FENtoGameState(FEN, reversed);
-        cleanAllForFigure();
-        setAnimated(false);
-        setInitialState(boardState);
-        setActualState(boardState);
-        setCurrentColor(currentColor);
-        setBoardReversed(reversed);
-    };
 
     useEffect(() => {
         createHtmlReversedStateHolder();
