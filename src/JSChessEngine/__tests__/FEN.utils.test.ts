@@ -12,6 +12,9 @@ const FEN_WITH_BEATED_FIELD =
   'rnbqkbnr/pppppppp/8/8/6p1/8/PPPPPP1P/RNBQKBNR b KQkq g4 0 1';
 const FEN_WITHOUT_LONG_CASTLINGS =
   '1rbqkb1r/pppppp1p/2n2np1/8/8/2N2PP1/PPPPP2P/1RBQKBNR w Kk - 3 4';
+// Чёрный король и ладья a8 на месте (флаг рокировки `q` присутствует),
+// но на h8 стоит чужая фигура — белый конь (как после Nxh8).
+const FEN_CAPTURE_ON_H8 = 'r3k2N/8/8/8/8/8/8/4K3 b q - 0 1';
 
 describe('Тесты на FENtoGameState', () => {
   it('FENtoGameState вернет правильный стейт для воссоздани начальной позиции', () => {
@@ -48,6 +51,19 @@ describe('Тесты на FENtoGameState', () => {
 
     expect(gameState.currentColor).toBe('black');
     expect(gameState.boardState[5][6].beated).toBeTruthy();
+  });
+
+  it('FENtoGameState не затирает ладью a8 фигурой с h8 при флаге рокировки q', () => {
+    const gameState = FENtoGameState(FEN_CAPTURE_ON_H8);
+
+    // a8 должна остаться чёрной ладьёй, а не превратиться в копию коня с h8
+    expect(gameState.boardState[0][0].figure?.type).toBe('rook');
+    expect(gameState.boardState[0][0].figure?.color).toBe('black');
+    expect(gameState.boardState[0][0].figure?.touched).toBeFalsy();
+
+    // h8 остаётся нетронутой
+    expect(gameState.boardState[0][7].figure?.type).toBe('knight');
+    expect(gameState.boardState[0][7].figure?.color).toBe('white');
   });
 });
 

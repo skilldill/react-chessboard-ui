@@ -86,7 +86,7 @@ export const prepareCastlingByFEN = (
     if (!!preparedState[0][0].figure) {
       // Ладья
       preparedState[0][0].figure = {
-        ...preparedState[0][preparedState.length - 1].figure!,
+        ...preparedState[0][0].figure!,
         touched: false,
       };
   
