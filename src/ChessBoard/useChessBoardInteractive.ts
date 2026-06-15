@@ -487,7 +487,7 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
   }
 
   const handleClick = (cellPos: CellPos, viewOnly = false) => {
-    handleClickByChessBoard(actualState[cellPos[0]][cellPos[1]], cellPos);
+    handleClickByChessBoard(actualState[cellPos[1]][cellPos[0]], cellPos);
 
     clearMarkedCells();
     clearArrows();

@@ -23,6 +23,7 @@ type ChessBoardProps = {
     viewOnly?: boolean;
     moveHighlight?: [SquarePos, SquarePos];
     moveArrows?: ArrowCoords[];
+    arrows?: (ArrowCoords & { color?: string })[];
 }
 
 export const ChessBoard: FC<ChessBoardProps> = (props) => {
@@ -37,7 +38,8 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
         playerColor,
         viewOnly,
         moveHighlight,
-        moveArrows = [],
+        moveArrows = [], // DEPRECATED
+        arrows = [],
     } = props;
 
     const {
@@ -98,9 +100,16 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
     }, [change]);
 
     // Coordinates will recalculated for board's pixels
-    const externalArrows = moveArrows.map((arrow) => ({
+    // DEPRECATED
+    const DEPRECATED_externalArrows = moveArrows.map((arrow) => ({
         start: correctGrabbingPosForArrow(arrow.start as CellPos, boardConfig),
         end: correctGrabbingPosForArrow(arrow.end as CellPos, boardConfig),
+    }));
+
+    const externalArrows = arrows.map((arrow) => ({
+        start: correctGrabbingPosForArrow(arrow.start as CellPos, boardConfig),
+        end: correctGrabbingPosForArrow(arrow.end as CellPos, boardConfig),
+        color: arrow.color,
     }));
 
     return (
@@ -128,7 +137,8 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
             />
             <ArrowLayout 
                 arrowsCoords={arrowsCoords}
-                externalArrowsCoords={externalArrows}
+                externalArrowsCoords={DEPRECATED_externalArrows}
+                externalArrows={externalArrows}
                 startArrowCoord={startArrowCoord}
                 grabbingPos={correctGrabbingPosForArrow(grabbingCell, boardConfig)}
                 boardConfig={boardConfig}
