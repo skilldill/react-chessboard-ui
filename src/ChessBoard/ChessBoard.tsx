@@ -1,4 +1,4 @@
-import { FENtoGameState, PieceColor, GameResult, MoveData, JSChessEngine, SquarePos, CellPos, FigureColor } from "../JSChessEngine";
+import { PieceColor, GameResult, MoveData, JSChessEngine, SquarePos, CellPos, FigureColor, Cell } from "../JSChessEngine";
 import React, { FC, useEffect } from "react";
 import styles from './ChessBoard.module.css';
 import { ChessBoardCellsLayout } from "./ChessBoardCellsLayout";
@@ -6,7 +6,7 @@ import { ChessBoardFiguresLayout } from "./ChessBoardFiguresLayout";
 import { ChessBoardControlLayout } from "./ChessBoardControlLayout";
 import { useChessBoardInteractive } from "./useChessBoardInteractive";
 import { ChessBoardInteractiveLayout } from "./ChessBoardInteractiveLayout";
-import { ArrowCoords, ChangeMove, ChessBoardConfig } from "./models";
+import { ArrowCoords, ChangeMove, ChessBoardConfig, ClickData } from "./models";
 import { ArrowLayout } from "./ArrowLayout";
 import { FigurePicker } from "./FigurePicker";
 import { correctGrabbingPosByScroll, correctGrabbingPosForArrow, createHtmlReversedStateHolder, setHtmlReversedStateHolderValue } from "./utils";
@@ -15,6 +15,7 @@ type ChessBoardProps = {
     FEN: string;
     onChange: (moveData: MoveData) => void;
     onEndGame: (result: GameResult) => void;
+    onClick?: (data: ClickData) => void;
     change?: ChangeMove;
     reversed?: boolean;
     config?: Partial<ChessBoardConfig>;
@@ -29,6 +30,7 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
         FEN, 
         onChange,
         onEndGame,
+        onClick,
         change, 
         reversed,
         config,
@@ -67,7 +69,12 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
         getHasCheckByCellPos,
         handleSelectFigurePicker,
         handleChangeFromExternal,
-    } = useChessBoardInteractive({ onChange, onEndGame, config });
+    } = useChessBoardInteractive({ 
+        onChange, 
+        onEndGame, 
+        onClickByChessBoard: onClick, 
+        config 
+    });
 
     useEffect(() => {
         createHtmlReversedStateHolder();
@@ -98,7 +105,7 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
 
     return (
         <div className={styles.chessBoard}>
-            <ChessBoardCellsLayout 
+            <ChessBoardCellsLayout
                 boardConfig={boardConfig}
                 movesTrail={boardConfig.showMovesTrail && movesTrail}
                 moveHighlight={moveHighlight}

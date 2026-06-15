@@ -1,17 +1,18 @@
 import { Cell, CellPos, FENtoGameState, Figure, FigureColor, GameResult, JSChessEngine, MoveData, stateToFEN } from "../JSChessEngine";
 import { useEffect, useRef, useState } from "react"
 import { checkIsPossibleMove, checkPositionsHas, correctGrabbingPosForArrow, getChessBoardConfig, hasCheck } from "./utils";
-import { ArrowCoords, ChangeMove, ChessBoardConfig } from "./models";
+import { ArrowCoords, ChangeMove, ChessBoardConfig, ClickData } from "./models";
 import { DEFAULT_CHESSBORD_CONFIG } from "./constants";
 
 type UseChessBoardInteractiveProps = {
   config?: Partial<ChessBoardConfig>;
   onChange: (moveData: MoveData) => void;
   onEndGame: (result: GameResult) => void;
+  onClickByChessBoard?: (data: ClickData) => void;
 }
 
 export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) => {
-  const { config, onChange, onEndGame } = props;
+  const { config, onChange, onEndGame, onClickByChessBoard } = props;
 
   const [boardConfig, setBoardConfig] = useState(DEFAULT_CHESSBORD_CONFIG);
   const [initialState, setInitialState] = useState<Cell[][]>([]);
@@ -95,6 +96,13 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
     cleanAllForFigure();
     setActualState((prevState) => JSChessEngine.reverseChessBoard(prevState));
     setBoardReversed((prevReversed) => !prevReversed);
+  }
+
+  // External click handler for click by chessboard
+  const handleClickByChessBoard = (cellData: Cell, pos: CellPos) => {
+    if (!onClickByChessBoard) return;
+
+    onClickByChessBoard({ cellData, pos });
   }
 
   // It's common select for click event and hover event  
@@ -479,6 +487,8 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
   }
 
   const handleClick = (cellPos: CellPos, viewOnly = false) => {
+    handleClickByChessBoard(actualState[cellPos[0]][cellPos[1]], cellPos);
+
     clearMarkedCells();
     clearArrows();
 
