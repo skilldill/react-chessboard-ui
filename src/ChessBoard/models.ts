@@ -1,4 +1,4 @@
-import { SquarePos, Piece, MoveData, Cell, CellPos } from "../JSChessEngine"
+import { SquarePos, Piece, MoveData, Cell, CellPos, FigureColor } from "../JSChessEngine"
 
 export interface ChessPiecesMap {
     [key: string]: (size: string) => JSX.Element;
@@ -38,4 +38,5 @@ export type ArrowCoords = { start: number[]; end: number[] };
 export type ClickData = {
     cellData: Cell,
     pos: CellPos,
+    currentColor: FigureColor,
 }

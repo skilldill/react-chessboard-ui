@@ -102,7 +102,7 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
   const handleClickByChessBoard = (cellData: Cell, pos: CellPos) => {
     if (!onClickByChessBoard) return;
 
-    onClickByChessBoard({ cellData, pos });
+    onClickByChessBoard({ cellData, pos, currentColor });
   }
 
   // It's common select for click event and hover event  

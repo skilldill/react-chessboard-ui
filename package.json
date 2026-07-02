@@ -1,7 +1,7 @@
 {
   "name": "react-chessboard-ui",
-  "version": "2.9.0",
-  "description": "A customizable and interactive chessboard component for React applications. Easily integrate a fully functional and responsive chessboard into your React project with features like drag-and-drop pieces, move validation, and customizable board styles.",
+  "version": "2.10.0",
+  "description": "All-in-one React chessboard UI with a built-in chess engine, FEN state control, move validation, drag-and-drop pieces, game-end callbacks, and customizable styles.",
   "author": "skilldill",
   "license": "MIT",
   "repository": "skilldill/react-chessboard-ui",
@@ -9,7 +9,7 @@
   "module": "dist/index.modern.js",
   "homepage": "https://react-chessboard-ui.dev/",
   "source": "src/index.tsx",
-  "keywords": ["react", "chess", "chess.js", "chessboard", "chess board", "react-chessboard", "react chessboard", "react chess board", "react-dnd", "chessboard component", "drag and drop", "typescript", "lichess", "chesscom"],
+  "keywords": ["react", "react-chess", "react-chessboard", "react-chessboard-ui", "js-chess", "chess", "chessboard", "chessboard component", "chess engine"],
   "engines": {
     "node": ">=10"
   },

@@ -710,3 +710,26 @@ export const CASTLING_MOVE = [
         "FEN": "r3k2r/ppppppp/8/8/8/8/PPPPPPPP/R3K2R w KQkq - 0 1"
     }
 ]
+
+export const WITH_ERROR_MOVES = [
+    {
+        "FEN": "r3k2B/1p2p2p/2b3p1/p1P5/P2P4/2P2P2/2Q3PP/R3K2R b KQq - 0 1",
+        "from": [4, 6],
+        "to": [2, 6],
+        "figure": {
+            "color": "white",
+            "type": "queen",
+            "touched": true
+        }
+    },
+    {
+        "FEN": "2kr3B/1p2p2p/2b3p1/p1P5/P2P4/2P2P2/2Q3PP/R3K2R w KQ - 1 2",
+        "from": [4, 0],
+        "to": [1, 0],
+        "figure": {
+            "color": "black",
+            "type": "king",
+            "touched": false
+        }
+    }
+]

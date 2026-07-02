@@ -3,9 +3,14 @@
 [![NPM](https://img.shields.io/npm/v/react-chessboard-ui.svg)](https://www.npmjs.com/package/react-chessboard-ui)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-A lightweight and customizable React chessboard component built with modern UI in mind. Easily integrate chess functionality into your React apps with FEN support, game-end detection, and position handling.
+<p align="center">
+  <img src="./blob/default.png?raw=true" width="23%" alt="Default react-chessboard-ui board" />
+  <img src="./blob/customization.png?raw=true" width="23%" alt="Customized react-chessboard-ui board" />
+  <img src="./blob/colorfull_arrows.png?raw=true" width="23%" alt="React chessboard with colorful arrows" />
+  <img src="./blob/all_queens.png?raw=true" width="23%" alt="React chessboard with custom pieces" />
+</p>
 
-<img src="./blob/ChessBoard.png?raw=true" width="400px" alt="react-chessboard-ui preview" />
+An all-in-one React chessboard component with both the chess engine and UI included. Drop it into your React app and get a ready-to-use chessboard without wiring up separate chess logic, move validation, or board state tools. Control the board position with simple FEN notation and react to moves or game-end events through callbacks.
 
 ## 📘 **Full documentation**: [https://react-chessboard-ui.dev/](https://react-chessboard-ui.dev/)
 
@@ -14,10 +19,18 @@ A lightweight and customizable React chessboard component built with modern UI i
 ## 🚀 Features
 
 - 🎯 Fully controlled via FEN strings
+- ♟️ Built-in chess engine and ready-made board UI
+- ✅ Move validation included
 - ♻️ React functional component with hooks support
 - 🎨 Customizable styles (via CSS or override)
 - ♟️ Game-end and move-change callbacks
-- 🧩 Easy integration into any React project
+- 🧩 No extra chess packages or setup required
+
+---
+
+## Why react-chessboard-ui?
+
+`react-chessboard-ui` is designed for developers who need a React chessboard, chess UI, and chess engine in one package. It is not just a board renderer: it provides drag-and-drop chess pieces, FEN-based position control, legal move handling, game-end detection, and customization options out of the box.
 
 ---
 
@@ -46,19 +59,16 @@ import 'react-chessboard-ui/dist/index.css'; // Required CSS
 
 export const App = () => {
   return (
-    <div>
-      <ChessBoard
-        FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
-        onChange={handleChangePosition}
-        onEndGame={handleEndGame}
-      />
-    </div>
+    <ChessBoard
+      FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+      onChange={handleChangePosition}
+      onEndGame={handleEndGame}
+    />
   );
 };
 ```
 
 ## Full customizable
-<img src="./blob/customization.png?raw=true" width="400px" alt="react-chessboard-ui preview" />
 
 ### 📘 **Documentation for customization**: [https://react-chessboard-ui.dev/properties/config/](https://react-chessboard-ui.dev/properties/config/)
 
@@ -82,4 +92,4 @@ MIT © [react-chessboard-ui](https://github.com/)
 
 ## 🧠 Keywords (for discoverability)
 
-`react` `chess` `chessboard` `react-chess` `chess ui` `react chess component` `fen` `chess game` `react board game`
+`react` `react-chess` `react-chessboard` `react-chessboard-ui` `js-chess` `chess` `chessboard` `chessboard component` `chess engine`
