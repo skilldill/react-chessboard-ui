@@ -180,7 +180,7 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
                     <div className={styles.fenErrorMessage} role="alert">
                         <div>
                             Invalid FEN notation. The default board position was used instead.{" "}
-                            <a href="/docs/fen-errors">
+                            <a href="https://react-chessboard-ui.dev/docs/fen-errors">
                                 See common FEN problems
                             </a>
                         .
