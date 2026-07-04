@@ -1,6 +1,6 @@
 {
   "name": "react-chessboard-ui",
-  "version": "2.10.0",
+  "version": "2.11.0",
   "description": "All-in-one React chessboard UI with a built-in chess engine, FEN state control, move validation, drag-and-drop pieces, game-end callbacks, and customizable styles.",
   "author": "skilldill",
   "license": "MIT",

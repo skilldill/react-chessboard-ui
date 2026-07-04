@@ -3,6 +3,7 @@ import {
   LETTER_TO_FIGURE_MAP,
   FIGURES_LATTERS_NOTATIONS,
   LETTERS,
+  INITIAL_CELLS,
 } from './chess.consts';
 import { FigureColor, Cell, JSChessEngine, } from './JSChessEngine';
 
@@ -41,7 +42,9 @@ export const prepareCastlingByFEN = (
           .figure!,
         touched: false,
       };
-  
+    }
+
+    if (!!preparedState[preparedState.length - 1][4].figure) {
       // Король
       preparedState[preparedState.length - 1][4].figure = {
         ...preparedState[preparedState.length - 1][4].figure!,
@@ -58,6 +61,10 @@ export const prepareCastlingByFEN = (
         touched: false,
       };
   
+      
+    }
+
+    if (!!preparedState[preparedState.length - 1][4].figure) {
       // Король
       preparedState[preparedState.length - 1][4].figure = {
         ...preparedState[preparedState.length - 1][4].figure!,
@@ -74,6 +81,10 @@ export const prepareCastlingByFEN = (
         touched: false,
       };
   
+      
+    }
+
+    if (!!preparedState[0][4].figure) {
       // Король
       preparedState[0][4].figure = {
         ...preparedState[0][4].figure!,
@@ -90,6 +101,10 @@ export const prepareCastlingByFEN = (
         touched: false,
       };
   
+      
+    }
+
+    if (!!preparedState[0][4].figure) {
       // Король
       preparedState[0][4].figure = {
         ...preparedState[0][4].figure!,
@@ -140,57 +155,65 @@ export const partFENtoState = (notation: string) => {
 export const FENtoGameState = (
   FEN: string,
   reversed?: boolean,
-): { boardState: Cell[][]; currentColor: FigureColor } => {
-  const gameState: { boardState: Cell[][]; currentColor: FigureColor } = {
-    boardState: [],
-    currentColor: 'white',
-  };
-
-  const [stateNotaion, currentColor, FENcastling, beatedField, ..._] =
-    FEN.split(' ');
-
-  // Сначала подготавливаем stateNotaion, чтобы вместо цифр были "." - пустые поля
-  let preparedStateNotation = '';
-  for (let i = 0; i < stateNotaion.length; i++) {
-    // Если символ число, то заполняем готовую нотацию
-    // точками в таком количестве какое число в нотации
-    if (!isNaN(parseInt(stateNotaion[i]))) {
-      const dotsCount = parseInt(stateNotaion[i]);
-      for (let dotI = 0; dotI < dotsCount; dotI++) preparedStateNotation += '.';
-      continue;
+): { boardState: Cell[][]; currentColor: FigureColor; invalidFEN?: boolean; } => {
+  try {
+    const gameState: { boardState: Cell[][]; currentColor: FigureColor, invalidFEN?: boolean; } = {
+      boardState: [],
+      currentColor: 'white',
+    };
+  
+    const [stateNotaion, currentColor, FENcastling, beatedField, ..._] =
+      FEN.split(' ');
+  
+    // Сначала подготавливаем stateNotaion, чтобы вместо цифр были "." - пустые поля
+    let preparedStateNotation = '';
+    for (let i = 0; i < stateNotaion.length; i++) {
+      // Если символ число, то заполняем готовую нотацию
+      // точками в таком количестве какое число в нотации
+      if (!isNaN(parseInt(stateNotaion[i]))) {
+        const dotsCount = parseInt(stateNotaion[i]);
+        for (let dotI = 0; dotI < dotsCount; dotI++) preparedStateNotation += '.';
+        continue;
+      }
+  
+      preparedStateNotation += stateNotaion[i];
     }
-
-    preparedStateNotation += stateNotaion[i];
+  
+    // Преобразуем часть с фигурами в состояние доски
+    gameState.boardState = partFENtoState(preparedStateNotation);
+  
+    // Определили текущий цвет
+    gameState.currentColor = currentColor === 'w' ? 'white' : 'black';
+  
+    // Определение возможностей рокировки
+    gameState.boardState = prepareCastlingByFEN(
+      FENcastling,
+      gameState.boardState
+    );
+  
+    // Определение битое поля
+    if (beatedField !== '-') {
+      const posBeatedCell = getPositionByFEN(beatedField);
+      gameState.boardState[posBeatedCell[0]][posBeatedCell[1]] = {
+        ...gameState.boardState[posBeatedCell[0]][posBeatedCell[1]],
+        beated: true,
+      };
+    }
+  
+    if (reversed)
+      return { 
+        boardState: JSChessEngine.reverseChessBoard(gameState.boardState),
+        currentColor: gameState.currentColor,
+      };
+  
+    return gameState;
+  } catch {
+    return {
+      boardState: INITIAL_CELLS,
+      currentColor: 'white',
+      invalidFEN: true,
+    }
   }
-
-  // Преобразуем часть с фигурами в состояние доски
-  gameState.boardState = partFENtoState(preparedStateNotation);
-
-  // Определили текущий цвет
-  gameState.currentColor = currentColor === 'w' ? 'white' : 'black';
-
-  // Определение возможностей рокировки
-  gameState.boardState = prepareCastlingByFEN(
-    FENcastling,
-    gameState.boardState
-  );
-
-  // Определение битое поля
-  if (beatedField !== '-') {
-    const posBeatedCell = getPositionByFEN(beatedField);
-    gameState.boardState[posBeatedCell[0]][posBeatedCell[1]] = {
-      ...gameState.boardState[posBeatedCell[0]][posBeatedCell[1]],
-      beated: true,
-    };
-  }
-
-  if (reversed)
-    return { 
-      boardState: JSChessEngine.reverseChessBoard(gameState.boardState),
-      currentColor: gameState.currentColor,
-    };
-
-  return gameState;
 };
 
 /**

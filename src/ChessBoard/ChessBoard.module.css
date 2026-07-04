@@ -149,6 +149,46 @@
     align-items: center;
 }
 
+.chessBoardInvalidFenMessage {
+    z-index: 102;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fenErrorMessage {
+  padding: 12px 14px;
+  border: 1px solid #f4b8b8;
+  border-radius: 6px;
+  background: #fff1f1;
+  color: #8a1f1f;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.fenErrorMessage a {
+  color: #b42318;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+.fenErrorMessage a:hover {
+  color: #7a1712;
+}
+
+.fenErrorMessageClose {
+    color: #6b6b6b !important;
+    font-size: 12px;
+}
+
 .movesTrail {
     width: 100%;
     height: 100%;

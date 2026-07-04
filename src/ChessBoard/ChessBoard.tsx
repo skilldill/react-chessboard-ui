@@ -1,5 +1,5 @@
 import { PieceColor, GameResult, MoveData, JSChessEngine, SquarePos, CellPos, FigureColor, Cell } from "../JSChessEngine";
-import React, { FC, useEffect } from "react";
+import React, { FC, MouseEventHandler, useEffect } from "react";
 import styles from './ChessBoard.module.css';
 import { ChessBoardCellsLayout } from "./ChessBoardCellsLayout";
 import { ChessBoardFiguresLayout } from "./ChessBoardFiguresLayout";
@@ -24,15 +24,16 @@ type ChessBoardProps = {
     moveHighlight?: [SquarePos, SquarePos];
     moveArrows?: ArrowCoords[];
     arrows?: (ArrowCoords & { color?: string })[];
+    toggleTurn?: boolean;
 }
 
 export const ChessBoard: FC<ChessBoardProps> = (props) => {
-    const { 
-        FEN, 
+    const {
+        FEN,
         onChange,
         onEndGame,
         onClick,
-        change, 
+        change,
         reversed,
         config,
         playerColor,
@@ -40,6 +41,7 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
         moveHighlight,
         moveArrows = [], // DEPRECATED
         arrows = [],
+        toggleTurn = true,
     } = props;
 
     const {
@@ -47,6 +49,7 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
         newMove,
         animated,
         movesTrail,
+        invalidFEN,
         boardConfig,
         markedCells,
         grabbingPos,
@@ -61,6 +64,7 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
         markCell,
         handleClick,
         handleGrabEnd,
+        setInvalidFEN,
         handleGrabbing,
         endRenderArrow,
         setPlayerColor,
@@ -71,11 +75,12 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
         getHasCheckByCellPos,
         handleSelectFigurePicker,
         handleChangeFromExternal,
-    } = useChessBoardInteractive({ 
-        onChange, 
-        onEndGame, 
-        onClickByChessBoard: onClick, 
-        config 
+    } = useChessBoardInteractive({
+        onChange,
+        onEndGame,
+        onClickByChessBoard: onClick,
+        config,
+        toggleTurn
     });
 
     useEffect(() => {
@@ -112,6 +117,11 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
         color: arrow.color,
     }));
 
+    const handleHideInvalidFENmessage = (event: React.MouseEvent<HTMLAnchorElement>) => {
+        event.preventDefault();
+        setInvalidFEN(false);
+    }
+
     return (
         <div className={styles.chessBoard}>
             <ChessBoardCellsLayout
@@ -124,7 +134,7 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
                 change={newMove}
                 boardConfig={boardConfig}
                 animated={animated}
-                // reversed={reversed} ** While blocked this props **
+            // reversed={reversed} ** While blocked this props **
             />
             <ChessBoardInteractiveLayout
                 selectedPos={fromPos}
@@ -135,7 +145,7 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
                 boardConfig={boardConfig}
                 onHasCheck={getHasCheckByCellPos}
             />
-            <ArrowLayout 
+            <ArrowLayout
                 arrowsCoords={arrowsCoords}
                 externalArrowsCoords={DEPRECATED_externalArrows}
                 externalArrows={externalArrows}
@@ -146,11 +156,11 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
             <ChessBoardControlLayout
                 boardConfig={boardConfig}
                 onClick={(pos) => handleClick(pos, viewOnly)}
-                onGrabStart={viewOnly ? () => {} : selectHoverFrom}
+                onGrabStart={viewOnly ? () => { } : selectHoverFrom}
                 onGrabStartRight={startRenderArrow}
-                onGrabEnd={viewOnly ? () => {} : handleGrabEnd}
+                onGrabEnd={viewOnly ? () => { } : handleGrabEnd}
                 onGrabEndRight={endRenderArrow}
-                onGrabbing={viewOnly ? () => {} : handleGrabbing}
+                onGrabbing={viewOnly ? () => { } : handleGrabbing}
                 onRightClick={markCell}
                 onGrabbingCell={handleGrabbingCell}
             />
@@ -162,6 +172,23 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
                         forPawnTransform
                         onSelect={handleSelectFigurePicker}
                     />
+                </div>
+            )}
+
+            {invalidFEN && (
+                <div className={styles.chessBoardInvalidFenMessage}>
+                    <div className={styles.fenErrorMessage} role="alert">
+                        <div>
+                            Invalid FEN notation. The default board position was used instead.{" "}
+                            <a href="/docs/fen-errors">
+                                See common FEN problems
+                            </a>
+                        .
+                        </div>
+                        <div>
+                            <a className={styles.fenErrorMessageClose} onClick={handleHideInvalidFENmessage} >Hide this message</a>
+                        </div>
+                    </div>
                 </div>
             )}
         </div>

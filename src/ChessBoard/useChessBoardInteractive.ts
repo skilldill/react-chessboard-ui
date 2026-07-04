@@ -9,10 +9,11 @@ type UseChessBoardInteractiveProps = {
   onChange: (moveData: MoveData) => void;
   onEndGame: (result: GameResult) => void;
   onClickByChessBoard?: (data: ClickData) => void;
+  toggleTurn?: boolean; 
 }
 
 export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) => {
-  const { config, onChange, onEndGame, onClickByChessBoard } = props;
+  const { config, onChange, onEndGame, onClickByChessBoard, toggleTurn = true } = props;
 
   const [boardConfig, setBoardConfig] = useState(DEFAULT_CHESSBORD_CONFIG);
   const [initialState, setInitialState] = useState<Cell[][]>([]);
@@ -44,11 +45,19 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
   // Для анимирования хода фигуры
   const [animated, setAnimated] = useState(false);
 
+  // Errors
+  const [invalidFEN, setInvalidFEN] = useState(false);
+
   const clearFromPos = () => setFromPos([-1, -1]);
   const clearGrabbingPos = () => setGrabbingPos([-1, -1]);
   const clearPossibleMoves = () => setPossibleMoves([]);
   const clearClickPossibleMoves = () => setClickPossibleMoves([]);
-  const toggleCurrentColor = () => setCurrentColor((prevColor) => prevColor === 'white' ? 'black' : 'white');
+
+  const toggleCurrentColor = () => {
+    if (toggleTurn)
+      setCurrentColor((prevColor) => prevColor === 'white' ? 'black' : 'white')
+  };
+
   const clearMarkedCells = () => setMarkedCells([]);
   const clearClickedPos = () => setClickedPos([-1, -1]);
   const clearArrows = () => setArrowsCoords([]);
@@ -179,14 +188,16 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
       from,
       boardReversed
     );
-
-    const linesCheck = JSChessEngine.getLinesWithCheck(
-      updatedCells,
-      currentColor,
-      boardReversed
-    );
-
-    setLinesWithCheck(linesCheck);
+    
+    if (toggleTurn) {
+      const linesCheck = JSChessEngine.getLinesWithCheck(
+        updatedCells,
+        currentColor,
+        boardReversed
+      );
+  
+      setLinesWithCheck(linesCheck);
+    }
 
     setActualState(updatedCells);
 
@@ -235,13 +246,15 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
       boardReversed
     );
 
-    const linesCheck = JSChessEngine.getLinesWithCheck(
-      updatedCells,
-      currentColor,
-      boardReversed
-    );
-
-    setLinesWithCheck(linesCheck);
+    if (toggleTurn) {
+      const linesCheck = JSChessEngine.getLinesWithCheck(
+        updatedCells,
+        currentColor,
+        boardReversed
+      );
+  
+      setLinesWithCheck(linesCheck);
+    }
     const updatedChange = {
       ...change,
       move: boardReversed ? JSChessEngine.reverseMove(change.move) : change.move
@@ -273,13 +286,15 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
       boardReversed
     );
 
-    const linesCheck = JSChessEngine.getLinesWithCheck(
-      updatedCells,
-      currentColor,
-      boardReversed
-    );
-
-    setLinesWithCheck(linesCheck);
+    if (toggleTurn) {
+      const linesCheck = JSChessEngine.getLinesWithCheck(
+        updatedCells,
+        currentColor,
+        boardReversed
+      );
+  
+      setLinesWithCheck(linesCheck);
+    }
 
     setActualState(updatedCells);
 
@@ -326,13 +341,17 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
       boardReversed
     );
 
-    const linesCheck = JSChessEngine.getLinesWithCheck(
-      updatedCells,
-      currentColor,
-      boardReversed
-    );
+    let linesCheck: CellPos[][] = [];
+    if (toggleTurn) {
+      linesCheck = JSChessEngine.getLinesWithCheck(
+        updatedCells,
+        currentColor,
+        boardReversed
+      );
+  
+      setLinesWithCheck(linesCheck);
+    }
 
-    setLinesWithCheck(linesCheck);
 
     // Premove
     if (fromPos[0] !== -1) {
@@ -617,7 +636,8 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
   }
 
   const handleUpdateFEN = (FEN: string, reversed: boolean) => {
-    const { boardState, currentColor } = FENtoGameState(FEN, reversed);
+    const { boardState, currentColor, invalidFEN } = FENtoGameState(FEN, reversed);
+    setInvalidFEN(invalidFEN);
     cleanAllForFigure();
     setAnimated(false);
     setInitialState(boardState);
@@ -639,6 +659,7 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
     newMove,
     animated,
     movesTrail,
+    invalidFEN,
     boardConfig,
     markedCells,
     grabbingPos,
@@ -659,6 +680,7 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
     handleClick,
     clearFromPos,
     handleGrabEnd,
+    setInvalidFEN,
     handleGrabbing,
     endRenderArrow,
     setActualState,
