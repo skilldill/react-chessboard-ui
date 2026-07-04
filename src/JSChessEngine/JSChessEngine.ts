@@ -654,44 +654,45 @@ export class JSChessEngine {
                 enemyPos,
                 direction
               );
-
-              // Ищем индекс позиции короля
-              const foundIndexKingPos = attackedLine.findIndex(
-                (pos) => pos[0] === kingPos[0] && pos[1] === kingPos[1]
-              );
-
-              // Ищем позицию фигуры на линии атаки
-              const foundIndexFigurePos = attackedLine.findIndex(
-                (pos) => pos[0] === figurePos[0] && pos[1] === figurePos[1]
-              );
-
-              const countFiguresBehindKing = JSChessEngine.getCountEnemys(
-                state,
-                enemyPos,
-                attackedLine
-              );
-
-              // Если индексы найдены и индекс короля больше чем индекс фигуры на линии атаки
-              // то корректируем возможные движения фигуры
-              kingBehidFigure =
-                foundIndexKingPos > -1 &&
-                foundIndexFigurePos > -1 &&
-                foundIndexKingPos > foundIndexFigurePos &&
-                countFiguresBehindKing === 1;
-
-              if (kingBehidFigure) {
-                // Оставляем только те позиции которые есть и в possibleMoves и в attackedLine
-                possibleMoves.forEach((possibleMove) => {
-                  // Включаем позиции атакующей фигуры так как ее можно съесть
-                  [...attackedLine, enemyPos].forEach((attackedPos) => {
-                    if (
-                      attackedPos[0] === possibleMove[0] &&
-                      attackedPos[1] === possibleMove[1]
-                    ) {
-                      correctedPossibleMoves.push(possibleMove);
-                    }
+              if (!!kingPos) {
+                // Ищем индекс позиции короля
+                const foundIndexKingPos = attackedLine.findIndex(
+                  (pos) => pos[0] === kingPos[0] && pos[1] === kingPos[1]
+                );
+  
+                // Ищем позицию фигуры на линии атаки
+                const foundIndexFigurePos = attackedLine.findIndex(
+                  (pos) => pos[0] === figurePos[0] && pos[1] === figurePos[1]
+                );
+  
+                const countFiguresBehindKing = JSChessEngine.getCountEnemys(
+                  state,
+                  enemyPos,
+                  attackedLine
+                );
+  
+                // Если индексы найдены и индекс короля больше чем индекс фигуры на линии атаки
+                // то корректируем возможные движения фигуры
+                kingBehidFigure =
+                  foundIndexKingPos > -1 &&
+                  foundIndexFigurePos > -1 &&
+                  foundIndexKingPos > foundIndexFigurePos &&
+                  countFiguresBehindKing === 1;
+  
+                if (kingBehidFigure) {
+                  // Оставляем только те позиции которые есть и в possibleMoves и в attackedLine
+                  possibleMoves.forEach((possibleMove) => {
+                    // Включаем позиции атакующей фигуры так как ее можно съесть
+                    [...attackedLine, enemyPos].forEach((attackedPos) => {
+                      if (
+                        attackedPos[0] === possibleMove[0] &&
+                        attackedPos[1] === possibleMove[1]
+                      ) {
+                        correctedPossibleMoves.push(possibleMove);
+                      }
+                    });
                   });
-                });
+                }
               }
             }
           });
@@ -711,43 +712,45 @@ export class JSChessEngine {
                 direction
               );
 
-              // Ищем индекс позиции короля
-              const foundIndexKingPos = attackedLine.findIndex(
-                (pos) => pos[0] === kingPos[0] && pos[1] === kingPos[1]
-              );
-
-              // Ищем позицию фигуры на линии атаки
-              const foundIndexFigurePos = attackedLine.findIndex(
-                (pos) => pos[0] === figurePos[0] && pos[1] === figurePos[1]
-              );
-
-              const countFiguresBehindKing = JSChessEngine.getCountEnemys(
-                state,
-                enemyPos,
-                attackedLine
-              );
-
-              // Если индексы найдены и индекс короля больше чем индекс фигуры на линии атаки
-              // то корректируем возможные движения фигуры
-              kingBehidFigure =
-                foundIndexKingPos > -1 &&
-                foundIndexFigurePos > -1 &&
-                foundIndexKingPos > foundIndexFigurePos &&
-                countFiguresBehindKing === 1;
-
-              if (kingBehidFigure) {
-                // Оставляем только те позиции которые есть и в possibleMoves и в attackedLine
-                possibleMoves.forEach((possibleMove) => {
-                  // Включаем позиции атакующей фигуры так как ее можно съесть
-                  [...attackedLine, enemyPos].forEach((attackedPos) => {
-                    if (
-                      attackedPos[0] === possibleMove[0] &&
-                      attackedPos[1] === possibleMove[1]
-                    ) {
-                      correctedPossibleMoves.push(possibleMove);
-                    }
+              if (!!kingPos) {
+                // Ищем индекс позиции короля
+                const foundIndexKingPos = attackedLine.findIndex(
+                  (pos) => pos[0] === kingPos[0] && pos[1] === kingPos[1]
+                );
+  
+                // Ищем позицию фигуры на линии атаки
+                const foundIndexFigurePos = attackedLine.findIndex(
+                  (pos) => pos[0] === figurePos[0] && pos[1] === figurePos[1]
+                );
+  
+                const countFiguresBehindKing = JSChessEngine.getCountEnemys(
+                  state,
+                  enemyPos,
+                  attackedLine
+                );
+  
+                // Если индексы найдены и индекс короля больше чем индекс фигуры на линии атаки
+                // то корректируем возможные движения фигуры
+                kingBehidFigure =
+                  foundIndexKingPos > -1 &&
+                  foundIndexFigurePos > -1 &&
+                  foundIndexKingPos > foundIndexFigurePos &&
+                  countFiguresBehindKing === 1;
+  
+                if (kingBehidFigure) {
+                  // Оставляем только те позиции которые есть и в possibleMoves и в attackedLine
+                  possibleMoves.forEach((possibleMove) => {
+                    // Включаем позиции атакующей фигуры так как ее можно съесть
+                    [...attackedLine, enemyPos].forEach((attackedPos) => {
+                      if (
+                        attackedPos[0] === possibleMove[0] &&
+                        attackedPos[1] === possibleMove[1]
+                      ) {
+                        correctedPossibleMoves.push(possibleMove);
+                      }
+                    });
                   });
-                });
+                }
               }
             }
           });
@@ -767,43 +770,45 @@ export class JSChessEngine {
                 direction
               );
 
-              // Ищем индекс позиции короля
-              const foundIndexKingPos = attackedLine.findIndex(
-                (pos) => pos[0] === kingPos[0] && pos[1] === kingPos[1]
-              );
-
-              // Ищем позицию фигуры на линии атаки
-              const foundIndexFigurePos = attackedLine.findIndex(
-                (pos) => pos[0] === figurePos[0] && pos[1] === figurePos[1]
-              );
-
-              const countFiguresBehindKing = JSChessEngine.getCountEnemys(
-                state,
-                enemyPos,
-                attackedLine
-              );
-
-              // Если индексы найдены и индекс короля больше чем индекс фигуры на линии атаки
-              // то корректируем возможные движения фигуры
-              kingBehidFigure =
-                foundIndexKingPos > -1 &&
-                foundIndexFigurePos > -1 &&
-                foundIndexKingPos > foundIndexFigurePos &&
-                countFiguresBehindKing === 1;
-
-              if (kingBehidFigure) {
-                // Оставляем только те позиции которые есть и в possibleMoves и в attackedLine
-                possibleMoves.forEach((possibleMove) => {
-                  // Включаем позиции атакующей фигуры так как ее можно съесть
-                  [...attackedLine, enemyPos].forEach((attackedPos) => {
-                    if (
-                      attackedPos[0] === possibleMove[0] &&
-                      attackedPos[1] === possibleMove[1]
-                    ) {
-                      correctedPossibleMoves.push(possibleMove);
-                    }
+              if (!!kingPos) {
+                // Ищем индекс позиции короля
+                const foundIndexKingPos = attackedLine.findIndex(
+                  (pos) => pos[0] === kingPos[0] && pos[1] === kingPos[1]
+                );
+  
+                // Ищем позицию фигуры на линии атаки
+                const foundIndexFigurePos = attackedLine.findIndex(
+                  (pos) => pos[0] === figurePos[0] && pos[1] === figurePos[1]
+                );
+  
+                const countFiguresBehindKing = JSChessEngine.getCountEnemys(
+                  state,
+                  enemyPos,
+                  attackedLine
+                );
+  
+                // Если индексы найдены и индекс короля больше чем индекс фигуры на линии атаки
+                // то корректируем возможные движения фигуры
+                kingBehidFigure =
+                  foundIndexKingPos > -1 &&
+                  foundIndexFigurePos > -1 &&
+                  foundIndexKingPos > foundIndexFigurePos &&
+                  countFiguresBehindKing === 1;
+  
+                if (kingBehidFigure) {
+                  // Оставляем только те позиции которые есть и в possibleMoves и в attackedLine
+                  possibleMoves.forEach((possibleMove) => {
+                    // Включаем позиции атакующей фигуры так как ее можно съесть
+                    [...attackedLine, enemyPos].forEach((attackedPos) => {
+                      if (
+                        attackedPos[0] === possibleMove[0] &&
+                        attackedPos[1] === possibleMove[1]
+                      ) {
+                        correctedPossibleMoves.push(possibleMove);
+                      }
+                    });
                   });
-                });
+                }
               }
             }
           });
