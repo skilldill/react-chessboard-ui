@@ -12,9 +12,9 @@ import { FigureColor, Cell, JSChessEngine, } from './JSChessEngine';
  * @param positionFEN позиция из FEN вида e4
  * @returns координаты для определения клетки на доске
  */
-export const getPositionByFEN = (positionFEN: string) => {
+export const getPositionByFEN = (positionFEN: string, boardSize = 8) => {
   return [
-    8 - parseInt(positionFEN[1]) + 1, // +1 Поправка на то что значение взятто из индекса в массиве
+    boardSize - parseInt(positionFEN[1]) + 1, // +1 Поправка на то что значение взятто из индекса в массиве
     LETTERS.findIndex((letter) => letter === positionFEN[0]),
   ];
 };
@@ -60,8 +60,8 @@ export const prepareCastlingByFEN = (
         ...preparedState[preparedState.length - 1][0].figure!,
         touched: false,
       };
-  
-      
+
+
     }
 
     if (!!preparedState[preparedState.length - 1][4].figure) {
@@ -80,8 +80,8 @@ export const prepareCastlingByFEN = (
         ...preparedState[0][preparedState.length - 1].figure!,
         touched: false,
       };
-  
-      
+
+
     }
 
     if (!!preparedState[0][4].figure) {
@@ -100,8 +100,8 @@ export const prepareCastlingByFEN = (
         ...preparedState[0][0].figure!,
         touched: false,
       };
-  
-      
+
+
     }
 
     if (!!preparedState[0][4].figure) {
@@ -161,51 +161,56 @@ export const FENtoGameState = (
       boardState: [],
       currentColor: 'white',
     };
-  
+
     const [stateNotaion, currentColor, FENcastling, beatedField, ..._] =
       FEN.split(' ');
-  
+
     // Сначала подготавливаем stateNotaion, чтобы вместо цифр были "." - пустые поля
-    let preparedStateNotation = '';
-    for (let i = 0; i < stateNotaion.length; i++) {
-      // Если символ число, то заполняем готовую нотацию
-      // точками в таком количестве какое число в нотации
-      if (!isNaN(parseInt(stateNotaion[i]))) {
-        const dotsCount = parseInt(stateNotaion[i]);
-        for (let dotI = 0; dotI < dotsCount; dotI++) preparedStateNotation += '.';
-        continue;
-      }
-  
-      preparedStateNotation += stateNotaion[i];
-    }
-  
+    const preparedStateNotation = stateNotaion.replace(/\d+/g, (match) =>
+      '.'.repeat(Number(match)),
+    );
+
+    // TODO: тут ошибка, сейчас цифры считаются посимвольно, а нужно читать целое число
+    // иначе 10 читается как 1 и 0
+    // for (let i = 0; i < stateNotaion.length; i++) {
+    //   // Если символ число, то заполняем готовую нотацию
+    //   // точками в таком количестве какое число в нотации
+    //   if (!isNaN(parseInt(stateNotaion[i]))) {
+    //     const dotsCount = parseInt(stateNotaion[i]);
+    //     for (let dotI = 0; dotI < dotsCount; dotI++) preparedStateNotation += '.';
+    //     continue;
+    //   }
+
+    //   preparedStateNotation += stateNotaion[i];
+    // }
+
     // Преобразуем часть с фигурами в состояние доски
     gameState.boardState = partFENtoState(preparedStateNotation);
-  
+
     // Определили текущий цвет
     gameState.currentColor = currentColor === 'w' ? 'white' : 'black';
-  
+
     // Определение возможностей рокировки
     gameState.boardState = prepareCastlingByFEN(
       FENcastling,
       gameState.boardState
     );
-  
+
     // Определение битое поля
     if (beatedField !== '-') {
-      const posBeatedCell = getPositionByFEN(beatedField);
+      const posBeatedCell = getPositionByFEN(beatedField, gameState.boardState.length);
       gameState.boardState[posBeatedCell[0]][posBeatedCell[1]] = {
         ...gameState.boardState[posBeatedCell[0]][posBeatedCell[1]],
         beated: true,
       };
     }
-  
+
     if (reversed)
-      return { 
+      return {
         boardState: JSChessEngine.reverseChessBoard(gameState.boardState),
         currentColor: gameState.currentColor,
       };
-  
+
     return gameState;
   } catch {
     return {

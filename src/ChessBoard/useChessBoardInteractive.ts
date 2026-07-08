@@ -545,6 +545,7 @@ export const useChessBoardInteractive = (props: UseChessBoardInteractiveProps) =
   const getHasCheckByCellPos = ([x, y]: CellPos) => {
     if (actualState.length === 0) return false;
     const cell = actualState[y][x];
+
     if (!cell.figure) return false;
     return hasCheck(cell, currentColor, linesWithCheck);
   }

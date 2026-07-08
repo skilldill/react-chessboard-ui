@@ -2290,10 +2290,10 @@ export class JSChessEngine {
    * length - 8
    * @param fenMoves история ходов в формате FEN
    */
-  static detectDrawByRepeatMoves(fenMoves: string[]) {
-    if (fenMoves.length < 8) return false;
+  static detectDrawByRepeatMoves(fenMoves: string[], boardSize = 8) {
+    if (fenMoves.length < boardSize) return false;
 
-    const lastMoves = fenMoves.slice(fenMoves.length - 8);
+    const lastMoves = fenMoves.slice(fenMoves.length - boardSize);
 
     // Для понимания было троекратное повторение или нет, нужно
     // первые четыре хода и последние четыре хода из выборки

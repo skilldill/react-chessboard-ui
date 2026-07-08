@@ -125,6 +125,7 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
     return (
         <div className={styles.chessBoard}>
             <ChessBoardCellsLayout
+                size={initialState.length}
                 boardConfig={boardConfig}
                 movesTrail={boardConfig.showMovesTrail && movesTrail}
                 moveHighlight={moveHighlight}
@@ -137,6 +138,7 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
             // reversed={reversed} ** While blocked this props **
             />
             <ChessBoardInteractiveLayout
+                size={initialState.length}
                 selectedPos={fromPos}
                 possibleMoves={possibleMoves}
                 holdedFigure={holdedFigure}
@@ -154,6 +156,7 @@ export const ChessBoard: FC<ChessBoardProps> = (props) => {
                 boardConfig={boardConfig}
             />
             <ChessBoardControlLayout
+                size={initialState.length}
                 boardConfig={boardConfig}
                 onClick={(pos) => handleClick(pos, viewOnly)}
                 onGrabStart={viewOnly ? () => { } : selectHoverFrom}

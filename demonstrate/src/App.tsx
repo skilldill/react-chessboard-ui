@@ -101,9 +101,13 @@ function App() {
                 // FEN={"k7/p6P/8/8/8/8/8/7K w - - 0 1"}
                 // FEN={"1K6/3q4/k7/8/8/8/p7/8 b - - 0 1"}
                 // FEN={"1K6/3q4/k7/8/8/8/p7/8 b - - 0 1"}
-                // FEN={"r3k2r/pppppppp/8/8/8/8/PPPPPPPP/R3K2R w KQkq - 0 1"}
-                FEN={'4k3/8/8/8/8/8/4R3/4K3 b - - 0 1'}
+                // FEN={"r3k2r/pppppppp/8/8/8/8/PPPPPPPP/R3K2R w K!!kq 0 1"}
+                // FEN={'4k3/8/8/8/8/8/4R3/4K3 b KQkq - 0 1'}
                 // FEN={"r3k2r/8/8/8/8/8/8/R3K2R w KQkq - 0 1"}
+                // FEN="r7/8/8/8/8/8/8/R7 w - - 0 1"
+                // FEN="n7/8/8/8/8/8/8/N7 w - - 0 1"
+                // FEN="rnbqqbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQQBNR w - - 0 1"
+                FEN="qrnbqqbnrqqq/qqpppppppppp/12/12/12/12/12/12/12/12/qppPPPPPPPPq/ppPRNBQQBNRP w - - 0 1"
                 onChange={onChange}
                 onEndGame={console.log}
                 change={currentMove}
@@ -121,7 +125,9 @@ function App() {
                     holdedPieceClassName: 'holdedPiece',
                     hidePieceEffectClassName: 'hideFigureEffectWithBurn'
                 }}
-                playerColor="white"        
+                // playerColor="white"
+                // toggleTurn={false}
+                onClick={console.log}
                 reversed={reversed} // <~~~ flag for reversing board
             // moveHighlight={[[1, 1], [7, 7]]}
             // moveArrows={[{ start: [0, 1], end: [7, 7] }, { start: [2, 2], end: [1, 1] }]}
