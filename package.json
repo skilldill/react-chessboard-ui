@@ -1,21 +1,41 @@
 {
   "name": "react-chessboard-ui",
-  "version": "2.14.0",
+  "version": "3.0.0",
   "description": "All-in-one React chessboard UI with a built-in chess engine, FEN state control, move validation, drag-and-drop pieces, game-end callbacks, and customizable styles.",
   "author": "skilldill",
   "license": "MIT",
   "repository": "skilldill/react-chessboard-ui",
-  "main": "dist/index.js",
-  "module": "dist/index.modern.js",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./style.css": "./dist/index.css",
+    "./dist/index.css": "./dist/index.css"
+  },
   "homepage": "https://react-chessboard-ui.dev/",
-  "source": "src/index.tsx",
-  "keywords": ["react", "react-chess", "react-chessboard", "react-chessboard-ui", "js-chess", "chess", "chessboard", "chessboard component", "chess engine"],
+  "keywords": [
+    "react",
+    "react-chess",
+    "react-chessboard",
+    "react-chessboard-ui",
+    "js-chess",
+    "chess",
+    "chessboard",
+    "chessboard component",
+    "chess engine"
+  ],
   "engines": {
-    "node": ">=10"
+    "node": ">=20.19.0"
   },
   "scripts": {
-    "build": "microbundle-crl --no-compress --format modern,cjs",
-    "start": "microbundle-crl watch --no-compress --format modern,cjs",
+    "build": "vite build",
+    "start": "vite build --watch",
     "prepare": "run-s build",
     "test": "run-s test:unit test:lint test:build",
     "test:build": "run-s build",
@@ -37,6 +57,7 @@
     "@types/react-dom": "^19.1.0",
     "@typescript-eslint/eslint-plugin": "^2.26.0",
     "@typescript-eslint/parser": "^2.26.0",
+    "ajv": "^8.20.0",
     "babel-eslint": "^10.0.3",
     "cross-env": "^7.0.2",
     "eslint": "^6.8.0",
@@ -50,13 +71,14 @@
     "eslint-plugin-react": "^7.17.0",
     "eslint-plugin-standard": "^4.0.1",
     "gh-pages": "^2.2.0",
-    "microbundle-crl": "^0.13.10",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.0.4",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-scripts": "^3.4.1",
-    "typescript": "^3.7.5"
+    "typescript": "^5.9.3",
+    "vite": "^7.1.7",
+    "vite-plugin-dts": "^4.5.4"
   },
   "files": [
     "dist"
