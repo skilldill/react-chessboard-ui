@@ -1,3 +1,5 @@
+import './injectStyles';
+
 export * from './ChessBoard';
 export * from './JSChessEngine';
 export { 

@@ -1,7 +1,8 @@
+import type { ReactElement } from "react";
 import { SquarePos, Piece, MoveData, Cell, CellPos, FigureColor } from "../JSChessEngine"
 
 export interface ChessPiecesMap {
-    [key: string]: (size: string) => JSX.Element;
+    [key: string]: (size: string) => ReactElement;
 }
 
 export type ChessBoardConfig = {
