@@ -14,6 +14,11 @@ Use it when you need a playable chessboard in a React app without combining a bo
   <img src="./blob/all_queens.png?raw=true" width="23%" alt="React chessboard with custom pieces" />
 </p>
 
+## Documentation
+
+- Full documentation: [https://react-chessboard-ui.dev/](https://react-chessboard-ui.dev/)
+- Customization docs: [https://react-chessboard-ui.dev/properties/config/](https://react-chessboard-ui.dev/properties/config/)
+
 ## Features
 
 - **Board UI and chess logic in one package**: render the board, validate moves, and receive game events from one component.
@@ -161,11 +166,6 @@ export function StyledBoard() {
 - `FEN` controls the initial board state and can be replaced from React state.
 - A number in a FEN row means that many consecutive empty cells.
 - Standard 8x8 chess positions and larger custom boards are supported.
-
-## Documentation
-
-- Full documentation: [https://react-chessboard-ui.dev/](https://react-chessboard-ui.dev/)
-- Customization docs: [https://react-chessboard-ui.dev/properties/config/](https://react-chessboard-ui.dev/properties/config/)
 
 ## Authors
 
