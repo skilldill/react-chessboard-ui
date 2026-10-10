@@ -1,0 +1,11 @@
+Model Information:
+* title:	Chess Kit
+* source:	https://sketchfab.com/3d-models/chess-kit-94f58cabfc0044acb83c28f5b70c79f9
+* author:	Luke Brown (https://sketchfab.com/brownb23)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Chess Kit" (https://sketchfab.com/3d-models/chess-kit-94f58cabfc0044acb83c28f5b70c79f9) by Luke Brown (https://sketchfab.com/brownb23) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

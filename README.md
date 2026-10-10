@@ -60,6 +60,50 @@ export const App: FC = () => {
 
 ## Key Examples
 
+### 3D Board
+
+The 3D board has a separate entry point. The main `react-chessboard-ui` import does not include Three.js or the 3D models.
+
+```tsx
+import { ChessBoard3D } from "react-chessboard-ui/3d";
+
+export function Board3D() {
+  return (
+    <ChessBoard3D
+      FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+      onChange={console.log}
+      onEndGame={console.log}
+    />
+  );
+}
+```
+
+To load 3D only when it is rendered, use a dynamic import with React's `lazy` and wrap the board in `Suspense`:
+
+```tsx
+import { lazy, Suspense } from "react";
+
+const ChessBoard3D = lazy(() =>
+  import("react-chessboard-ui/3d").then(({ ChessBoard3D }) => ({
+    default: ChessBoard3D,
+  }))
+);
+
+export function LazyBoard3D() {
+  return (
+    <Suspense fallback={null}>
+      <ChessBoard3D
+        FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+        onChange={console.log}
+        onEndGame={console.log}
+      />
+    </Suspense>
+  );
+}
+```
+
+Styles are injected automatically for either entry point. The 3D board uses the same built-in engine, supports camera rotation, and handles moves by clicking a piece followed by a destination square.
+
 ### Training Position
 
 ```tsx
@@ -175,6 +219,11 @@ export function StyledBoard() {
 ## License
 
 MIT
+
+### 3D Model Attribution
+
+The 3D chess pieces are based on [Chess Kit](https://sketchfab.com/3d-models/chess-kit-94f58cabfc0044acb83c28f5b70c79f9) by [Luke Brown](https://sketchfab.com/brownb23), licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The model is adapted by separating the six pieces, centering and scaling their geometry, and assigning white and black materials. The model's CC BY 4.0 license is separate from the library's MIT license. Preserve this attribution when redistributing the model or its adaptations.
+
 _________
 ## Keywords
 

@@ -15,6 +15,11 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
+    "./3d": {
+      "types": "./dist/3d.d.ts",
+      "import": "./dist/3d.js",
+      "require": "./dist/3d.cjs"
+    },
     "./style.css": "./dist/index.css",
     "./dist/index.css": "./dist/index.css"
   },
@@ -55,6 +60,7 @@
     "@types/node": "^12.12.38",
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.0",
+    "@types/three": "^0.186.0",
     "@typescript-eslint/eslint-plugin": "^2.26.0",
     "@typescript-eslint/parser": "^2.26.0",
     "ajv": "^8.20.0",
@@ -84,6 +90,7 @@
     "dist"
   ],
   "dependencies": {
-    "classnames": "^2.5.1"
+    "classnames": "^2.5.1",
+    "three": "^0.186.1"
   }
 }

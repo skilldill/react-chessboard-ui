@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './App.css'
 import { ChessBoard, type MoveData } from "../../src";
-import { PAUL_MORPHY_OPERA_GAME, TRANSFORMATION_GAME, CASTLING_MOVE } from './moves';
+import { ChessBoard3D } from "../../src/3d";
+import { PAUL_MORPHY_OPERA_GAME } from './moves';
 
 
 const MOVES = PAUL_MORPHY_OPERA_GAME;
@@ -12,6 +13,7 @@ function App() {
     const [history, setHistory] = useState<MoveData[]>([]);
     const [initialFEN, setInitialFEN] = useState("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
     const [reversed, setReversed] = useState(false);
+    const [view, setView] = useState<'2d' | '3d'>('3d');
 
     const onChange = (move: MoveData) => {
         console.log(move);
@@ -84,6 +86,9 @@ function App() {
             <button onClick={reverseBoard}>Reverse</button>
             <button onClick={setDelayedFen}>Set delayed FEN</button>
             <button onClick={setDelayedMove}>Delayed move</button>
+            <button onClick={() => setView((current) => current === '3d' ? '2d' : '3d')}>
+                {view === '3d' ? 'Show 2D board' : 'Show 3D board'}
+            </button>
             {/* {MOVES.map((move, index) => (
         <button key={index} onClick={() => {
             setCurrentMove({
@@ -96,43 +101,40 @@ function App() {
         </button>
       ))} */}
 
-            <ChessBoard
-                // FEN={initialFEN}
-                // FEN={"k7/p6P/8/8/8/8/8/7K w - - 0 1"}
-                // FEN={"1K6/3q4/k7/8/8/8/p7/8 b - - 0 1"}
-                // FEN={"1K6/3q4/k7/8/8/8/p7/8 b - - 0 1"}
-                // FEN={"r3k2r/pppppppp/8/8/8/8/PPPPPPPP/R3K2R w K!!kq 0 1"}
-                // FEN={'4k3/8/8/8/8/8/4R3/4K3 b KQkq - 0 1'}
-                // FEN={"r3k2r/8/8/8/8/8/8/R3K2R w KQkq - 0 1"}
-                // FEN="r7/8/8/8/8/8/8/R7 w - - 0 1"
-                // FEN="n7/8/8/8/8/8/8/N7 w - - 0 1"
-                // FEN="rnbqqbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQQBNR w - - 0 1"
-                FEN="qrnbqqbnrqqq/qqpppppppppp/12/12/12/12/12/12/12/12/qppPPPPPPPPq/ppPRNBQQBNRP w - - 0 1"
-                onChange={onChange}
-                onEndGame={console.log}
-                change={currentMove}
-                config={{
-                    pieceSizePercent: 100,
-                    onHidePieces: (piece) => {
-                        setTimeout(() => {
-                            piece.position = [8, piece.position![1]]
-                        }, 1000)
-                    },
-                    lightSquareClassName: 'lightSquareCustom',
-                    darkSquareClassName: 'darkSquareCustom',
-                    squareHighlightClassName: 'highlightCustom',
-                    possibleMoveMarkClassName: 'customMarkMove',
-                    holdedPieceClassName: 'holdedPiece',
-                    hidePieceEffectClassName: 'hideFigureEffectWithBurn'
-                }}
-                // playerColor="white"
-                // toggleTurn={false}
-                onClick={console.log}
-                reversed={reversed} // <~~~ flag for reversing board
-            // moveHighlight={[[1, 1], [7, 7]]}
-            // moveArrows={[{ start: [0, 1], end: [7, 7] }, { start: [2, 2], end: [1, 1] }]}
-            // viewOnly={true}
-            />
+            {view === '3d' ? (
+                <ChessBoard3D
+                    FEN={initialFEN}
+                    onChange={onChange}
+                    onEndGame={console.log}
+                    change={currentMove}
+                    config={{ pieceSizePercent: 100 }}
+                    onClick={console.log}
+                    reversed={reversed}
+                />
+            ) : (
+                <ChessBoard
+                    FEN={initialFEN}
+                    onChange={onChange}
+                    onEndGame={console.log}
+                    change={currentMove}
+                    config={{
+                        pieceSizePercent: 100,
+                        onHidePieces: (piece) => {
+                            setTimeout(() => {
+                                piece.position = [8, piece.position![1]]
+                            }, 1000)
+                        },
+                        lightSquareClassName: 'lightSquareCustom',
+                        darkSquareClassName: 'darkSquareCustom',
+                        squareHighlightClassName: 'highlightCustom',
+                        possibleMoveMarkClassName: 'customMarkMove',
+                        holdedPieceClassName: 'holdedPiece',
+                        hidePieceEffectClassName: 'hideFigureEffectWithBurn'
+                    }}
+                    onClick={console.log}
+                    reversed={reversed}
+                />
+            )}
         </div>
     )
 }

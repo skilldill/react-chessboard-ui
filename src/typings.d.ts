@@ -12,6 +12,16 @@ declare module '*.css?inline' {
   export default content;
 }
 
+declare module '*.gltf?raw' {
+  const content: string;
+  export default content;
+}
+
+declare module '*.bin?url' {
+  const url: string;
+  export default url;
+}
+
 interface SvgrComponent extends React.StatelessComponent<React.SVGAttributes<SVGElement>> {}
 
 declare module '*.svg' {

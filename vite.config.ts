@@ -11,18 +11,27 @@ export default defineConfig({
     build: {
         cssCodeSplit: false,
         lib: {
-            entry: resolve(__dirname, 'src/index.tsx'),
-            formats: ['es', 'cjs'],
-            fileName: (format) => format === 'es' ? 'index.js' : 'index.cjs',
+            entry: {
+                index: resolve(__dirname, 'src/index.tsx'),
+                '3d': resolve(__dirname, 'src/3d.ts'),
+            },
+            fileName: (format, entryName) => `${entryName}.${format === 'es' ? 'js' : 'cjs'}`,
             cssFileName: 'index',
         },
         rollupOptions: {
             external: ['react', 'react/jsx-runtime'],
-            output: {
-                globals: {
-                    react: 'React',
+            output: [
+                {
+                    format: 'es',
+                    chunkFileNames: 'chunks/[name]-[hash].js',
+                    globals: { react: 'React' },
                 },
-            },
+                {
+                    format: 'cjs',
+                    chunkFileNames: 'chunks/[name]-[hash].cjs',
+                    globals: { react: 'React' },
+                },
+            ],
         },
     },
 });
